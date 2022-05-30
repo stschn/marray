@@ -1,3 +1,4 @@
+#' @title Data flattening
 #' @description Flatten data into a one-dimensional array.
 #'
 #' @param data Data to be flatten.

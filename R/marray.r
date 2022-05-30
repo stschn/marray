@@ -64,12 +64,20 @@ as.marray.default <- function(data, dim = NULL, dimnames = NULL, order = c("C", 
 
 #' @rdname marray
 #' @export
+as.marray.matrix <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F")) {
+  if (is.null(dimnames)) dimnames <- dimnames(data)
+  as.marray.default(data, dim = dim, dimnames = dimnames, order = order)
+}
+
+#' @rdname marray
+#' @export
 as.marray.data.frame <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F")) {
-  as.marray.default(as.matrix(data), dim = dim, dimnames = dimnames, order = order, numeric = numeric)
+  if (is.null(dimnames)) dimnames <- dimnames(data)
+  as.marray.default(as.matrix(data), dim = dim, dimnames = dimnames, order = order)
 }
 
 #' @rdname marray
 #' @export
 as.marray.list <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F")) {
-  as.marray.default(array(unlist(data)), dim = dim, dimnames = dimnames, order = order, numeric = numeric)
+  as.marray.default(array(unlist(data)), dim = dim, dimnames = dimnames, order = order)
 }
