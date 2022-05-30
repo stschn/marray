@@ -23,7 +23,7 @@
 #' @export
 flatten <- function(data, axis = NULL, order = c("C", "F")) {
   order <- match.arg(order)
-  if ((!all(is.na(data))) && (is.atomic(data)) && (!(deepANN::ndim(data) > 1L))) {
+  if ((!all(is.na(data))) && (is.atomic(data)) && (!(ndim(data) > 1L))) {
     data <- array(data)
   } else {
   if (is.data.frame(data)) {
