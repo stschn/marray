@@ -35,10 +35,10 @@ slice(a, l = 2) # the values of the array of the second element of the last dime
 slice(a, i = 1, j = 3) # the values of the array of the first element of the first dimension (1st row) and the third element of the second dimension (3rd column) across all bunches of the remaining dimensions 3 and 4.
 
 a <- marray(1:24, dim = c(4, 3, 2), order = "F")
-slice(a, i = 1L) <- 0L
-slice(a, i = 1L) <- 100:102
-slice(a, i = 1L) <- 100:105
-slice(a, i = 1L) <- matrix(100:105, nrow = 2L)
+slice(a, i = 1L) <- 0L # write 0 to the first dimension (row) across all remaining dimensions
+slice(a, i = 1L) <- 100:102 # write 100-102 to the first dimension (row) across all remaining dimensions
+slice(a, i = 1L) <- 100:105 # write 100-105 to the first dimension (row) across all remaining dimensions
+slice(a, i = 1L) <- matrix(100:105, nrow = 2L) # equal to prior, nrow can be 1, 2, 3, or 6
 }
 \references{
 Implementation credits go to \url{https://github.com/cran/arrayhelpers}.
