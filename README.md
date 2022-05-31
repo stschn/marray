@@ -33,3 +33,119 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>rot90()</code> rotates an array by 90 degrees in the plane specified by axes.</li>
   <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
 </ul>
+
+<h2>Examples</h3>
+<p><code>library(marray)</code></p>
+
+<h3>Array creation from scratch</h3>
+
+```r
+# Filled with NA
+a <- empty(dim = c(4, 3, 2))
+# Filled with Zeros
+a <- zeros(dim = c(4, 3, 2))
+# Filled with Ones
+a <- ones(dim = c(4, 3, 2))
+# Filled with value(s)
+a <- full(dim = c(4, 3, 2), fill_value = 11)
+a <- full(dim = c(4, 3, 2), fill_value = c(11, 2, 23), order = "F")
+```
+
+<h3>Array creation with ordering and from other data</h3>
+
+```r
+# Row-major ordering
+a <- marray(1:24, dim = c(4, 3, 2))
+# Column-major ordering
+a <- marray(1:24, dim = c(4, 3, 2), order = "F")
+
+# Different types of data
+v <- (1:24)
+l <- list(x1 = 1:10, x2 = seq(10, 100, 10))
+df <- data.frame(x1 = 1:6, x2 = seq(10, 60, 10), x3 = sample(letters, 6))
+m <- matrix(1:24, nrow = 6)
+a1 <- array(letters[1L:24L])
+a3 <- array(v, dim = c(4, 3, 2))
+a4 <- array(1:48, dim = c(4, 3, 2, 2))
+
+a <- marray(v) # just change the argument
+```
+
+<h3>Expand and squeeze dimensions</h3>
+
+```r
+a <- marray(seq_len(12))
+a <- expand_dims(a)
+a <- squeeze(a)
+```
+
+<h3>Flatten data</h3>
+
+```r
+a4 <- array(1:48, dim = c(4, 3, 2, 2))
+flatten(a4, order = "F")
+```
+
+<h3>Bind arrays in pipe-friendly way</h3>
+
+```r
+x <- marray(seq_len(24), dim = c(4, 3, 2), order = "F")
+y <- marray(-seq_len(24), dim = c(4, 3, 2), order = "F")
+z <- marray(seq_len(12), dim = c(4, 3))
+
+a <- expand_dims(z) |>
+  list() |>
+  append(list(x, y), 0L) |>
+  mabind()
+```
+
+<h3>Insert into array</h3>
+
+```r
+a <- marray(seq.int(2 * 3 * 4), dim = c(2, 3, 4), order = "F")
+x <- marray(100L + seq.int(2 * 1 * 4))
+insert(a, x, axis = 2L, order = "F") # x will automatically be coerced in the right shape
+```
+
+<h3>Read and write slices of an array</h3>
+
+```r
+a <- marray(1:48, dim = c(4, 3, 2, 2))
+slice(a) # read complete four-dimensional array
+slice(a, l = 2) # the values of the second element of the last dimension (4th dimension)
+slice(a, i = 1, j = 3) # the values of the first element of the first dimension (1st row) and the third element of the second dimension (3rd column) across all bunches of the remaining dimensions 3 and 4.
+
+a <- marray(1:24, dim = c(4, 3, 2), order = "F")
+slice(a, i = 1L) <- 0L; a # write 0 to the first dimension (row) across all remaining dimensions
+slice(a, i = 1L) <- 100:102; a # write 100-102 to the first dimension (row) across all remaining dimensions
+slice(a, i = 1L) <- 100:105; a # write 100-105 to the first dimension (row) across all remaining dimensions
+slice(a, i = 1L) <- matrix(100:105, nrow = 3L); a # equal to prior, nrow can be 1, 2, 3, or 6
+```
+
+<h3>Flip array</h3>
+
+```r
+a <- marray(seq_len(24), dim = c(4, 3, 2), order = "F")
+# Along first dimension
+flip(a)
+# Along second dimension
+flip(a, axis = 2L)
+# Along third dimension
+flip(a, axis = 3L)
+# Along first and second dimension
+flip(a, axis = c(1L, 2L))
+```
+
+<h3>Rotate array</h3>
+
+```r
+a <- marray(seq_len(12), dim = c(4, 3), order = "F")
+# Clockwise
+rot90(a)
+# Two times clockwise
+rot90(a, k = 2L)
+# Counterclockwise
+rot90(a, k = -1L)
+# Three times counterclockwise
+rot90(a, k = -3L)
+```
