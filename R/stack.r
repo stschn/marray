@@ -16,10 +16,7 @@
 #' @export
 column_stack <- function(..., order = c("C", "F")) {
   order <- match.arg(order)
-  list_of_arrays <- list(...)
-  # If arrays are coerced into a list like list(a1, a2, a3, ...), flat arguments into a simple list
-  if (any(sapply(list_of_arrays, is.list)))
-    list_of_arrays <- unlist(list_of_arrays, recursive = FALSE)
+  list_of_arrays <- .dots(...)
 
   # Transform objects to 1D arrays
   list_of_arrays <- lapply(list_of_arrays, FUN = flatten, order = order)
@@ -51,10 +48,7 @@ column_stack <- function(..., order = c("C", "F")) {
 #' @export
 row_stack <- function(..., order = c("C", "F")) {
   order <- match.arg(order)
-  list_of_arrays <- list(...)
-  # If arrays are coerced into a list like list(a1, a2, a3, ...), flat arguments into a simple list
-  if (any(sapply(list_of_arrays, is.list)))
-    list_of_arrays <- unlist(list_of_arrays, recursive = FALSE)
+  list_of_arrays <- .dots(...)
 
   # Transform objects to 1D arrays
   list_of_arrays <- lapply(list_of_arrays, FUN = flatten, order = order)

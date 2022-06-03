@@ -21,10 +21,7 @@
 #' @export
 mabind <- function(..., input_shape = NULL, axis = -1, order = c("C", "F")) {
   order <- match.arg(order)
-  list_of_arrays <- list(...)
-  # If arrays are coerced into a list like list(a1, a2, a3, ...), flat arguments into a simple list
-  if (any(sapply(list_of_arrays, is.list)))
-    list_of_arrays <- unlist(list_of_arrays, recursive = FALSE)
+  list_of_arrays <- .dots(...)
 
   # Transform objects to arrays
   list_of_arrays <- lapply(list_of_arrays, FUN = marray, dim = input_shape, order = order)

@@ -2,9 +2,15 @@
 % Please edit documentation in R/flip.r
 \name{flip}
 \alias{flip}
+\alias{flipud}
+\alias{fliplr}
 \title{Array flip}
 \usage{
 flip(a, axis = 1L)
+
+flipud(a)
+
+fliplr(a)
 }
 \arguments{
 \item{a}{An array.}
@@ -24,4 +30,6 @@ it is helpful to imagine a horizontal axis (from left to right) in the middle of
 becomes the last, the second row the second last and so on until the last row becomes the first. The same applies for reversing the order
 of the elements along the second dimension (column), with the distinction that the flipping axis is a vertical axis (from top to bottom)
 in the middle of the matrix.
+
+\code{flipud} flips an array vertically, so along axis = 1. \code{fliplr} flips an array horizontally, so along axis = 2.
 }

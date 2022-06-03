@@ -16,6 +16,7 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>squeeze()</code> removes dimensions of length one from array.</li>
   <li><code>mamatrix()</code> shrinks an array by rows or columns into a matrix.</li>
   <li><code>slice()</code> read or write a part of an array.</li>
+  <li><code>clip()</code> limits values of an array.</li>
   <li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
   <li><code>column_stack()</code> stacks 1D arrays as columns into a 2D array.</li>
   <li><code>row_stack()</code> stacks 1D arrays as rows into a 2D array.</li>
@@ -25,11 +26,14 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>zeros()</code> creates an array filled with zeros.</li>
   <li><code>empty()</code> creates an array filled with NA.</li>
   <li><code>full()</code> creates an array filled with value.</li>
+  <li><code>maidentity()</code> creates an identity array.</li>
   <li><code>insert()</code> inserts objects into an array.</li>
   <li><code>delete()</code> deletes axes from an array.</li>
   <li><code>transpose()</code> transposes an array by swapping dimensions.</li>
   <li><code>rearrange()</code> rearranges axis-driven an array by swapping dimensions.</li>
   <li><code>flip()</code> reverses the order of the elements of an array along axes.</li>
+  <li><code>flipud()</code> flips an array vertically (axis = 1).</li>
+  <li><code>fliplr()</code> flips an array horizontally (axis = 2).</li>
   <li><code>rot90()</code> rotates an array by 90 degrees in the plane specified by axes.</li>
   <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
 </ul>
@@ -148,4 +152,10 @@ rot90(a, k = 2L)
 rot90(a, k = -1L)
 # Three times counterclockwise
 rot90(a, k = -3L)
+```
+<h3>Embed series</h3>
+
+```r
+a <- marray(1:24, dim = c(6, 4), order = "F")
+embedseries(a, length = 3L)
 ```

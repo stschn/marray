@@ -86,3 +86,19 @@ empty <- function(dim = NULL, dimnames = NULL) {
 full <- function(dim = NULL, fill_value = NA, dimnames = NULL, order = c("C", "F")) {
   marray(rep(fill_value, prod(dim) -> N)[seq_len(N)], dim = dim, dimnames = dimnames, order = order)
 }
+
+#' @title Array creation
+#' @description Return the identity array, a square array with ones on the main diagonal.
+#'
+#' @param n Number of rows and columns in \emph{n x n} output.
+#' @param dimnames Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of length \code{n}.
+#'
+#' @details This function corresponds to \code{identity()} from NumPy.
+#' @return \emph{n x n} array with its main diagonal set to one, and all other elements to zero.
+#'
+#' @export
+maidentity <- function(n, dimnames = NULL) {
+  m <- zeros(dim = c(n, n), dimnames)
+  diag(m) <- 1L
+  m
+}

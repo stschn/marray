@@ -5,7 +5,7 @@
 \alias{slice<-}
 \title{Array slicing}
 \usage{
-slice(a, ..., drop = TRUE)
+slice(a, ..., drop = FALSE)
 
 \code{slice(a, ...) <- value}.
 }

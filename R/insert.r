@@ -26,9 +26,7 @@ insert <- function(a, ..., axis = -1L, order = c("C", "F")) {
   nd <- ndim(a)
   axis[which((axis < 0L) | (axis > nd))] <- nd
 
-  x <- list(...)
-  if (any(sapply(x, is.list)))
-    x <- unlist(x, recursive = FALSE)
+  x <- .dots(...)
 
   # Reshape x with the same dimension as a but replacing the axis dimension with 1
   if (nd > 1L) {

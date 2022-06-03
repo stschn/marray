@@ -11,6 +11,8 @@
 #' of the elements along the second dimension (column), with the distinction that the flipping axis is a vertical axis (from top to bottom)
 #' in the middle of the matrix.
 #'
+#' \code{flipud} flips an array vertically, so along axis = 1. \code{fliplr} flips an array horizontally, so along axis = 2.
+#'
 #' @return The reversed array \code{a} along axes.
 #'
 #' @export
@@ -21,4 +23,17 @@ flip <- function(a, axis = 1L) {
   l <- lapply(d, seq_len)
   l[axis] <- lapply(l[axis], rev)
   do.call('[', c(list(a), l))
+}
+
+#' @rdname flip
+#' @export
+flipud <- function(a) {
+  flip(a, axis = 1L)
+}
+
+#' @rdname flip
+#' @export
+fliplr <- function(a) {
+  stopifnot("a must be at least a 2-dimensional array." = ndim(a) >= 2L)
+  flip(a, axis = 2L)
 }

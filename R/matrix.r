@@ -11,8 +11,7 @@
 #'
 #' @export
 mamatrix <- function(a, order = c("C", "F")) {
-  if (!(is.array(a) && (ndim(a) >= 2L)))
-    stop("a must be at least a two-dimensional array.")
+  stopifnot("a must be at least a 2-dimensional array." = ndim(a) >= 2L)
   order <- match.arg(order)
   if (order == "C")
     apply(a, 2L, base::identity) # rbind()

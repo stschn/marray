@@ -25,9 +25,9 @@
 #' slice(a, i = 1L) <- 100:105 # write 100-105 to the first dimension (row) across all remaining dimensions
 #' slice(a, i = 1L) <- matrix(100:105, nrow = 2L) # equal to prior, nrow can be 1, 2, 3, or 6
 #' @export
-slice <- function(a, ..., drop = TRUE) {
+slice <- function(a, ..., drop = FALSE) {
   args <- as.list(rep(TRUE, ndim(a)))
-  params <- list(...)
+  params <- .dots(...)
   which <- match(names(params), letters) - 8L
   args[which] <- params
   do.call(`[`, c(list(a), args, list(drop = drop)))
@@ -38,7 +38,7 @@ slice <- function(a, ..., drop = TRUE) {
 #' @export
 'slice<-' <- function(a, ..., value) {
   args <- as.list(rep(TRUE, ndim(a)))
-  params <- list(...)
+  params <- .dots(...)
   which <- match(names(params), letters) - 8L
   args[which] <- params
   do.call(`[<-`, c(list(a), args, list(value = value)))
