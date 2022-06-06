@@ -12,7 +12,7 @@ slice(a, ..., drop = FALSE)
 \arguments{
 \item{a}{A vector, matrix, or array.}
 
-\item{...}{Indexing instructions in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.}
+\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.}
 
 \item{drop}{For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.}
 
@@ -41,5 +41,5 @@ slice(a, i = 1L) <- 100:105 # write 100-105 to the first dimension (row) across 
 slice(a, i = 1L) <- matrix(100:105, nrow = 2L) # equal to prior, nrow can be 1, 2, 3, or 6
 }
 \references{
-Implementation credits go to \url{https://github.com/cran/arrayhelpers}.
+Indexing by letters is inspired by \url{https://github.com/cran/arrayhelpers}.
 }

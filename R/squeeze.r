@@ -1,5 +1,5 @@
 #' @title Array compressing
-#' @description Compress the shape of an array by removing dimensions of length one from the array.
+#' @description Compress the shape of an array by removing singleton dimensions.
 #'
 #' @param a An array.
 #' @param axis The dimensions which should be removed. If \code{NULL} (default), all dimensions of length one are removed.

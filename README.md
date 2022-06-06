@@ -35,6 +35,7 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>flipud()</code> flips an array vertically (axis = 1).</li>
   <li><code>fliplr()</code> flips an array horizontally (axis = 2).</li>
   <li><code>rot90()</code> rotates an array by 90 degrees in the plane specified by axes.</li>
+  <li><code>roll()</code> shifts an array circularly.</li>
   <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
 </ul>
 

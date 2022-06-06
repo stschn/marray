@@ -2,7 +2,7 @@
 #' @description Slice an array by using indices i, j, k etc.
 #'
 #' @param a A vector, matrix, or array.
-#' @param ... Indexing instructions in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.
+#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.
 #' @param value Any values to assign to the slice of \code{a}.
 #' @param drop For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.
 #'
@@ -11,7 +11,7 @@
 #'
 #' @return An extracted part of \code{a}.
 #'
-#' @references Implementation credits go to \url{https://github.com/cran/arrayhelpers}.
+#' @references Indexing by letters is inspired by \url{https://github.com/cran/arrayhelpers}.
 #'
 #' @examples
 #' a <- marray(1:48, dim = c(4, 3, 2, 2))
@@ -26,10 +26,7 @@
 #' slice(a, i = 1L) <- matrix(100:105, nrow = 2L) # equal to prior, nrow can be 1, 2, 3, or 6
 #' @export
 slice <- function(a, ..., drop = FALSE) {
-  args <- as.list(rep(TRUE, ndim(a)))
-  params <- .dots(...)
-  which <- match(names(params), letters) - 8L
-  args[which] <- params
+  args <- .aindex(DIM(a), ...)
   do.call(`[`, c(list(a), args, list(drop = drop)))
 }
 
@@ -37,9 +34,6 @@ slice <- function(a, ..., drop = FALSE) {
 #' @usage \code{slice(a, ...) <- value}.
 #' @export
 'slice<-' <- function(a, ..., value) {
-  args <- as.list(rep(TRUE, ndim(a)))
-  params <- .dots(...)
-  which <- match(names(params), letters) - 8L
-  args[which] <- params
+  args <- .aindex(DIM(a), ...)
   do.call(`[<-`, c(list(a), args, list(value = value)))
 }

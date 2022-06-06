@@ -19,7 +19,7 @@ In opposite, the \code{Fortran}-style ordering means elements should be read in 
 The array \code{a} usually without dimensions of length one.
 }
 \description{
-Compress the shape of an array by removing dimensions of length one from the array.
+Compress the shape of an array by removing singleton dimensions.
 }
 \details{
 This function corresponds to \code{squeeze()} from NumPy.
