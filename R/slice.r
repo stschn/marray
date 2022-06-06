@@ -1,5 +1,5 @@
 #' @title Array slicing
-#' @description Slice an array by using indices i, j, k etc.
+#' @description Slice an array using enhanced indexing operations.
 #'
 #' @param a A vector, matrix, or array.
 #' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.

@@ -36,6 +36,7 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>fliplr()</code> flips an array horizontally (axis = 2).</li>
   <li><code>rot90()</code> rotates an array by 90 degrees in the plane specified by axes.</li>
   <li><code>roll()</code> shifts an array circularly.</li>
+  <li><code>crop()</code> takes out a part of an array with default values for the remaining part.</li>
   <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
 </ul>
 
@@ -159,4 +160,24 @@ rot90(a, k = -3L)
 ```r
 a <- marray(1:24, dim = c(6, 4), order = "F")
 embedseries(a, length = 3L)
+```
+
+<h3>Roll array</h3>
+
+```r
+a <- marray(0:9)
+roll(a, shift = 2)
+roll(a, shift = -2)
+a <- marray(a, dim = c(2, 5))
+roll(a, shift = 1)
+roll(a, shift = -1)
+roll(a, shift = 1, axis = 1)
+roll(a, shift = -1, axis = 1)
+```
+
+<h3>Crop array</h3>
+
+```r
+a <- marray(1:24, dim = c(4, 3, 2))
+crop(a, i = 1, j = 2:3)
 ```

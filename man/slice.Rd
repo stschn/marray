@@ -22,7 +22,7 @@ slice(a, ..., drop = FALSE)
 An extracted part of \code{a}.
 }
 \description{
-Slice an array by using indices i, j, k etc.
+Slice an array using enhanced indexing operations.
 }
 \details{
 \code{slice} is an alternative way to handle indexing array objects, usually done with \code{\link[base]{[}}. The dimensions must be indexed by names,
