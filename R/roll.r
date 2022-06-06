@@ -27,7 +27,7 @@
 #'
 #' @export
 roll <- function(a, shift, axis = NULL) {
-  if (shift == 0) return(a)
+  if (any(shift == 0)) return(a)
   if (is.null(axis))
     return(marray(roll(flatten(a), shift, axis = 1L), dim = DIM(a)))
   else {
