@@ -21,7 +21,7 @@ expand_dims <- function(a, axis = -1L) {
     wd[neg] <- wd[neg] + nd + naxis + 1L
 
   if (min(wd) < 1L)
-    stop("Implicit additional dims for expansions with negative indexes are not supported.")
+    stop("implicit additional dims for expansions with negative indexes are not supported.")
 
   if ((max_wd <- max(wd)) > nd + naxis) {
     # Implicitly pad on right

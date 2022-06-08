@@ -21,18 +21,18 @@
 #' @export
 mabind <- function(..., input_shape = NULL, axis = -1, order = c("C", "F")) {
   order <- match.arg(order)
-  list_of_arrays <- .dots(...)
+  arys <- .dots(...)
 
   # Transform objects to arrays
-  list_of_arrays <- lapply(list_of_arrays, FUN = marray, dim = input_shape, order = order)
+  arys <- lapply(arys, FUN = marray, dim = input_shape, order = order)
   # Coerce all arguments to have the same number of dimensions (by adding one, if necessary)
   # and permute them to put the join dimension (axis) last.
-  N <- max(1, sapply(list_of_arrays, FUN = ndim))
+  N <- max(1, sapply(arys, FUN = ndim))
   if ((axis < 0L) || (axis > N)) axis <- N
 
   # Construct matrix of dimensions
   # Rows are equal to the length of the dimension(s) and Cols are equal to to length of array list
-  all_dims <- sapply(list_of_arrays, dim)
+  all_dims <- sapply(arys, dim)
   if (is.vector(all_dims)) all_dims <- t(all_dims)
   if (!(is.matrix(all_dims) && all(apply(all_dims[-axis, , drop = FALSE], 1L, function(x) length(unique(x)) == 1L) == TRUE)))
     stop("All input arrays must have the same shape (number of dimensions), excluding axis.", call. = FALSE)
@@ -43,10 +43,10 @@ mabind <- function(..., input_shape = NULL, axis = -1, order = c("C", "F")) {
 
   # Adopt dimensions of arrays, if necessary
   if (any(perm != seq_along(perm)))
-    list_of_arrays <- lapply(list_of_arrays, FUN = transpose, perm)
+    arys <- lapply(arys, FUN = transpose, perm)
 
   # Construct output array
-  out <- array(unlist(list_of_arrays), dim = c(all_dims[-axis, 1L], sum(all_dims[axis, ])))
+  out <- array(unlist(arys), dim = c(all_dims[-axis, 1L], sum(all_dims[axis, ])))
   # Permute the output array to put the join dimension back in the right place
   if (any(order(perm) != seq_along(perm)))
     out <- transpose(out, order(perm))

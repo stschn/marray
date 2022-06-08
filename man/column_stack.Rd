@@ -7,17 +7,17 @@
 column_stack(..., order = c("C", "F"))
 }
 \arguments{
-\item{...}{Any numbers of objects they are coerced to 1D arrays. The objects can be packed into a \code{list}. The length of these objects must be equal.}
+\item{...}{Any numbers of objects they are coerced to 1-D arrays. The objects can be packed into a \code{list}. The length of these objects must be equal.}
 
 \item{order}{The order in which elements of the objects should be read during coercing to arrays.
 By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.}
 }
 \value{
-An 2D array formed by stacking all input arrays.
+An 2-D array formed by stacking all input arrays.
 }
 \description{
-Stack 1D arrays as columns into a 2D array.
+Stack 1-D arrays as columns into a 2-D array.
 }
 \details{
 This function corresponds to \code{column_stack()} from NumPy.

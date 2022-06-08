@@ -9,7 +9,7 @@ reshape.array(a, dim = NULL, order = c("C", "F"))
 \arguments{
 \item{a}{An array.}
 
-\item{dim}{A integerish vector of new dimensions to be set on the array.}
+\item{dim}{An integerish vector of new dimensions to be set on the array.}
 
 \item{order}{The order in which elements of \code{a} should be read during rearrangement.
 By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.

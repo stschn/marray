@@ -11,6 +11,7 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>dimC()</code> set the dimension of an object in row-major ordering (C-style).</li>
   <li><code>reshape.array()</code> reshapes an array to new dimension.</li>
   <li><code>marray()</code> and <code>as.marray()</code> transform data into a multidimensional array and <code>is.marray()</code> checks for that type of array.</li>
+  <li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerces objects into arrays with corresponding number of dimensions.</li>
   <li><code>flatten()</code> flattens data into a one-dimensional array.</li>
   <li><code>expand_dims()</code> expands the shape of an array by inserting a new axis.</li>
   <li><code>squeeze()</code> removes dimensions of length one from array.</li>
@@ -18,8 +19,15 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>slice()</code> read or write a part of an array.</li>
   <li><code>clip()</code> limits values of an array.</li>
   <li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
+  <li><code>vstack()</code> stacks arrays in sequence vertically (row-wise).</li>
+  <li><code>hstack()</code> stacks arrays in sequence horizontally (column-wise).</li>
+  <li><code>dstack()</code> stacks arrays in sequence along 3rd axis (depth-wise)).</li>
   <li><code>column_stack()</code> stacks 1D arrays as columns into a 2D array.</li>
   <li><code>row_stack()</code> stacks 1D arrays as rows into a 2D array.</li>
+  <li><code>array_split()</code> splits an array into sub-arrays along an axis.</li>
+  <li><code>vsplit()</code> splits an array into sub-arrays vertically (row-wise).</li>
+  <li><code>hsplit()</code> splits an array into sub-arrays horizontally (column-wise).</li>
+  <li><code>dsplit()</code> splits an array into sub-arrays along 3rd axis (depth-wise)).</li>
   <li><code>eye()</code> creates a 2D identity matrix.</li>
   <li><code>vander()</code> creates a Vandermonde matrix.</li>
   <li><code>ones()</code> creates an array filled with ones.</li>

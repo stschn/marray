@@ -35,7 +35,7 @@
 #' @title Reshape an array
 #'
 #' @param a An array.
-#' @param dim A integerish vector of new dimensions to be set on the array.
+#' @param dim An integerish vector of new dimensions to be set on the array.
 #' @param order The order in which elements of \code{a} should be read during rearrangement.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
