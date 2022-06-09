@@ -17,7 +17,7 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>squeeze()</code> removes dimensions of length one from array.</li>
   <li><code>mamatrix()</code> shrinks an array by rows or columns into a matrix.</li>
   <li><code>slice()</code> read or write a part of an array.</li>
-  <li><code>clip()</code> limits values of an array.</li>
+  <li><code>maclip()</code> limits values of an array.</li>
   <li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
   <li><code>vstack()</code> stacks arrays in sequence vertically (row-wise).</li>
   <li><code>hstack()</code> stacks arrays in sequence horizontally (column-wise).</li>

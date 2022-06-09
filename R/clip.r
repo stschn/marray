@@ -14,12 +14,12 @@
 #' @examples
 #' a <- marray(1:24, dim = c(4, 3, 2))
 #' # Limit entire array
-#' clip(a, a_min = 3, a_max = 7)
+#' maclip(a, a_min = 3, a_max = 7)
 #' # Limit only a region of the array
-#' clip(a, i = 1:2, j = 2:3, a_min = 3, a_max = 7)
+#' maclip(a, i = 1:2, j = 2:3, a_min = 3, a_max = 7)
 #'
 #' @export
-clip <- function(a, ..., a_min, a_max) {
+maclip <- function(a, ..., a_min, a_max) {
   as <- slice(a, ...)
   if (a_min > a_max)
     slice(as) <- a_max
