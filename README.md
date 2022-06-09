@@ -46,6 +46,7 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>roll()</code> shifts an array circularly.</li>
   <li><code>crop()</code> takes out a part of an array with default values for the remaining part.</li>
   <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
+  <li><code>mareplace()</code> replaces values in an array.</li>
 </ul>
 
 <h2>Examples</h3>

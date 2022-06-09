@@ -18,11 +18,13 @@
   args <- .dots(...)
   if (length(args) > length(ds))
     stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", length(args), length(ds)), call. = FALSE)
-  which <- match(names(args), letters) - 8L
-  if (!((is.integer(which) && !length(which)) || any(is.na(which)))) {
-    if (max(which) > length(ds))
-      stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", max(which), length(ds)), call. = FALSE)
-    ds[which] <- args
+  axis <- match(names(args), letters) - 8L
+  if (!((is.integer(axis) && !length(axis)) || any(is.na(axis)))) {
+    if (any(axis < 1L))
+      stop(sprintf("symbols (%s) are not allowed as arguments for indexing.", paste(letters[axis[which(axis < 1L)] + 8L], collapse = ", ")), call. = FALSE)
+    if (max(axis) > length(ds))
+      stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", max(axis), length(ds)), call. = FALSE)
+    ds[axis] <- args
   } else {
     args <- lapply(seq_along(args), function(i) if (any(is.null(args[[i]])) || any(is.na(args[[i]])) || any(args[[i]] <= 0)) ds[[i]] else args[[i]])
     ds[seq_along(args)] <- args
