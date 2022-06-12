@@ -33,7 +33,7 @@
     x <- ds[[i]]
     x[x < ds_min[[i]]] <- ds_min[[i]]
     x[x > ds_max[[i]]] <- ds_max[[i]]
-    unique(x)
+    x
   })
   ds
 }

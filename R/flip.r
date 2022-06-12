@@ -20,20 +20,19 @@ flip <- function(a, axis = 1L) {
   d <- DIM(a)
   nd <- length(d)
   axis[which((axis < 0L) | (axis > nd))] <- nd
-  l <- lapply(d, seq_len)
-  l[axis] <- lapply(l[axis], rev)
-  do.call('[', c(list(a), l))
+  ds <- lapply(d, seq_len)
+  ds[axis] <- lapply(ds[axis], rev)
+  do.call('[', c(list(a), ds))
 }
 
 #' @rdname flip
 #' @export
 flipud <- function(a) {
-  flip(a, axis = 1L)
+  flip(atleast_1d(a), axis = 1L)
 }
 
 #' @rdname flip
 #' @export
 fliplr <- function(a) {
-  stopifnot("a must be at least a 2-dimensional array." = ndim(a) >= 2L)
-  flip(a, axis = 2L)
+  flip(atleast_2d(a), axis = 2L)
 }

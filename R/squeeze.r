@@ -18,16 +18,16 @@
 #' @export
 squeeze <- function(a, axis = NULL, order = c("C", "F")) {
   order <- match.arg(order)
-  da <- dim(a)
+  d <- dim(a)
   if (is.null(axis)) {
-    newdim <- da[!da %in% c(1L)]
+    newdim <- d[!d %in% c(1L)]
   } else {
-    axis1 <- which(da %in% c(1L))
+    axis1 <- which(d %in% c(1L))
     remove_axis <- axis1[axis1 %in% axis]
     if (isFALSE((is.integer(remove_axis)) && (length(remove_axis) == 0L))) # check for integer (empty)
-      newdim <- da[-remove_axis]
+      newdim <- d[-remove_axis]
     else
-      newdim <- da
+      newdim <- d
   }
   marray(a, dim = newdim, order = order)
 }

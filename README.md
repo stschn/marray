@@ -45,6 +45,7 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>rot90()</code> rotates an array by 90 degrees in the plane specified by axes.</li>
   <li><code>roll()</code> shifts an array circularly.</li>
   <li><code>crop()</code> takes out a part of an array with default values for the remaining part.</li>
+  <li><code>slide()</code> slides over an array with a window of given size and given stride.</li>
   <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
   <li><code>mareplace()</code> replaces values in an array.</li>
 </ul>
@@ -189,4 +190,30 @@ roll(a, shift = -1, axis = 1)
 ```r
 a <- marray(1:24, dim = c(4, 3, 2))
 crop(a, i = 1, j = 2:3)
+```
+
+<h3>Split array</h3>
+
+```r
+a <- marray(1:8)
+sub_arys <- array_split(a, indices_or_sections = 3)
+sub_arys <- array_split(a, indices_or_sections = c(3, 5, 6))
+
+a <- marray(1:12, dim = c(4, 3))
+sub_arys <- array_split(a, indices_or_sections = 2)
+sub_arys <- array_split(a, indices_or_sections = 2, axis = 2L)
+
+a <- marray(1:24, dim = c(4, 3, 2), order = "F")
+sub_arys <- array_split(a, indices_or_sections = 2)
+sub_arys <- array_split(a, indices_or_sections = 2, axis = 2L)
+```
+
+<h3>Slide over an array</h3>
+
+```r
+a <- marray(sample(7 * 4 * 2), dim = c(7, 4, 2))
+# Sliding along each axes with a size of 1 and a stride of 1
+sub_arys <- slide(a)
+# Sliding along axes 1 and 2 with a size of 2 resp. 1 and a stride of 1
+sub_arys <- slide(a, size = c(2, 1), axis = c(1, 2))
 ```
