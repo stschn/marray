@@ -5,7 +5,6 @@
 #' @param order The order in which elements of data should be read during combination.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
-#' @param ... Additional arguments to be passed to the method.
 #'
 #' @return A two-dimensional array with combined matrices of the first two dimensions of \code{x}.
 #'

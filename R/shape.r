@@ -22,6 +22,51 @@ ndim <- function(x) { length(dim(x)) }
 #' @export
 nsize <- function(x) { prod(dim(x)) }
 
+#' @title Enforce array and convert to vector
+#'
+#' @param x A vector or array.
+#' @return An array of at least one dimension.
+#' @references Implementation credits go partially to \url{https://github.com/cran/arrayhelpers}.
+#'
+#' @examples
+#' v <- setNames(1:11, do.call(paste0, list("i", c(1:11))))
+#' v
+#' class(v)
+#' v <- ensuredim(v)
+#' class(v)
+#' dim(v)
+#' dimnames(v)
+#'
+#' v <- dropdim(v)
+#' class(v)
+#' names(v)
+#' dim(v)
+#' dimnames(v)
+#'
+#' @export
+ensuredim <- function(x) {
+  if (is.null(dim(x)))
+    x <- structure(x, .Dim = length(x),
+                   .Dimnames = if (all(sapply(list(names(x)) -> xn, is.null))) NULL else xn,
+                   .Names = NULL)
+  x
+}
+
+#' @rdname ensuredim
+#' @param order The order in which elements of \code{x} should be read during flattening if \code{x} is a higher-dimensional array.
+#'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
+#'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
+#' @return A vector.
+#' @export
+dropdim <- function(x, order = c("C", "F")) {
+  xn <- if (ndim(x) == 1L) dimnames(x)[[1L]] else names(x)
+  x <- flatten(x, order = order)
+  x <- structure(x, .Dim = NULL,
+                 .Dimnames = NULL,
+                 .Names = xn)
+  x
+}
+
 #' @title Convert inputs to arrays with at least one dimension
 #'
 #' @param ... Any number of objects that are coerced into at least 1-D arrays.

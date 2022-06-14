@@ -12,6 +12,14 @@
 #' @return An array as a combination of all input arrays along a specified dimension.
 #'
 #' @examples
+#' a <- marray(1:11)
+#' b <- marray(2:23)
+#' mabind(a, b)
+#'
+#' a <- marray(1:12, dim = c(4, 3))
+#' b <- marray(1:12, dim = c(4, 3, 1))
+#' mabind(a, b)
+#'
 #' a1 <- marray(1:24, dim = c(4, 3, 2), order = "F"); a1
 #' a2 <- marray(-1:-24, dim = c(4, 3, 2), order = "F"); a2
 #' a3 <- marray(sample(24), dim = c(4, 3, 2), order = "F"); a3
@@ -25,14 +33,20 @@ mabind <- function(..., input_shape = NULL, axis = -1, order = c("C", "F")) {
 
   # Transform objects to arrays
   arys <- lapply(arys, FUN = marray, dim = input_shape, order = order)
+  N <- max(1, sapply(arys, FUN = ndim))
+  if ((axis <= 0L) || (axis > N)) axis <- N
+
   # Coerce all arguments to have the same number of dimensions (by adding one, if necessary)
   # and permute them to put the join dimension (axis) last.
-  N <- max(1, sapply(arys, FUN = ndim))
-  if ((axis < 0L) || (axis > N)) axis <- N
+  all_dims <- lapply(arys, dim)
+  all_dims <- lapply(all_dims, function(d) {
+    if (length(d) < N) d <- append(d, 1L, axis - 1L)
+    d
+  })
 
   # Construct matrix of dimensions
-  # Rows are equal to the length of the dimension(s) and Cols are equal to to length of array list
-  all_dims <- sapply(arys, dim)
+  # Rows are equal to the length of the dimension(s) and Cols are equal to the number of arrays
+  all_dims <- sapply(all_dims, identity)
   if (is.vector(all_dims)) all_dims <- t(all_dims)
   if (!(is.matrix(all_dims) && all(apply(all_dims[-axis, , drop = FALSE], 1L, function(x) length(unique(x)) == 1L) == TRUE)))
     stop("All input arrays must have the same shape (number of dimensions), excluding axis.", call. = FALSE)

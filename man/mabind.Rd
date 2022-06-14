@@ -27,6 +27,14 @@ Combine arrays along a specified dimension.
 This function corresponds to \code{concatenate()} from NumPy.
 }
 \examples{
+a <- marray(1:11)
+b <- marray(2:23)
+mabind(a, b)
+
+a <- marray(1:12, dim = c(4, 3))
+b <- marray(1:12, dim = c(4, 3, 1))
+mabind(a, b)
+
 a1 <- marray(1:24, dim = c(4, 3, 2), order = "F"); a1
 a2 <- marray(-1:-24, dim = c(4, 3, 2), order = "F"); a2
 a3 <- marray(sample(24), dim = c(4, 3, 2), order = "F"); a3
