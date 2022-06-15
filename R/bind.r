@@ -43,15 +43,14 @@ mabind <- function(..., input_shape = NULL, axis = -1, order = c("C", "F")) {
 
   # Coerce all arguments to have the same number of dimensions (by adding one, if necessary)
   # and permute them to put the join dimension (axis) last.
-  all_dims <- lapply(arys, dim)
-  all_dims <- lapply(all_dims, function(d) {
-    if (length(d) < N) d <- append(d, 1L, axis - 1L)
-    d
+  arys <- lapply(arys, function(a) {
+    if (ndim(a) < N) a <- expand_dims(a, axis)
+    a
   })
 
   # Construct matrix of dimensions
   # Rows are equal to the length of the dimension(s) and Cols are equal to the number of arrays
-  all_dims <- sapply(all_dims, identity)
+  all_dims <- sapply(arys, FUN = dim)
   if (is.vector(all_dims)) all_dims <- t(all_dims)
   if (!(is.matrix(all_dims) && all(apply(all_dims[-axis, , drop = FALSE], 1L, function(x) length(unique(x)) == 1L) == TRUE)))
     stop("All input arrays must have the same shape (number of dimensions), excluding axis.", call. = FALSE)
