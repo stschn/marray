@@ -14,7 +14,7 @@
 #'
 #' @export
 vstack <- function(..., input_shape = NULL, order = c("C", "F")) {
-  mabind(..., input_shape = input_shape, axis = 1L, order = order)
+  mabind(..., axis = 1L, input_shape = input_shape, order = order)
 }
 
 #' @title Array stack
@@ -33,7 +33,7 @@ vstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #'
 #' @export
 hstack <- function(..., input_shape = NULL, order = c("C", "F")) {
-  mabind(atleast_2d(..., order = order), input_shape = input_shape, axis = 2L, order = order)
+  mabind(atleast_2d(..., order = order), axis = 2L, input_shape = input_shape, order = order)
 }
 
 #' @title Array stack
@@ -52,7 +52,7 @@ hstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #'
 #' @export
 dstack <- function(..., input_shape = NULL, order = c("C", "F")) {
-  mabind(atleast_3d(..., order = order), input_shape = input_shape, axis = 3L, order = order)
+  mabind(atleast_3d(..., order = order), axis = 3L, input_shape = input_shape, order = order)
 }
 
 #' @title Array stack

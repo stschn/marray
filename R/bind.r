@@ -2,8 +2,8 @@
 #' @description Combine arrays along a specified dimension.
 #'
 #' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{list}. The dimensions of these objects must be equal, excluding axis, if they are not to be coerced into a certain \code{input_shape}.
-#' @param input_shape The dimension the input objects are to be coerced. By default \code{NULL}, the original dimensions are used.
 #' @param axis The dimension along the objects are combined. By default (\code{-1}), the last dimension is used for binding the arrays.
+#' @param input_shape The dimension the input objects are to be coerced. By default \code{NULL}, the original dimensions are used.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
@@ -27,7 +27,7 @@
 #' mabind(a1, a2, a3, axis = 1) # output is an 12x3x2 array
 #' mabind(a1, a2, a3, axis = 2) # output is an 4x9x2 array
 #' @export
-mabind <- function(..., input_shape = NULL, axis = -1, order = c("C", "F")) {
+mabind <- function(..., axis = -1, input_shape = NULL, order = c("C", "F")) {
   order <- match.arg(order)
   arys <- .dots(...)
   # Discard empty elements
