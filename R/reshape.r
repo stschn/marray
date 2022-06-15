@@ -40,7 +40,7 @@
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{reshape()} from NumPy.
+#' @details This function corresponds to \code{reshape()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.reshape.html}{see}).
 #' @return The (redimensioned) array \code{a}.
 #'
 #' @seealso \code{\link[reticulate]{array_reshape}}.

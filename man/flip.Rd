@@ -24,7 +24,7 @@ The reversed array \code{a} along axes.
 Reverse the order of elements in an array along the given axes.
 }
 \details{
-This function corresponds to \code{flip()} from NumPy.
+This function corresponds to \code{flip()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.flip.html}{see}).
 Flipping along an axis can be exemplified with a matrix. If the order of the elements along the first dimension (row) is to be reversed,
 it is helpful to imagine a horizontal axis (from left to right) in the middle of the matrix where flipping takes place. The first row
 becomes the last, the second row the second last and so on until the last row becomes the first. The same applies for reversing the order

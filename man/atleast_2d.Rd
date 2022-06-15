@@ -20,5 +20,5 @@ An array, or list of arrays, each with at least two dimensions.
 Convert inputs to arrays with at least two dimensions
 }
 \details{
-This function corresponds to \code{atleast_2d()} from NumPy.
+This function corresponds to \code{atleast_2d()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.atleast_2d.html}{see}).
 }

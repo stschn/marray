@@ -7,7 +7,7 @@
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{squeeze()} from NumPy.
+#' @details This function corresponds to \code{squeeze()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html}{see}).
 #'   The base R function \code{\link{drop}} does the same as this function. In opposite to \code{drop} this function
 #'   allows reordering the elements of the newly created array as well as specifying only certain axes.
 #'

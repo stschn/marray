@@ -22,5 +22,5 @@ An array of \code{fill_value} with the given shape.
 Create array filled with value.
 }
 \details{
-This function corresponds to \code{full()} from NumPy.
+This function corresponds to \code{full()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.full.html}{see}).
 }

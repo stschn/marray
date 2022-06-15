@@ -4,7 +4,7 @@
 #' @param a An array.
 #' @param axis Index position of the new axis in the expanded array. Negative numbers count from the back.
 #'
-#' @details This function corresponds to \code{expand_dims()} from NumPy.
+#' @details This function corresponds to \code{expand_dims()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.expand_dims.html}{see}).
 #' @return The expanded array \code{a} with new shape.
 #'
 #' @references Implementation credits go to \url{https://github.com/t-kalinowski/listarrays}.

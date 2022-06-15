@@ -18,7 +18,7 @@ The expanded array \code{a} with new shape.
 Insert a new axis that will appear at the axis position in the expanded array shape.
 }
 \details{
-This function corresponds to \code{expand_dims()} from NumPy.
+This function corresponds to \code{expand_dims()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.expand_dims.html}{see}).
 }
 \references{
 Implementation credits go to \url{https://github.com/t-kalinowski/listarrays}.

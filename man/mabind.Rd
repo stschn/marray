@@ -24,7 +24,7 @@ An array as a combination of all input arrays along a specified dimension.
 Combine arrays along a specified dimension.
 }
 \details{
-This function corresponds to \code{concatenate()} from NumPy.
+This function corresponds to \code{concatenate()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html}{see}).
 }
 \examples{
 a <- marray(1:11)

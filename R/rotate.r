@@ -5,7 +5,7 @@
 #' @param k Number of times the array is rotated by 90 degree. Positive numbers represent clockwise rotation, negative numbers counterclockwise rotation.
 #' @param axes The array is rotated in the plane defined by the axes. Axes must be different.
 #'
-#' @details This function corresponds to \code{rot90()} from NumPy.
+#' @details This function corresponds to \code{rot90()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.rot90.html}{see}).
 #' @return A rotated view of \code{a}.
 #'
 #' @export

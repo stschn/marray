@@ -7,7 +7,7 @@
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds partially to \code{delete()} from NumPy.
+#' @details This function corresponds partially to \code{delete()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.delete.html}{see}).
 #'   The number of elements is tailored for the reshaped array. The sign of \code{axis} determines the reading direction for the extraction
 #'   of the elements from \code{a} for the newly created array. A positive sign indicates that the first n elements from \code{a} are used,
 #'   a negative sign indicates that the last n elements will be used.

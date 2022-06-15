@@ -20,7 +20,7 @@ An 2-D array formed by stacking all input arrays.
 Stack 1-D arrays as columns into a 2-D array.
 }
 \details{
-This function corresponds to \code{column_stack()} from NumPy.
+This function corresponds to \code{column_stack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.column_stack.html}{see}).
 }
 \examples{
 a <- 1:3

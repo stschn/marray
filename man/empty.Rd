@@ -18,5 +18,5 @@ An array of \code{NA} with the given shape.
 Create array filled with NA.
 }
 \details{
-This function corresponds to \code{empty()} from NumPy with the difference that instead of arbitrary values \code{NA} are set.
+This function corresponds to \code{empty()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.empty.html}{see}) with the difference that instead of arbitrary values \code{NA} are set.
 }

@@ -16,5 +16,5 @@ Number of dimensions.
 Number of dimensions
 }
 \details{
-This function corresponds to \code{ndarray.ndim} from NumPy.
+This function corresponds to \code{ndarray.ndim} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.ndim.html}{see}).
 }

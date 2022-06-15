@@ -8,7 +8,7 @@
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds partially to \code{insert()} and \code{append()} from NumPy.
+#' @details This function corresponds partially to \code{insert()} and \code{append()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.insert.html}{see}).
 #'
 #' @return The array \code{a} with objects inserted or appended.
 #'

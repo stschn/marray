@@ -22,6 +22,6 @@ The array formed by stacking the given arrays.
 Stack arrays in sequence vertically (row-wise).
 }
 \details{
-This function corresponds to \code{vstack()} from NumPy.
+This function corresponds to \code{vstack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.vstack.html}{see}).
   It's equivalent to \code{\link{mabind}} along the first axis.
 }

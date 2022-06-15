@@ -8,7 +8,7 @@
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{concatenate()} from NumPy.
+#' @details This function corresponds to \code{concatenate()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html}{see}).
 #' @return An array as a combination of all input arrays along a specified dimension.
 #'
 #' @examples
@@ -30,6 +30,11 @@
 mabind <- function(..., input_shape = NULL, axis = -1, order = c("C", "F")) {
   order <- match.arg(order)
   arys <- .dots(...)
+  # Discard empty elements
+  if (any(discard <- sapply(arys, FUN = is.null)))
+    arys <- arys[!discard]
+  if (length(arys) == 0L)
+    return(NULL)
 
   # Transform objects to arrays
   arys <- lapply(arys, FUN = marray, dim = input_shape, order = order)

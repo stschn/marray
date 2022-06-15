@@ -2,9 +2,24 @@
 % Please edit documentation in R/flatten.r
 \name{flatten}
 \alias{flatten}
+\alias{flatten_int}
+\alias{flatten_dbl}
+\alias{flatten_raw}
+\alias{flatten_chr}
+\alias{flatten_lgl}
 \title{Data flattening}
 \usage{
 flatten(data, axis = NULL, order = c("C", "F"))
+
+flatten_int(data, order = c("C", "F"))
+
+flatten_dbl(data, order = c("C", "F"))
+
+flatten_raw(data, order = c("C", "F"))
+
+flatten_chr(data, order = c("C", "F"))
+
+flatten_lgl(data, order = c("C", "F"))
 }
 \arguments{
 \item{data}{Data to be flatten.}
@@ -19,12 +34,13 @@ In opposite, the \code{Fortran}-style ordering means elements should be read in 
 }
 \value{
 The flatten data in form of a one-dimensional array.
+  \code{flatten_int()} returns an integer vector, \code{flatten_dbl()} a double vector, \code{flatten_raw()} a raw vector, \code{flatten_chr()} a character vector, and \code{flatten_lgl()} a logical vector.
 }
 \description{
 Flatten data into a one-dimensional array.
 }
 \details{
-This function corresponds to \code{ndarray.flatten()} from NumPy.
+This function corresponds to \code{ndarray.flatten()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.flatten.html}{see}).
 }
 \examples{
 v <- (1:24); dim(v); ndim(v)

@@ -24,7 +24,7 @@ The array \code{a} with objects inserted or appended.
 Insert an object into an array.
 }
 \details{
-This function corresponds partially to \code{insert()} and \code{append()} from NumPy.
+This function corresponds partially to \code{insert()} and \code{append()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.insert.html}{see}).
 }
 \examples{
 # original array

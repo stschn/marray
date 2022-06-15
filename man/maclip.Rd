@@ -22,7 +22,7 @@ The array \code{a}, but where values < \code{a_min} are replaced with \code{a_mi
 Clip (limit) the values in an array.
 }
 \details{
-This function corresponds partially to \code{clip()} from NumPy.
+This function corresponds partially to \code{clip()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.clip.html}{see}).
 In opposite to NumPy function a slice of \code{a} can be specified to which limitation of the values refers.
 }
 \examples{

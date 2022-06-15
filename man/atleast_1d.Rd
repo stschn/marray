@@ -20,5 +20,5 @@ An array, or list of arrays, each with at least one dimension.
 Convert inputs to arrays with at least one dimension
 }
 \details{
-This function corresponds to \code{atleast_1d()} from NumPy.
+This function corresponds to \code{atleast_1d()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.atleast_1d.html}{see}).
 }

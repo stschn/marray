@@ -18,5 +18,5 @@ An array of ones with the given shape.
 Create array filled with ones.
 }
 \details{
-This function corresponds to \code{ones()} from NumPy.
+This function corresponds to \code{ones()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ones.html}{see}).
 }

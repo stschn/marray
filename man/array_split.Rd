@@ -22,7 +22,7 @@ A list of sub-arrays.
 Split an array into multiple sub-arrays along an axis.
 }
 \details{
-This function corresponds to \code{array_split()} from NumPy.
+This function corresponds to \code{array_split()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.split.html}{see}).
 }
 \examples{
 a <- marray(1:8)

@@ -6,7 +6,7 @@
 #' @param a_min Minimum value.
 #' @param a_max Maximum value.
 #'
-#' @details This function corresponds partially to \code{clip()} from NumPy.
+#' @details This function corresponds partially to \code{clip()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.clip.html}{see}).
 #' In opposite to NumPy function a slice of \code{a} can be specified to which limitation of the values refers.
 #'
 #' @return The array \code{a}, but where values < \code{a_min} are replaced with \code{a_min}, and those > \code{a_max} with \code{a_max}.

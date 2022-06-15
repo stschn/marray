@@ -18,5 +18,5 @@ maidentity(n, dimnames = NULL)
 Return the identity array, a square array with ones on the main diagonal.
 }
 \details{
-This function corresponds to \code{identity()} from NumPy.
+This function corresponds to \code{identity()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.identity.html}{see}).
 }

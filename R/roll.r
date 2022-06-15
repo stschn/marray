@@ -8,7 +8,7 @@
 #' @param axis The axis or axes along \code{a} which elements are shifted.
 #'   By default, the array is flattened before shifting, after which the original shape is restored.
 #'
-#' @details This function corresponds to \code{roll()} from NumPy.
+#' @details This function corresponds to \code{roll()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.roll.html}{see}).
 #' Shift array circularly, that is, elements that roll beyond the last position are re-introduced at the first.
 #'
 #' @return An array with the same shape as \code{a} but with shifted elements along given axis.

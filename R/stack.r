@@ -7,7 +7,7 @@
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{vstack()} from NumPy.
+#' @details This function corresponds to \code{vstack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.vstack.html}{see}).
 #'   It's equivalent to \code{\link{mabind}} along the first axis.
 #'
 #' @return The array formed by stacking the given arrays.
@@ -26,7 +26,7 @@ vstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{hstack()} from NumPy.
+#' @details This function corresponds to \code{hstack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.hstack.html}{see}).
 #'   It's equivalent to \code{\link{mabind}} along the second axis.
 #'
 #' @return The array formed by stacking the given arrays.
@@ -45,7 +45,7 @@ hstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{dstack()} from NumPy.
+#' @details This function corresponds to \code{dstack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.dstack.html}{see}).
 #'   It's equivalent to \code{\link{mabind}} along the third axis.
 #'
 #' @return The array formed by stacking the given arrays.
@@ -63,7 +63,7 @@ dstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{column_stack()} from NumPy.
+#' @details This function corresponds to \code{column_stack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.column_stack.html}{see}).
 #' @return An 2-D array formed by stacking all input arrays.
 #'
 #' @examples
@@ -95,7 +95,7 @@ column_stack <- function(..., order = c("C", "F")) {
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{row_stack()} from NumPy.
+#' @details This function corresponds to \code{row_stack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.row_stack.html}{see}).
 #' @return An 2-D array formed by stacking all input arrays.
 #'
 #' @examples

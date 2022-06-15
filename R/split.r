@@ -7,7 +7,7 @@
 #'   A sorted vector of integers denotes the entries where along \code{axis} the array \code{a} is split.
 #' @param axis The axis along which to split, default is \code{1}.
 #'
-#' @details This function corresponds to \code{array_split()} from NumPy.
+#' @details This function corresponds to \code{array_split()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.split.html}{see}).
 #'
 #' @return A list of sub-arrays.
 #'
@@ -56,7 +56,7 @@ array_split <- function(a, indices_or_sections, axis = 1L) {
 #'   A single integer, N, denotes that the array \code{a} will be divided into N arrays along \code{axis}.
 #'   A sorted vector of integers denotes the entries where along \code{axis} the array \code{a} is split.
 #'
-#' @details This function corresponds to \code{vsplit()} from NumPy.
+#' @details This function corresponds to \code{vsplit()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.vsplit.html}{see}).
 #'   It's equivalent to \code{\link{array_split}} along the first axis.
 #'
 #' @return A list of sub-arrays.
@@ -74,7 +74,7 @@ vsplit <- function(a, indices_or_sections) {
 #'   A single integer, N, denotes that the array \code{a} will be divided into N arrays along \code{axis}.
 #'   A sorted vector of integers denotes the entries where along \code{axis} the array \code{a} is split.
 #'
-#' @details This function corresponds to \code{hsplit()} from NumPy.
+#' @details This function corresponds to \code{hsplit()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.hsplit.html}{see}).
 #'   It's equivalent to \code{\link{array_split}} along the second axis.
 #'
 #' @return A list of sub-arrays.
@@ -92,7 +92,7 @@ hsplit <- function(a, indices_or_sections) {
 #'   A single integer, N, denotes that the array \code{a} will be divided into N arrays along \code{axis}.
 #'   A sorted vector of integers denotes the entries where along \code{axis} the array \code{a} is split.
 #'
-#' @details This function corresponds to \code{dsplit()} from NumPy.
+#' @details This function corresponds to \code{dsplit()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.dsplit.html}{see}).
 #'   It's equivalent to \code{\link{array_split}} along the third axis.
 #'
 #' @return A list of sub-arrays.

@@ -18,5 +18,5 @@ An identity matrix with n rows and n or rather m columns.
 Create 2D identity matrix.
 }
 \details{
-This function corresponds to \code{eye()} from NumPy.
+This function corresponds to \code{eye()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.eye.html}{see}).
 }

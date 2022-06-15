@@ -18,5 +18,5 @@ An array of zeros with the given shape.
 Create array filled with zeros.
 }
 \details{
-This function corresponds to \code{zeros()} from NumPy.
+This function corresponds to \code{zeros()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.zeros.html}{see}).
 }

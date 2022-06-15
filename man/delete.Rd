@@ -22,7 +22,7 @@ The array \code{a} with deleted axes.
 Delete axis of an array.
 }
 \details{
-This function corresponds partially to \code{delete()} from NumPy.
+This function corresponds partially to \code{delete()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.delete.html}{see}).
   The number of elements is tailored for the reshaped array. The sign of \code{axis} determines the reading direction for the extraction
   of the elements from \code{a} for the newly created array. A positive sign indicates that the first n elements from \code{a} are used,
   a negative sign indicates that the last n elements will be used.

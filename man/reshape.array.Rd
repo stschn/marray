@@ -22,7 +22,7 @@ The (redimensioned) array \code{a}.
 Reshape an array
 }
 \details{
-This function corresponds to \code{reshape()} from NumPy.
+This function corresponds to \code{reshape()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.reshape.html}{see}).
 }
 \seealso{
 \code{\link[reticulate]{array_reshape}}.

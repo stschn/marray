@@ -16,5 +16,5 @@ Number of elements.
 Number of elements
 }
 \details{
-This function corresponds to \code{ndarray.size} from NumPy.
+This function corresponds to \code{ndarray.size} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.size.html}{see}).
 }

@@ -20,5 +20,5 @@ A rotated view of \code{a}.
 Rotate an array by 90 degrees in the plane specified by axes.
 }
 \details{
-This function corresponds to \code{rot90()} from NumPy.
+This function corresponds to \code{rot90()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.rot90.html}{see}).
 }

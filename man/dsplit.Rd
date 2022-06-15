@@ -20,6 +20,6 @@ A list of sub-arrays.
 Split an array into multiple sub-arrays along the 3rd axis (depth-wise).
 }
 \details{
-This function corresponds to \code{dsplit()} from NumPy.
+This function corresponds to \code{dsplit()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.dsplit.html}{see}).
   It's equivalent to \code{\link{array_split}} along the third axis.
 }

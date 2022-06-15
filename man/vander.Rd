@@ -18,5 +18,5 @@ A Vandermonde matrix.
 Create Vandermonde matrix.
 }
 \details{
-This function corresponds to \code{vander()} from NumPy.
+This function corresponds to \code{vander()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.vander.html}{see}).
 }

@@ -9,8 +9,9 @@
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds to \code{ndarray.flatten()} from NumPy.
+#' @details This function corresponds to \code{ndarray.flatten()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.flatten.html}{see}).
 #' @return The flatten data in form of a one-dimensional array.
+#'   \code{flatten_int()} returns an integer vector, \code{flatten_dbl()} a double vector, \code{flatten_raw()} a raw vector, \code{flatten_chr()} a character vector, and \code{flatten_lgl()} a logical vector.
 #'
 #' @examples
 #' v <- (1:24); dim(v); ndim(v)
@@ -35,4 +36,34 @@ flatten <- function(data, axis = NULL, order = c("C", "F")) {
   if (!is.null(axis))
     data <- apply(data, MARGIN = axis, FUN = identity)
   return(as.array(as.vector(reshape.array(data, order = order))))
+}
+
+#' @rdname flatten
+#' @export
+flatten_int <- function(data, order = c("C", "F")) {
+  as.integer(dropdim(data, order = order))
+}
+
+#' @rdname flatten
+#' @export
+flatten_dbl <- function(data, order = c("C", "F")) {
+  as.double(dropdim(data, order = order))
+}
+
+#' @rdname flatten
+#' @export
+flatten_raw <- function(data, order = c("C", "F")) {
+  as.raw(dropdim(data, order = order))
+}
+
+#' @rdname flatten
+#' @export
+flatten_chr <- function(data, order = c("C", "F")) {
+  as.character(dropdim(data, order = order))
+}
+
+#' @rdname flatten
+#' @export
+flatten_lgl <- function(data, order = c("C", "F")) {
+  as.logical(dropdim(data, order = order))
 }

@@ -23,7 +23,7 @@ An array with the same shape as \code{a} but with shifted elements along given a
 Roll array elements along a given axis.
 }
 \details{
-This function corresponds to \code{roll()} from NumPy.
+This function corresponds to \code{roll()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.roll.html}{see}).
 Shift array circularly, that is, elements that roll beyond the last position are re-introduced at the first.
 }
 \examples{

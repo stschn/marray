@@ -22,6 +22,6 @@ The array formed by stacking the given arrays.
 Stack arrays in sequence along the 3rd axis (depth-wise).
 }
 \details{
-This function corresponds to \code{dstack()} from NumPy.
+This function corresponds to \code{dstack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.dstack.html}{see}).
   It's equivalent to \code{\link{mabind}} along the third axis.
 }

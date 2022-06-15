@@ -38,3 +38,26 @@ rearrange <- function(a, axis = NULL) {
   s.ans <- if (is.null(axis)) NULL else ds[axis]
   aperm(a, perm = c(s.call, s.ans))
 }
+
+#' @title Array axis swapping
+#' @description Interchange two axes of an array.
+#'
+#' @param a An array.
+#' @param axis1 First axis.
+#' @param axis2 Second axis.
+#'
+#' @details This function corresponds to \code{swapaxes()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html}{see}).
+#'
+#' @return The array \code{a} with swapped dimensions.
+#'
+#' @seealso \code{\link{transpose}}.
+#'
+#' @export
+swapaxes <- function(a, axis1, axis2) {
+  ds <- seq_along(DIM(a))
+  nd <- length(ds)
+  if ((axis1 <= 0L) || (axis1 > nd)) axis1 <- nd
+  if ((axis2 <= 0L) || (axis2 > nd)) axis2 <- nd
+  ds[c(axis1, axis2)] <- ds[c(axis2, axis1)]
+  aperm(a, perm = ds)
+}

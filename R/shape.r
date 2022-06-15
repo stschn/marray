@@ -9,7 +9,7 @@ DIM <- function(x) { dim(x) %||% length(x) }
 #' @title Number of dimensions
 #'
 #' @param x A multidimensional data structure like array, matrix or data.frame.
-#' @details This function corresponds to \code{ndarray.ndim} from NumPy.
+#' @details This function corresponds to \code{ndarray.ndim} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.ndim.html}{see}).
 #' @return Number of dimensions.
 #' @export
 ndim <- function(x) { length(dim(x)) }
@@ -17,7 +17,7 @@ ndim <- function(x) { length(dim(x)) }
 #' @title Number of elements
 #'
 #' @param x A multidimensional data structure like array, matrix or data.frame.
-#' @details This function corresponds to \code{ndarray.size} from NumPy.
+#' @details This function corresponds to \code{ndarray.size} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.size.html}{see}).
 #' @return Number of elements.
 #' @export
 nsize <- function(x) { prod(dim(x)) }
@@ -73,7 +73,7 @@ dropdim <- function(x, order = c("C", "F")) {
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
-#' @details This function corresponds to \code{atleast_1d()} from NumPy.
+#' @details This function corresponds to \code{atleast_1d()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.atleast_1d.html}{see}).
 #' @return An array, or list of arrays, each with at least one dimension.
 #' @export
 atleast_1d <- function(..., order = c("C", "F")) {
@@ -89,7 +89,7 @@ atleast_1d <- function(..., order = c("C", "F")) {
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
-#' @details This function corresponds to \code{atleast_2d()} from NumPy.
+#' @details This function corresponds to \code{atleast_2d()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.atleast_2d.html}{see}).
 #' @return An array, or list of arrays, each with at least two dimensions.
 #' @export
 atleast_2d <- function(..., order = c("C", "F")) {
@@ -109,7 +109,7 @@ atleast_2d <- function(..., order = c("C", "F")) {
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
-#' @details This function corresponds to \code{atleast_3d()} from NumPy.
+#' @details This function corresponds to \code{atleast_3d()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.atleast_3d.html}{see}).
 #' @return An array, or list of arrays, each with at least three dimensions.
 #' @export
 atleast_3d <- function(..., order = c("C", "F")) {
