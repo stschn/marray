@@ -54,3 +54,50 @@ reshape.array <- function(a, dim = NULL, order = c("C", "F")) {
     dim(a) <- dim
   a
 }
+
+#' @title Resize an array
+#'
+#' @param a An array.
+#' @param dim An integerish vector of new shape (dimension space) to be set on the array.
+#' @param fill The type of fill method. If the new array is larger than the original array, then the new array is filled with:
+#'   * \code{copy}: repeated copies of \code{a}
+#'   * \code{zero}: zeros
+#'   * \code{na}: NA
+#'   * \code{approx}: approximated values
+#' @md
+#' @param order The order in which elements of \code{a} should be read during rearrangement.
+#'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
+#'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
+#'
+#' @details This function corresponds partially to \code{resize()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.resize.html}{see}). The function from NumPy only uses the copy type.
+#'
+#' @return The new array \code{a} with given shape.
+#'
+#' @export
+resize.array <- function(a, dim, fill = c("copy", "zero", "na", "approx"), order = c("C", "F")) {
+  fill <- match.arg(fill)
+  oldsize <- nsize(a)
+  newsize <- prod(dim)
+  a <- flatten(a, order = order)
+
+  if (newsize > oldsize)
+    switch(fill,
+      copy = {
+        repeats <- -floor(-newsize / oldsize)
+        a <- rep(a, repeats)
+      },
+      zero = {
+        repeats <- newsize - oldsize
+        a <- c(a, rep(0, repeats))
+      },
+      na = {
+        repeats <- newsize - oldsize
+        a <- c(a, rep(NA, repeats))
+      },
+      approx = {
+        a <- stats::approx(a, n = newsize)$y
+      },
+    )
+
+  marray(a[1L:newsize], dim = dim, order = order)
+}

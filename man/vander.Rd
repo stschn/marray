@@ -4,12 +4,12 @@
 \alias{vander}
 \title{Array creation}
 \usage{
-vander(data, n)
+vander(data, n = NULL)
 }
 \arguments{
 \item{data}{The data to be reshaped to a Vandermonde matrix.}
 
-\item{n}{The number of columns of the resulting matrix.}
+\item{n}{The number of columns of the resulting matrix. If n is not specified, a square array is returned.}
 }
 \value{
 A Vandermonde matrix.

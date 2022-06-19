@@ -4,10 +4,12 @@
 \alias{mareplace}
 \title{Array replacement}
 \usage{
-mareplace(a, oldvalue, newvalue)
+mareplace(a, ..., oldvalue, newvalue)
 }
 \arguments{
 \item{a}{An array.}
+
+\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.}
 
 \item{oldvalue}{A vector of values to search for.}
 
@@ -24,5 +26,8 @@ Replace array elements.
 \examples{
 a <- marray(c(rep(1, 4), 2, rep(3, 5), 21:34), dim = c(4, 3, 2), order = "F")
 mareplace(a, oldvalue = c(1, 200, 3), newvalue = c(100, 2, 300))
+
+a <- zeros(dim = c(5, 4))
+mareplace(a, i = 2:4, j = 2:3, oldvalue = 0, newvalue = 2)
 
 }

@@ -41,4 +41,12 @@ a3 <- marray(sample(24), dim = c(4, 3, 2), order = "F"); a3
 mabind(a1, a2, a3) # output is an 4x3x6 array
 mabind(a1, a2, a3, axis = 1) # output is an 12x3x2 array
 mabind(a1, a2, a3, axis = 2) # output is an 4x9x2 array
+
+a <- marray(sample(12), dim = c(4, 3))
+b <- marray(sample(12), dim = c(4, 3, 1))
+d <- marray(1:12)
+e <- marray(sample(12), dim = c(4, 3, 1))
+f <- marray(sample(4*3*1*1), dim = c(4, 3, 1, 1))
+mabind(a, b, d, e, f)
+
 }

@@ -22,6 +22,19 @@ ndim <- function(x) { length(dim(x)) }
 #' @export
 nsize <- function(x) { prod(dim(x)) }
 
+#' @title Ensure minimum number of dimensions
+#'
+#' @param a An array.
+#' @param n The desired number of dimensions.
+#' @param axis Index position of the new axis in the expanded array. Negative numbers count from the back.
+#'
+#' @return The array \code{a} with at least \code{n} dimensions.
+#' @export
+ndmin <- function(a, n, axis = -1L) {
+  while (ndim(a) < n) a <- expand_dims(a, axis)
+  a
+}
+
 #' @title Enforce array and convert to vector
 #'
 #' @param x A vector or array.

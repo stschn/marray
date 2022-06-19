@@ -5,12 +5,14 @@ Multidimensional Array
 This R library is a replica of ndarray and functionality from NumPy.
 
 <ul>
+  <li><code>DIM()</code> returns the dimension of an object or its length.</li>
   <li><code>ndim()</code> returns the number of dimensions of an array.</li>
   <li><code>nsize()</code> returns the number of elements of an array.</li>
-  <li><code>DIM()</code> returns the dimension of an object or its length.</li>
+  <li><code>ndmin()</code> ensures a minimum number of dimensions in an array.</li>
   <li><code>ensuredim()</code> and <code>dropdim()</code> enforces an array or a vector.</li>
   <li><code>dimC()</code> set the dimension of an object in row-major ordering (C-style).</li>
   <li><code>reshape.array()</code> reshapes an array to new dimension.</li>
+  <li><code>resize.array()</code> resizes an array to new dimension.</li>
   <li><code>marray()</code> and <code>as.marray()</code> transform data into a multidimensional array and <code>is.marray()</code> checks for that type of array.</li>
   <li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerces objects into arrays with corresponding number of dimensions.</li>
   <li><code>flatten()</code> flattens data into a one-dimensional array.</li>
@@ -22,13 +24,14 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
   <li><code>vstack()</code> stacks arrays in sequence vertically (row-wise).</li>
   <li><code>hstack()</code> stacks arrays in sequence horizontally (column-wise).</li>
-  <li><code>dstack()</code> stacks arrays in sequence along 3rd axis (depth-wise)).</li>
+  <li><code>dstack()</code> stacks arrays in sequence along 3rd axis (depth-wise).</li>
   <li><code>column_stack()</code> stacks 1D arrays as columns into a 2D array.</li>
   <li><code>row_stack()</code> stacks 1D arrays as rows into a 2D array.</li>
   <li><code>array_split()</code> splits an array into sub-arrays along an axis.</li>
   <li><code>vsplit()</code> splits an array into sub-arrays vertically (row-wise).</li>
   <li><code>hsplit()</code> splits an array into sub-arrays horizontally (column-wise).</li>
-  <li><code>dsplit()</code> splits an array into sub-arrays along 3rd axis (depth-wise)).</li>
+  <li><code>dsplit()</code> splits an array into sub-arrays along 3rd axis (depth-wise).</li>
+  <li><code>tile()</code> repeats an array a number of times.</li>
   <li><code>eye()</code> creates a 2D identity matrix.</li>
   <li><code>vander()</code> creates a Vandermonde matrix.</li>
   <li><code>ones()</code> creates an array filled with ones.</li>
@@ -40,6 +43,8 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>delete()</code> deletes axes from an array.</li>
   <li><code>transpose()</code> transposes an array by swapping dimensions.</li>
   <li><code>rearrange()</code> rearranges axis-driven an array by swapping dimensions.</li>
+  <li><code>swapaxes()</code> interchanges two axes of an array.</li>
+  <li><code>moveaxis()</code> moves axes of an array to new positions.</li>
   <li><code>flip()</code> reverses the order of the elements of an array along axes.</li>
   <li><code>flipud()</code> flips an array vertically (axis = 1).</li>
   <li><code>fliplr()</code> flips an array horizontally (axis = 2).</li>
@@ -217,4 +222,19 @@ a <- marray(sample(7 * 4 * 2), dim = c(7, 4, 2))
 sub_arys <- slide(a)
 # Sliding along axes 1 and 2 with a size of 2 resp. 1 and a stride of 1
 sub_arys <- slide(a, size = c(2, 1), axis = c(1, 2))
+```
+
+<h3>Move axis</h3>
+
+```r
+a <- marray(1:(3*4*5), dim = c(3, 4, 5), order = "F")
+DIM(moveaxis(a, 1, 3))
+DIM(moveaxis(a, 3, 1))
+DIM(moveaxis(a, source = c(1, 2), destination = c(3, 1)))
+
+a <- marray(1:24, dim = c(4, 3, 2, 1))
+DIM(moveaxis(a, source = c(1, 4), destination = c(3, 2)))
+
+m <- marray(1:12, dim = c(4, 3))
+DIM(moveaxis(m, 1, 2)) # transpose(m)
 ```

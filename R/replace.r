@@ -2,6 +2,7 @@
 #' @description Replace array elements.
 #'
 #' @param a An array.
+#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.
 #' @param oldvalue A vector of values to search for.
 #' @param newvalue A vector of values to replace \code{oldvalue}.
 #'   A single value is used as a replacement for all values in \code{oldvalue}. Otherwise, the length of \code{newvalue} must be equal to the length of \code{oldvalue}.
@@ -13,9 +14,13 @@
 #' a <- marray(c(rep(1, 4), 2, rep(3, 5), 21:34), dim = c(4, 3, 2), order = "F")
 #' mareplace(a, oldvalue = c(1, 200, 3), newvalue = c(100, 2, 300))
 #'
+#' a <- zeros(dim = c(5, 4))
+#' mareplace(a, i = 2:4, j = 2:3, oldvalue = 0, newvalue = 2)
+#'
 #' @export
-mareplace <- function(a, oldvalue, newvalue) {
-  old_index <- which(oldvalue %in% a)
+mareplace <- function(a, ..., oldvalue, newvalue) {
+  as <- slice(a, ...)
+  old_index <- which(oldvalue %in% as)
   if (is.integer(old_index) && (length(old_index) == 0L)) # no match
     return(a)
   if (length(newvalue) > 1L) {
@@ -23,13 +28,14 @@ mareplace <- function(a, oldvalue, newvalue) {
     newvalue <- newvalue[old_index]
   }
   oldvalue <- oldvalue[old_index]
-  aindex <- which(a %in% oldvalue)
+  aindex <- which(as %in% oldvalue)
   if (length(newvalue) == 1L) {
-    a[aindex] <- newvalue
+    as[aindex] <- newvalue
   } else {
-    vindex <- match(a, oldvalue)
+    vindex <- match(as, oldvalue)
     vindex <- vindex[!is.na(vindex)]
-    a[aindex] <- newvalue[vindex]
+    as[aindex] <- newvalue[vindex]
   }
+  slice(a, ...) <- as
   a
 }

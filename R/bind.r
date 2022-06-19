@@ -26,6 +26,14 @@
 #' mabind(a1, a2, a3) # output is an 4x3x6 array
 #' mabind(a1, a2, a3, axis = 1) # output is an 12x3x2 array
 #' mabind(a1, a2, a3, axis = 2) # output is an 4x9x2 array
+#'
+#' a <- marray(sample(12), dim = c(4, 3))
+#' b <- marray(sample(12), dim = c(4, 3, 1))
+#' d <- marray(1:12)
+#' e <- marray(sample(12), dim = c(4, 3, 1))
+#' f <- marray(sample(4*3*1*1), dim = c(4, 3, 1, 1))
+#' mabind(a, b, d, e, f)
+#'
 #' @export
 mabind <- function(..., axis = -1, input_shape = NULL, order = c("C", "F")) {
   order <- match.arg(order)
@@ -43,7 +51,10 @@ mabind <- function(..., axis = -1, input_shape = NULL, order = c("C", "F")) {
 
   # Coerce all arguments to have the same number of dimensions (by adding one, if necessary)
   # and permute them to put the join dimension (axis) last.
+  cdim <- .coerce_dim(arys, axis)
   arys <- lapply(arys, function(a) {
+    #while (ndim(a) < (N - 1L)) a <- expand_dims(a)
+    if (ndim(a) < (N - 1L)) a <- marray(a, dim = cdim)
     if (ndim(a) < N) a <- expand_dims(a, axis)
     a
   })
@@ -68,5 +79,20 @@ mabind <- function(..., axis = -1, input_shape = NULL, order = c("C", "F")) {
   # Permute the output array to put the join dimension back in the right place
   if (any(order(perm) != seq_along(perm)))
     out <- transpose(out, order(perm))
+  out
+}
+
+# helper function
+# Retrieve the dimension arrays must be coerced if they do not have the highest number of dimensions and size
+.coerce_dim <- function(arys, axis) {
+  N <- max(1L, sapply(arys, ndim))
+  nd <- which(sapply(arys, ndim) == N)
+  ns <- which((s <- sapply(arys, nsize)) == max(s))
+
+  i <- intersect(nd, ns) # for more than two arguments: Reduce(intersect, list(nd, ns, ...))
+  if (length(i) == 0L)
+    stop("index mismatch between arrays number of dimensions and sizes.", call. = FALSE)
+  out <- lapply(arys, dim)[[i[1L]]]
+  if (length(out) > 1L) out <- out[-axis]
   out
 }

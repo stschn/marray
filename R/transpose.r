@@ -50,8 +50,6 @@ rearrange <- function(a, axis = NULL) {
 #'
 #' @return The array \code{a} with swapped dimensions.
 #'
-#' @seealso \code{\link{transpose}}.
-#'
 #' @export
 swapaxes <- function(a, axis1, axis2) {
   ds <- seq_along(DIM(a))
@@ -60,4 +58,43 @@ swapaxes <- function(a, axis1, axis2) {
   if ((axis2 <= 0L) || (axis2 > nd)) axis2 <- nd
   ds[c(axis1, axis2)] <- ds[c(axis2, axis1)]
   aperm(a, perm = ds)
+}
+
+#' @title Array axis moving
+#' @description Move axes of an array to new positions while the other axes remain in their original order.
+#'
+#' @param a An array.
+#' @param source An integerish vector indicating the original axes to move. These must be unique.
+#' @param destination An integerish vector indicating the destination positions for each of the original axes. These must also be unique.
+#'
+#' @details This function corresponds to \code{moveaxis()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.moveaxis.html}{see}).
+#'
+#' @return The array \code{a} with moved axes.
+#'
+#' @examples
+#' a <- marray(1:(3*4*5), dim = c(3, 4, 5), order = "F")
+#' DIM(moveaxis(a, 1, 3))
+#' DIM(moveaxis(a, 3, 1))
+#' DIM(moveaxis(a, source = c(1, 2), destination = c(3, 1)))
+#'
+#' a <- marray(1:24, dim = c(4, 3, 2, 1))
+#' DIM(moveaxis(a, source = c(1, 4), destination = c(3, 2)))
+#'
+#' @export
+moveaxis <- function(a, source, destination) {
+  ds <- seq_along(DIM(a))
+  nd <- length(ds)
+  source <- unique(source)
+  destination <- unique(destination)
+  source[which((source <= 0L) | (source > nd))] <- nd
+  destination[which((destination <= 0L) | (destination > nd))] <- nd
+  stopifnot("source and destination must have the same number of elements." = length(source) == length(destination))
+
+  newds <- setdiff(ds, source)
+  source <- source[order(destination, decreasing = FALSE)]
+  destination <- sort(destination)
+  for (i in seq_along(source))
+    newds <- append(newds, source[i], destination[i] - 1L)
+
+  aperm(a, perm = newds)
 }

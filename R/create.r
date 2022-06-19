@@ -19,14 +19,16 @@ eye <- function(n, m = NULL) {
 #' @description Create Vandermonde matrix.
 #'
 #' @param data The data to be reshaped to a Vandermonde matrix.
-#' @param n The number of columns of the resulting matrix.
+#' @param n The number of columns of the resulting matrix. If n is not specified, a square array is returned.
 #'
 #' @details This function corresponds to \code{vander()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.vander.html}{see}).
 #' @return A Vandermonde matrix.
 #'
 #' @export
-vander <- function(data, n) {
-  marray(outer(flatten(data), seq(0, n - 1), "^"), order = "F")
+vander <- function(data, n = NULL) {
+  data <- flatten(data)
+  if (is.null(n)) n <- length(data)
+  marray(outer(data, seq(0, n - 1), "^"), order = "F")
 }
 
 #' @title Array creation

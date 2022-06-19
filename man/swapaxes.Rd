@@ -22,6 +22,3 @@ Interchange two axes of an array.
 \details{
 This function corresponds to \code{swapaxes()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.swapaxes.html}{see}).
 }
-\seealso{
-\code{\link{transpose}}.
-}
