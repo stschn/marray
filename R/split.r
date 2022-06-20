@@ -28,7 +28,7 @@
 array_split <- function(a, indices_or_sections, axis = 1L) {
   d <- DIM(a)
   nd <- length(d)
-  axis[which((axis < 0L) | (axis > nd))] <- nd
+  axis <- .standardize_axis(axis, nd)
   indices_or_sections <- sort(indices_or_sections)
 
   ntotal <- d[axis]

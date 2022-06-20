@@ -154,10 +154,10 @@ a
 
 #### General creation routines
 
-- `empty()`: creates an array with NA
-- `zeros()`: creates an array with 0
-- `ones()`: creates an array with 1
-- `full()`: creates an array with value(s)
+- `empty()` and `empty_like()`: creates an array with NA
+- `zeros()` and `zeros_like()`: creates an array with 0
+- `ones()` and `ones_like()`: creates an array with 1
+- `full()` and `full_like()`: creates an array with value(s)
 
 ```{r}
 # filled with NA
@@ -169,6 +169,10 @@ a <- ones(dim = c(4, 3)); a
 # filled with value(s)
 a <- full(dim = c(4, 3), fill_value = 11); a
 a <- full(dim = c(4, 3), fill_value = c(11, 2, 23), order = "F"); a
+
+# like an array
+a <- marray(1:6, dim = c(3, 2))
+ones_like(a)
 ```
 
 #### Special creation routines
@@ -262,6 +266,7 @@ a
 slice(a, i = 1L) <- matrix(100:105, nrow = 3L)
 a
 ```
+
 ## Axes permutation (transposition)
 
 Transposition of an array can be done with:
@@ -289,6 +294,9 @@ DIM(moveaxis(a, 3, 1))
 DIM(moveaxis(a, source = c(1, 2), destination = c(3, 1)))
 a <- marray(1:24, dim = c(4, 3, 2, 1))
 DIM(moveaxis(a, source = c(1, 4), destination = c(3, 2)))
+
+m <- marray(1:12, dim = c(4, 3))
+DIM(moveaxis(m, 1, 2)) # transpose(m)
 ```
 
 ## Flattening
@@ -355,6 +363,21 @@ resize.array(a, dim = c(5, 5), fill = "na")
 resize.array(a, dim = c(5, 5), fill = "approx")
 ```
 
+
+Also a broadcasting mechanism is implemented. *Broadcasting* refers to a concept where the shape of arrays are coerced to shapes which makes operations, e.g. binding, along axes possible. A *broadcast dimension space* shows a template for those shape the arrays must be meet.
+
+```{r}
+v <- 1:4
+a <- array(1:24, dim = c(4, 3, 1))
+
+# Broadcast shape
+broadcastDIM(v, a, axis = 2)
+# Reshape arrays to get them work together along axes
+# v can only be binded along axis 2 on a. Therefor, the shape of v must be 4x1x1
+arys <- reshape_broadcast(v, a, axis = 2)
+```
+
+
 ## Rolling
 
 *Rolling* describes an array circulation whereby elements of the array are shifted along axes and re-introduced at the first position if they roll beyond the last position.
@@ -367,6 +390,7 @@ roll(a, shift = 2)
 roll(a, shift = -2)
 
 a <- marray(a, dim = c(2, 5))
+a
 roll(a, shift = 1)
 roll(a, shift = -1)
 roll(a, shift = 1, axis = 1)
@@ -377,7 +401,7 @@ roll(a, shift = -1, axis = 1)
 ## Insertion and deletion
 
 - `insert()`: inserts an R object into an array
-- `delete()`: deletes an axis of an array
+- `delete()`: deletes axes from an array
 
 ```{r}
 # Insert into array along axis
@@ -385,16 +409,20 @@ a <- marray(seq.int(2*3*4), dim = c(2, 3, 4), order = "F")
 x <- marray(100L + seq.int(2*1*4))
 insert(a, x, axis = 2L, order = "F")
 
+x <- marray(100L + seq.int(2*3*1))
+insert(a, x, axis = 3L, order = "F")
+
 # Delete from array
 # original array
 a <- marray(1:24, dim = c(4, 3, 2), order = "F")
-# delete the first dimension with reading elements start from first position
+# delete the first dimension with reading first n elements
 delete(a)
-# delete the first dimension with reading elements start from last position
-delete(a, axis = -1L)
-# delete the axes one and two with reading elements start from first position
+# delete the first dimension with reading last n elements
+delete(a, keep = "last")
+# delete the axes one and two with reading first n elements
 delete(a, axis = c(1L, 2L))
 ```
+
 ## Replacing and clipping
 
 - `mareplace()`: replaces values of an entire array or only of a slice
@@ -444,7 +472,6 @@ mabind(m, v, axis = 1)
 x <- marray(seq_len(24), dim = c(4, 3, 2), order = "F")
 y <- marray(-seq_len(24), dim = c(4, 3, 2), order = "F")
 z <- marray(seq_len(12), dim = c(4, 3))
-
 mabind(x, y, z)
 
 # That's not necessary because mabind() coerces arrays, if it's possible
@@ -452,6 +479,17 @@ a <- expand_dims(z) |>
   list() |>
   append(list(x, y), 0L) |>
   mabind()
+
+a <- marray(1:11)
+b <- marray(2:23)
+mabind(a, NULL, b)
+
+a <- marray(sample(12), dim = c(4, 3))
+b <- marray(sample(12), dim = c(4, 3, 1))
+c <- marray(1:12)
+d <- marray(sample(12), dim = c(4, 3, 1))
+e <- marray(sample(4*3*1*1), dim = c(4, 3, 1, 1))
+mabind(a, b, c, d, e)
 ```
 
 ### Special binding
@@ -488,7 +526,7 @@ array_split(a, indices_or_sections = c(3, 5, 6))
 
 a <- marray(1:12, dim = c(4, 3))
 array_split(a, indices_or_sections = 2)
-array_split(a, indices_or_sections = 2, axis = 2L)
+array_split(a, indices_or_sections = c(3, 4), axis = 1L)
 
 a <- marray(1:24, dim = c(4, 3, 2), order = "F")
 array_split(a, indices_or_sections = 2)
@@ -546,6 +584,7 @@ arys2 <- slide(a, size = c(2, 1), axis = c(1, 2))
 
 ```{r}
 a <- marray(seq_len(24), dim = c(4, 3, 2), order = "F")
+a
 # flip along first axis
 flip(a)
 # flip along second axis

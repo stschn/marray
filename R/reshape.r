@@ -101,3 +101,53 @@ resize.array <- function(a, dim, fill = c("copy", "zero", "na", "approx"), order
 
   marray(a[1L:newsize], dim = dim, order = order)
 }
+
+#' @title Retrieve broadcast dimensions
+#'
+#' @param ... Any number of objects.
+#' @param axis The axis along operations like binding are planned.
+#'
+#' @return The dimension all objects must meet in order for the operation to be performed.
+#'
+#' @seealso \code{\link{reshape_broadcast}}.
+#'
+#' @export
+broadcastDIM <- function(..., axis = NULL)  {
+  arys <- lapply(.dots(...), FUN = marray)
+  N <- max(1L, sapply(arys, ndim))
+  arys <- lapply(arys, ndmin, n = N)
+  dims <- sapply(arys, dim)
+  if (is.vector(dims)) dims <- t(as.matrix(dims))
+  dims <- apply(dims, 1L, max)
+  if (!is.null(axis)) {
+    nd <- length(dims)
+    axis[which((axis <= 0) | (axis > nd))] <- nd
+    dims[axis] <- NA
+  }
+  dims
+}
+
+#' @title Reshape arrays on basis of broadcasting
+#'
+#' @param ... Any number of objects.
+#' @param axis The axis along operations like binding are planned.
+#'
+#' @return An array, or list of arrays, each with a dimension necessary for planned operations along axis.
+#'
+#' @seealso \code{\link{broadcastDIM}}.
+#'
+#' @export
+reshape_broadcast <- function(..., axis = NULL) {
+  arys <- .dots(...)
+  if (length(arys) == 1L) return(arys[[1L]])
+  bdim <- broadcastDIM(..., axis = axis)
+  arys <- lapply(arys, FUN = marray)
+  arys <- lapply(arys, function(a) {
+    if (!all(is.na(setdiff(bdim, DIM(a))))) {
+      bdim[is.na(bdim)] <- 1L
+      a <- reshape.array(a, dim = bdim)
+    }
+    a
+  })
+  arys
+}

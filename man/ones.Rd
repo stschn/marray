@@ -2,21 +2,30 @@
 % Please edit documentation in R/create.r
 \name{ones}
 \alias{ones}
+\alias{ones_like}
 \title{Array creation}
 \usage{
 ones(dim = NULL, dimnames = NULL)
+
+ones_like(a)
 }
 \arguments{
 \item{dim}{Shape of the new array.}
 
 \item{dimnames}{Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of the length given by \code{dim} for that dimension.}
+
+\item{a}{An array whose shape is taken for the result array.}
 }
 \value{
 An array of ones with the given shape.
+
+An array of ones with the the same shape as \code{a}.
 }
 \description{
 Create array filled with ones.
 }
 \details{
 This function corresponds to \code{ones()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ones.html}{see}).
+
+This function corresponds to \code{ones_like()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ones_like.html#numpy.ones_like}{see}).
 }

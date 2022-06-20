@@ -37,3 +37,17 @@
   })
   ds
 }
+
+# Axis interpretation as follows:
+# 0 is set to 1
+# Positive numbers as are
+# Negative Numbers are axes read from back to front
+.standardize_axis <- function(axis, ndim = 1L) {
+  ndim <- as.integer(abs(ndim[1L]))
+  axis[which(axis == 0L)] <- 1L
+  neg <- which(axis < 0L)
+  axis[neg][which(axis[neg] < -ndim)] <- -ndim
+  axis[neg] <- ndim + axis[neg] + 1L #ndim - abs(axis[neg]) + 1L
+  axis[which(axis > ndim)] <- ndim
+  axis
+}

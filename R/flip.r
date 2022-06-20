@@ -19,7 +19,7 @@
 flip <- function(a, axis = 1L) {
   d <- DIM(a)
   nd <- length(d)
-  axis[which((axis < 0L) | (axis > nd))] <- nd
+  axis <- .standardize_axis(axis, nd)
   ds <- lapply(d, seq_len)
   ds[axis] <- lapply(ds[axis], rev)
   do.call('[', c(list(a), ds))

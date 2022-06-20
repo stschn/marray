@@ -14,7 +14,7 @@ rot90 <- function(a, k = 1L, axes = c(1L, 2L)) {
             "axes must consist of two values to span the plane the array is rotated." = length(axes) == 2L)
   d <- DIM(a)
   nd <- length(d)
-  axes[which((axes < 0L) | (axes > nd))] <- nd
+  axes <- .standardize_axis(axes, nd)
   # shape of the output: d[axes] <- d[rev(axes)]
   perm <- seq_len(ndim(a))
   perm[axes] <- perm[rev(axes)]

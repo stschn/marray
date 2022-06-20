@@ -13,6 +13,8 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>dimC()</code> set the dimension of an object in row-major ordering (C-style).</li>
   <li><code>reshape.array()</code> reshapes an array to new dimension.</li>
   <li><code>resize.array()</code> resizes an array to new dimension.</li>
+  <li><code>broadcastDIM()</code> retrieves broadcast dimensions.</li>
+  <li><code>reshape_.array_broadcast()</code> reshapes array on basis of broadcasting.</li>
   <li><code>marray()</code> and <code>as.marray()</code> transform data into a multidimensional array and <code>is.marray()</code> checks for that type of array.</li>
   <li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerces objects into arrays with corresponding number of dimensions.</li>
   <li><code>flatten()</code> flattens data into a one-dimensional array.</li>
@@ -34,10 +36,10 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>tile()</code> repeats an array a number of times.</li>
   <li><code>eye()</code> creates a 2D identity matrix.</li>
   <li><code>vander()</code> creates a Vandermonde matrix.</li>
-  <li><code>ones()</code> creates an array filled with ones.</li>
-  <li><code>zeros()</code> creates an array filled with zeros.</li>
-  <li><code>empty()</code> creates an array filled with NA.</li>
-  <li><code>full()</code> creates an array filled with value.</li>
+  <li><code>ones()</code> and <code>ones_like</code> creates an array filled with ones.</li>
+  <li><code>zeros()</code> and <code>zeros_like</code> creates an array filled with zeros.</li>
+  <li><code>empty()</code> and <code>empty_like</code> creates an array filled with NA.</li>
+  <li><code>full()</code> and <code>full_like</code> creates an array filled with value.</li>
   <li><code>maidentity()</code> creates an identity array.</li>
   <li><code>insert()</code> inserts objects into an array.</li>
   <li><code>delete()</code> deletes axes from an array.</li>

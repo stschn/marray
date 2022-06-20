@@ -4,12 +4,14 @@
 \alias{delete}
 \title{Array deletion}
 \usage{
-delete(a, axis = 1L, order = c("C", "F"))
+delete(a, axis = 1L, keep = c("first", "last"), order = c("C", "F"))
 }
 \arguments{
 \item{a}{An array.}
 
 \item{axis}{The axis or axes to delete from \code{a}.}
+
+\item{keep}{The direction data of \code{a} are read for the newly created array. \code{first} denotes a reading of the first n-elements and \code{last} of last n elements.}
 
 \item{order}{The order in which elements of \code{x} should be read during recreation after deleting \code{axis}.
 By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
@@ -23,18 +25,16 @@ Delete axis of an array.
 }
 \details{
 This function corresponds partially to \code{delete()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.delete.html}{see}).
-  The number of elements is tailored for the reshaped array. The sign of \code{axis} determines the reading direction for the extraction
-  of the elements from \code{a} for the newly created array. A positive sign indicates that the first n elements from \code{a} are used,
-  a negative sign indicates that the last n elements will be used.
+  The number of elements is tailored for the reshaped array. The argument \code{keep} determines the reading direction for tailoring.
 }
 \examples{
 # original array
 a <- marray(1:24, dim = c(4, 3, 2), order = "F")
-# delete the first dimension with reading elements start from first position
+# delete the first dimension with reading first n elements
 delete(a)
-# delete the first dimension with reading elements start from last position
-delete(a, axis = -1L)
-# delete the axes one and two with reading elements start from first position
+# delete the first dimension with reading last n elements
+delete(a, keep = "last")
+# delete the axes one and two with reading first n elements
 delete(a, axis = c(1L, 2L))
 
 }

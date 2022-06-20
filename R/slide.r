@@ -1,10 +1,3 @@
-# helper function
-# Given the length of an axis, the result is a matrix with the indices for selecting a sized sub-range considering a stride
-.broadcast <- function(xlen, size = 1L, stride = 1L) {
-  nrows <- floor((xlen - size) / stride) + 1L
-  outer(stride * seq_len(nrows), seq_len(size), FUN = "+") - stride
-}
-
 #' @title Array sliding
 #' @description Slides over an array with a window of given size and given stride.
 #'
@@ -23,11 +16,10 @@
 #' @export
 slide <- function(a, size = 1L, stride = 1L, axis = NULL) {
   d <- DIM(a)
-  ds <- lapply(d, seq_len)
   nd <- length(d)
 
   if (is.null(axis)) axis <- seq_len(nd)
-  axis[which((axis < 0L) | (axis > nd))] <- nd
+  axis <- .standardize_axis(axis, nd)
   keep <- setdiff(seq_along(d), axis)
 
   if (length(size) == 1L) size <- rep(size, length(axis))
@@ -58,4 +50,11 @@ slide <- function(a, size = 1L, stride = 1L, axis = NULL) {
   ary_indices <- lapply(ary_indices, function(idx) { names(idx) <- NULL; idx })
   subarrays <- lapply(ary_indices, function(idx) slice(a, idx))
   subarrays
+}
+
+# helper function
+# Given the length of an axis, the result is a matrix with the indices for selecting a sized sub-range considering a stride
+.broadcast <- function(xlen, size = 1L, stride = 1L) {
+  nrows <- floor((xlen - size) / stride) + 1L
+  outer(stride * seq_len(nrows), seq_len(size), FUN = "+") - stride
 }

@@ -2,21 +2,30 @@
 % Please edit documentation in R/create.r
 \name{empty}
 \alias{empty}
+\alias{empty_like}
 \title{Array creation}
 \usage{
 empty(dim = NULL, dimnames = NULL)
+
+empty_like(a)
 }
 \arguments{
 \item{dim}{Shape of the new array.}
 
 \item{dimnames}{Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of the length given by \code{dim} for that dimension.}
+
+\item{a}{An array whose shape is taken for the result array.}
 }
 \value{
 An array of \code{NA} with the given shape.
+
+An array of \code{NA} with the the same shape as \code{a}.
 }
 \description{
 Create array filled with NA.
 }
 \details{
 This function corresponds to \code{empty()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.empty.html}{see}) with the difference that instead of arbitrary values \code{NA} are set.
+
+This function corresponds to \code{empty_like()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.empty_like.html#numpy.empty_like}{see}).
 }

@@ -47,7 +47,7 @@ mabind <- function(..., axis = -1, input_shape = NULL, order = c("C", "F")) {
   # Transform objects to arrays
   arys <- lapply(arys, FUN = marray, dim = input_shape, order = order)
   N <- max(1, sapply(arys, FUN = ndim))
-  if ((axis <= 0L) || (axis > N)) axis <- N
+  axis <- .standardize_axis(axis, N)
 
   # Coerce all arguments to have the same number of dimensions (by adding one, if necessary)
   # and permute them to put the join dimension (axis) last.

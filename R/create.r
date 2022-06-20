@@ -45,6 +45,18 @@ ones <- function(dim = NULL, dimnames = NULL) {
   marray(rep(1L, prod(dim)), dim = dim, dimnames = dimnames)
 }
 
+#' @rdname ones
+#'
+#' @param a An array whose shape is taken for the result array.
+#'
+#' @details This function corresponds to \code{ones_like()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ones_like.html#numpy.ones_like}{see}).
+#' @return An array of ones with the the same shape as \code{a}.
+#'
+#' @export
+ones_like <- function(a) {
+  ones(dim = DIM(a), dimnames = dimnames(a))
+}
+
 #' @title Array creation
 #' @description Create array filled with zeros.
 #'
@@ -57,6 +69,18 @@ ones <- function(dim = NULL, dimnames = NULL) {
 #' @export
 zeros <- function(dim = NULL, dimnames = NULL) {
   marray(rep(0L, prod(dim)), dim = dim, dimnames = dimnames)
+}
+
+#' @rdname zeros
+#'
+#' @param a An array whose shape is taken for the result array.
+#'
+#' @details This function corresponds to \code{zeros_like()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html#numpy.zeros_like}{see}).
+#' @return An array of zeros with the the same shape as \code{a}.
+#'
+#' @export
+zeros_like <- function(a) {
+  zeros(dim = DIM(a), dimnames = dimnames(a))
 }
 
 #' @title Array creation
@@ -73,6 +97,18 @@ empty <- function(dim = NULL, dimnames = NULL) {
   marray(rep(NA, prod(dim)), dim = dim, dimnames = dimnames)
 }
 
+#' @rdname empty
+#'
+#' @param a An array whose shape is taken for the result array.
+#'
+#' @details This function corresponds to \code{empty_like()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.empty_like.html#numpy.empty_like}{see}).
+#' @return An array of \code{NA} with the the same shape as \code{a}.
+#'
+#' @export
+empty_like <- function(a) {
+  empty(dim = DIM(a), dimnames = dimnames(a))
+}
+
 #' @title Array creation
 #' @description Create array filled with value.
 #'
@@ -87,6 +123,18 @@ empty <- function(dim = NULL, dimnames = NULL) {
 #' @export
 full <- function(dim = NULL, fill_value = NA, dimnames = NULL, order = c("C", "F")) {
   marray(rep(fill_value, prod(dim) -> N)[seq_len(N)], dim = dim, dimnames = dimnames, order = order)
+}
+
+#' @rdname full
+#'
+#' @param a An array whose shape is taken for the result array.
+#'
+#' @details This function corresponds to \code{full_like()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.full_like.html#numpy.full_like}{see}).
+#' @return An array of \code{fill_value} with the the same shape as \code{a}.
+#'
+#' @export
+full_like <- function(a, fill_value = NA, order = c("C", "F")) {
+  full(dim = DIM(a), fill_value = fill_value, dimnames = dimnames(a), order = order)
 }
 
 #' @title Array creation

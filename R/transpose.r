@@ -29,9 +29,8 @@ transpose <- function(a, perm = NULL) {
 #' @export
 rearrange <- function(a, axis = NULL) {
   d <- DIM(a)
-
   nd <- length(d)
-  axis[which((axis < 0L) | (axis > nd))] <- nd
+  axis <- .standardize_axis(axis, nd)
 
   ds <- seq_along(d)
   s.call <- if (is.null(axis)) rev(ds) else ds[-axis]
@@ -54,8 +53,8 @@ rearrange <- function(a, axis = NULL) {
 swapaxes <- function(a, axis1, axis2) {
   ds <- seq_along(DIM(a))
   nd <- length(ds)
-  if ((axis1 <= 0L) || (axis1 > nd)) axis1 <- nd
-  if ((axis2 <= 0L) || (axis2 > nd)) axis2 <- nd
+  axis1 <- .standardize_axis(axis1, nd)
+  axis2 <- .standardize_axis(axis2, nd)
   ds[c(axis1, axis2)] <- ds[c(axis2, axis1)]
   aperm(a, perm = ds)
 }
@@ -86,8 +85,8 @@ moveaxis <- function(a, source, destination) {
   nd <- length(ds)
   source <- unique(source)
   destination <- unique(destination)
-  source[which((source <= 0L) | (source > nd))] <- nd
-  destination[which((destination <= 0L) | (destination > nd))] <- nd
+  source <- .standardize_axis(source, nd)
+  destination <- .standardize_axis(destination, nd)
   stopifnot("source and destination must have the same number of elements." = length(source) == length(destination))
 
   newds <- setdiff(ds, source)

@@ -2,9 +2,12 @@
 % Please edit documentation in R/create.r
 \name{full}
 \alias{full}
+\alias{full_like}
 \title{Array creation}
 \usage{
 full(dim = NULL, fill_value = NA, dimnames = NULL, order = c("C", "F"))
+
+full_like(a, fill_value = NA, order = c("C", "F"))
 }
 \arguments{
 \item{dim}{Shape of the new array.}
@@ -14,13 +17,19 @@ full(dim = NULL, fill_value = NA, dimnames = NULL, order = c("C", "F"))
 \item{dimnames}{Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of the length given by \code{dim} for that dimension.}
 
 \item{order}{Whether to store multidimensional array in C- or Fortran-contiguous (row- or column-wise) order.}
+
+\item{a}{An array whose shape is taken for the result array.}
 }
 \value{
 An array of \code{fill_value} with the given shape.
+
+An array of \code{fill_value} with the the same shape as \code{a}.
 }
 \description{
 Create array filled with value.
 }
 \details{
 This function corresponds to \code{full()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.full.html}{see}).
+
+This function corresponds to \code{full_like()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.full_like.html#numpy.full_like}{see}).
 }

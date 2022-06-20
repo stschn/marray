@@ -24,7 +24,7 @@ insert <- function(a, ..., axis = -1L, order = c("C", "F")) {
   order <- match.arg(order)
   d <- DIM(a)
   nd <- ndim(a)
-  axis[which((axis < 0L) | (axis > nd))] <- nd
+  axis <- .standardize_axis(axis, nd)
 
   x <- .dots(...)
 
