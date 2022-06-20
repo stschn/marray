@@ -2,7 +2,7 @@
 #' @description Clip (limit) the values in an array.
 #'
 #' @param a An array.
-#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.
+#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.
 #' @param a_min Minimum value.
 #' @param a_max Maximum value.
 #'

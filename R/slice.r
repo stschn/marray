@@ -2,7 +2,7 @@
 #' @description Slice an array using enhanced indexing operations.
 #'
 #' @param a A vector, matrix, or array.
-#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.
+#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.
 #' @param value Any values to assign to the slice of \code{a}.
 #' @param drop For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.
 #'

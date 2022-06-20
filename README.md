@@ -42,7 +42,8 @@ This R library is a replica of ndarray and functionality from NumPy.
   <li><code>full()</code> and <code>full_like</code> creates an array filled with value.</li>
   <li><code>maidentity()</code> creates an identity array.</li>
   <li><code>insert()</code> inserts objects into an array.</li>
-  <li><code>delete()</code> deletes axes from an array.</li>
+  <li><code>delete()</code> deletes parts from an array.</li>
+  <li><code>erase()</code> deletes axis from an array.</li>
   <li><code>transpose()</code> transposes an array by swapping dimensions.</li>
   <li><code>rearrange()</code> rearranges axis-driven an array by swapping dimensions.</li>
   <li><code>swapaxes()</code> interchanges two axes of an array.</li>

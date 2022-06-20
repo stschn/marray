@@ -9,7 +9,7 @@ crop(a, ..., fill_value = NA)
 \arguments{
 \item{a}{An array.}
 
-\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.}
+\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.}
 
 \item{fill_value}{Value to fill the array beyond the slice defined by \code{...}.}
 }

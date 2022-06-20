@@ -12,7 +12,7 @@ slice(a, ..., drop = FALSE)
 \arguments{
 \item{a}{A vector, matrix, or array.}
 
-\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.}
+\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.}
 
 \item{drop}{For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.}
 

@@ -2,7 +2,7 @@
 #' @description Crop array by selecting a slice and filling the rest with given values.
 #'
 #' @param a An array.
-#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.
+#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.
 #' @param fill_value Value to fill the array beyond the slice defined by \code{...}.
 #'
 #' @return An array with the same shape as \code{a} including an original slice and with \code{fill_value} beyond the slice.

@@ -2,7 +2,7 @@
 #' @description Replace array elements.
 #'
 #' @param a An array.
-#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.
+#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.
 #' @param oldvalue A vector of values to search for.
 #' @param newvalue A vector of values to replace \code{oldvalue}.
 #'   A single value is used as a replacement for all values in \code{oldvalue}. Otherwise, the length of \code{newvalue} must be equal to the length of \code{oldvalue}.

@@ -9,7 +9,7 @@ mareplace(a, ..., oldvalue, newvalue)
 \arguments{
 \item{a}{An array.}
 
-\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the dimensions and the values its values.}
+\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.}
 
 \item{oldvalue}{A vector of values to search for.}
 
