@@ -1,7 +1,7 @@
 #' @title Array stack
 #' @description Stack arrays in sequence vertically (row-wise).
 #'
-#' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{list}. The dimensions of these objects must be equal, excluding axis 1, if they are not to be coerced into a certain \code{input_shape}.
+#' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{\link{list}}. The dimensions of these objects must be equal, excluding axis 1, if they are not to be coerced into a certain \code{input_shape}.
 #' @param input_shape The dimension the input objects are to be coerced. By default \code{NULL}, the original dimensions are used.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
@@ -20,7 +20,7 @@ vstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #' @title Array stack
 #' @description Stack arrays in sequence horizontally (column-wise).
 #'
-#' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{list}. The dimensions of these objects must be equal, excluding axis 2, if they are not to be coerced into a certain \code{input_shape}.
+#' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{\link{list}}. The dimensions of these objects must be equal, excluding axis 2, if they are not to be coerced into a certain \code{input_shape}.
 #' @param input_shape The dimension the input objects are to be coerced. By default \code{NULL}, the original dimensions are used.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
@@ -39,7 +39,7 @@ hstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #' @title Array stack
 #' @description Stack arrays in sequence along the 3rd axis (depth-wise).
 #'
-#' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{list}. The dimensions of these objects must be equal, excluding axis 2, if they are not to be coerced into a certain \code{input_shape}.
+#' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{\link{list}}. The dimensions of these objects must be equal, excluding axis 2, if they are not to be coerced into a certain \code{input_shape}.
 #' @param input_shape The dimension the input objects are to be coerced. By default \code{NULL}, the original dimensions are used.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
@@ -58,7 +58,7 @@ dstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #' @title Array stack
 #' @description Stack 1-D arrays as columns into a 2-D array.
 #'
-#' @param ... Any numbers of objects they are coerced to 1-D arrays. The objects can be packed into a \code{list}. The length of these objects must be equal.
+#' @param ... Any numbers of objects they are coerced to 1-D arrays. The objects can be packed into a \code{\link{list}}. The length of these objects must be equal.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
@@ -73,24 +73,24 @@ dstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #' @export
 column_stack <- function(..., order = c("C", "F")) {
   order <- match.arg(order)
-  list_of_arrays <- .dots(...)
+  arys <- .dots(...)
 
   # Transform objects to 1-D arrays
-  list_of_arrays <- lapply(list_of_arrays, FUN = flatten, order = order)
+  arys <- lapply(arys, FUN = flatten, order = order)
 
   # Check equality of vector sizes
-  if (length(unique(sapply(list_of_arrays, length))) != 1L)
+  if (length(unique(sapply(arys, length))) != 1L)
     stop("all input arrays must have the same length (number of elements).", call. = FALSE)
 
   # Construct 2-D array (matrix)
-  #matrix(unlist(list_of_arrays), ncol = length(list_of_arrays))
-  do.call(cbind, list_of_arrays)
+  #matrix(unlist(arys), ncol = length(arys))
+  do.call(cbind, arys)
 }
 
 #' @title Array stack
 #' @description Stack 1-D arrays as rows into a 2-D array.
 #'
-#' @param ... Any numbers of objects they are coerced to 1-D arrays. The objects can be packed into a \code{list}. The length of these objects must be equal.
+#' @param ... Any numbers of objects they are coerced to 1-D arrays. The objects can be packed into a \code{\link{list}}. The length of these objects must be equal.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
@@ -105,16 +105,16 @@ column_stack <- function(..., order = c("C", "F")) {
 #' @export
 row_stack <- function(..., order = c("C", "F")) {
   order <- match.arg(order)
-  list_of_arrays <- .dots(...)
+  arys <- .dots(...)
 
   # Transform objects to 1-D arrays
-  list_of_arrays <- lapply(list_of_arrays, FUN = flatten, order = order)
+  arys <- lapply(arys, FUN = flatten, order = order)
 
   # Check equality of vector sizes
-  if (length(unique(sapply(list_of_arrays, length))) != 1L)
+  if (length(unique(sapply(arys, length))) != 1L)
     stop("all input arrays must have the same length (number of elements).", call. = FALSE)
 
   # Construct 2-D array (matrix)
-  #matrix(unlist(list_of_arrays), nrow = length(list_of_arrays), byrow = TRUE)
-  do.call(rbind, list_of_arrays)
+  #matrix(unlist(arys), nrow = length(arys), byrow = TRUE)
+  do.call(rbind, arys)
 }

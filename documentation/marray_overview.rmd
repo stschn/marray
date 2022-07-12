@@ -100,16 +100,16 @@ a
 
 ```{r}
 shape <- c(4, 3, 2)
-array_index <- rep(1, length(shape))
+axis_index <- rep(1, length(shape))
 len_data <- 24
 for (d in (seq_len(len_data))) {
-  print(array_index)
+  print(axis_index)
   for (i in rev(seq_len(length(shape)))) { # drop rev() for column-major ordering
-    array_index[i] <- array_index[i] + 1
-    if (array_index[i] <= shape[i])
+    axis_index[i] <- axis_index[i] + 1
+    if (axis_index[i] <= shape[i])
       break
     else
-      array_index[i] <- 1
+      axis_index[i] <- 1
   }
 }
 ```
@@ -119,18 +119,18 @@ In Python, the algorithm looks like:
 ```{python}
 shape = (4, 3, 2)
 N = len(shape)
-dims = [1, ] * N
+axis_index = [1, ] * N
 len_data = 24
 for d in range(len_data):
-    print(dims)
+    print(axis_index)
     # Get next dimension index
     # This is how row-major ordering works; without reversed: column-major ordering
     for i in reversed(range(N)):
-        dims[i] += 1
-        if dims[i] <= shape[i]:
+        axis_index[i] += 1
+        if axis_index[i] <= shape[i]:
             break
         else:
-            dims[i] = 1
+            axis_index[i] = 1
 ```
 
 
@@ -247,6 +247,8 @@ slice(a)
 slice(a, l = 2) 
 # the values of the first element of the first axis (1st row) and the third element of the second axis (3rd column) across all bunches of the remaining axes 3 and 4.
 slice(a, i = 1, j = 3)
+# read positions 2 and 3 from axis 1, positions 1 and 2 from axis 2, the whole axis 3, and position 2 from axis 4
+slice(a, 2:3, 1:2, 0, 2)
 ```
 
 ### Write
@@ -266,6 +268,27 @@ a
 slice(a, i = 1L) <- matrix(100:105, nrow = 3L)
 a
 ```
+
+## Subsetting
+
+```{r}
+a <- marray(sample(100)[1L:24L], dim = c(4, 3, 2))
+masubset(a)
+masubset(a, subset = (a > 23) & (a <= 67))
+```
+
+## Getting axes indices
+
+Note: The result from `masubset()` can directly be used as input for `axesindices()` to retrieve the axes indices of these array elements.
+
+```{r}
+a <- marray(1:24, dim = c(4, 3, 2))
+axesindices(a, value = c(11, 2, 23, 100))
+
+a <- marray(sample(6, 24, replace = TRUE), dim = c(4, 3, 2))
+axesindices(a, value = c(3, 5))
+```
+
 
 ## Axes permutation (transposition)
 
@@ -326,7 +349,7 @@ flatten_chr(a4)
 flatten_lgl(a4)
 ```
 
-## Expanding and squeezing
+## Expanding and Squeezing
 
 - `expand_dims()`: inserts a new axis that will appear at a certain position in the expanded array shape
 - `squeeze()`: compresses the shape of an array by removing singleton dimensions
@@ -341,7 +364,7 @@ a <- expand_dims(a); a
 a <- squeeze(a); a
 ```
 
-## Reshaping and resizing
+## Reshaping and Resizing
 
 `Reshaping` gives an array a new shape but keeps the number of elements. `Resizing`, in opposite, enlarges the number of elements, if necessary. If the new array is larger than the original array, then the new array is filled with:
 
@@ -401,7 +424,8 @@ roll(a, shift = -1, axis = 1)
 ## Insertion and deletion
 
 - `insert()`: inserts an R object into an array
-- `delete()`: deletes axes from an array
+- `delete()`: deletes parts from an array
+- `erase()`: deletes axis from array
 
 ```{r}
 # Insert into array along axis
@@ -412,18 +436,26 @@ insert(a, x, axis = 2L, order = "F")
 x <- marray(100L + seq.int(2*3*1))
 insert(a, x, axis = 3L, order = "F")
 
-# Delete from array
+# Original array
+a <- marray(1:24, dim = c(4, 3, 2), order = "F")
+# delete nothing
+delete(a)
+# delete positions 1 and 2 of the first axis
+delete(a, i = 1:2)
+# delete second row and third column
+delete(a, i = 2, j = 3)
+
 # original array
 a <- marray(1:24, dim = c(4, 3, 2), order = "F")
 # delete the first dimension with reading first n elements
-delete(a)
+erase(a)
 # delete the first dimension with reading last n elements
-delete(a, keep = "last")
+erase(a, keep = "last")
 # delete the axes one and two with reading first n elements
-delete(a, axis = c(1L, 2L))
+erase(a, axis = c(1L, 2L))
 ```
 
-## Replacing and clipping
+## Replacing and Clipping
 
 - `mareplace()`: replaces values of an entire array or only of a slice
 - `maclip()`: limits the values in an array
@@ -547,7 +579,18 @@ hsplit(marray(1:12, dim = c(4, 3)), indices_or_sections = 2)
 dsplit(marray(1:24, dim = c(4, 3, 2)), indices_or_sections = 2)
 ```
 
-## Tiling
+## Repeating and Tiling
+
+*Repeating* means repetition of elements of an array along axes. 
+
+```{r}
+a <- marray(seq_len(4*4*2), dim = c(4, 4, 2))
+marepeat(a, repeats = 2, axis = 1)
+marepeat(a, repeats = c(2, 2, 3, 1), axis = 1)
+marepeat(a, repeats = c(2, 2, 1, 1), axis = c(1, 2))
+marepeat(a, repeats = c(2, 2, 1, 1), axis = 1) |> marepeat(repeats = c(2, 2, 1, 1), axis = 2)
+marepeat(a, repeats = list(i = c(2, 1, 2, 1), j = c(1, 2, 3, 2)), axis = c(1, 2))
+```
 
 *Tiling* repeats an array along each axes. 
 

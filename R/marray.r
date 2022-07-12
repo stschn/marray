@@ -39,6 +39,11 @@
 #' a4 <- array(1:48, dim = c(4, 3, 2, 2))
 #' data <- a3; data
 #' a <- marray(data, order = "F"); a
+#'
+#' # Convert array elements into specific type
+#' a <- marray(sample(c(0, 1), 24, replace = TRUE), dim = c(4, 3 ,2, 1)) |>
+#'   as.marray_lgl()
+#' a
 #' @export
 marray <- function(data, ...) {
   as.marray(data, ...)
@@ -81,3 +86,28 @@ as.marray.data.frame <- function(data, dim = NULL, dimnames = NULL, order = c("C
 as.marray.list <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F")) {
   as.marray.default(array(unlist(data)), dim = dim, dimnames = dimnames, order = order)
 }
+
+#' @rdname marray
+#' @param a An array.
+#' @export
+as.marray_int <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.integer) }
+
+#' @rdname marray
+#' @param a An array.
+#' @export
+as.marray_dbl <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.double) }
+
+#' @rdname marray
+#' @param a An array.
+#' @export
+as.marray_raw <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.raw) }
+
+#' @rdname marray
+#' @param a An array.
+#' @export
+as.marray_chr <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.character) }
+
+#' @rdname marray
+#' @param a An array.
+#' @export
+as.marray_lgl <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.logical) }

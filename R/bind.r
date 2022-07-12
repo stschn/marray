@@ -1,7 +1,7 @@
 #' @title Array binding
 #' @description Combine arrays along a specified dimension.
 #'
-#' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{list}. The dimensions of these objects must be equal, excluding axis, if they are not to be coerced into a certain \code{input_shape}.
+#' @param ... Any number of objects that are combined into an array. The objects can be packed into a \code{\link{list}}. The dimensions of these objects must be equal, excluding axis, if they are not to be coerced into a certain \code{input_shape}.
 #' @param axis The dimension along the objects are combined. By default (\code{-1}), the last dimension is used for binding the arrays.
 #' @param input_shape The dimension the input objects are to be coerced. By default \code{NULL}, the original dimensions are used.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
@@ -92,7 +92,7 @@ mabind <- function(..., axis = -1, input_shape = NULL, order = c("C", "F")) {
   i <- intersect(nd, ns) # for more than two arguments: Reduce(intersect, list(nd, ns, ...))
   if (length(i) == 0L)
     stop("index mismatch between arrays number of dimensions and sizes.", call. = FALSE)
-  out <- lapply(arys, dim)[[i[1L]]]
-  if (length(out) > 1L) out <- out[-axis]
-  out
+  dima <- dim(arys[[i[1L]]]) # dima <- lapply(arys, dim)[[i[1L]]]
+  if (length(dima) > 1L) dima <- dima[-axis]
+  dima
 }

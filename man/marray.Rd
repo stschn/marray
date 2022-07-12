@@ -7,6 +7,11 @@
 \alias{as.marray.matrix}
 \alias{as.marray.data.frame}
 \alias{as.marray.list}
+\alias{as.marray_int}
+\alias{as.marray_dbl}
+\alias{as.marray_raw}
+\alias{as.marray_chr}
+\alias{as.marray_lgl}
 \title{Multidimensional array}
 \usage{
 marray(data, ...)
@@ -20,6 +25,16 @@ as.marray(data, ...)
 \method{as.marray}{data.frame}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
 
 \method{as.marray}{list}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
+
+as.marray_int(a)
+
+as.marray_dbl(a)
+
+as.marray_raw(a)
+
+as.marray_chr(a)
+
+as.marray_lgl(a)
 }
 \arguments{
 \item{data}{The data to be reshaped to a multidimensional array.}
@@ -31,6 +46,8 @@ as.marray(data, ...)
 \item{order}{The order in which elements of data should be read during rearrangement.
 By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.}
+
+\item{a}{An array.}
 }
 \value{
 An array.
@@ -65,6 +82,11 @@ a3 <- array(v, dim = c(4, 3, 2))
 a4 <- array(1:48, dim = c(4, 3, 2, 2))
 data <- a3; data
 a <- marray(data, order = "F"); a
+
+# Convert array elements into specific type
+a <- marray(sample(c(0, 1), 24, replace = TRUE), dim = c(4, 3 ,2, 1)) |>
+  as.marray_lgl()
+a
 }
 \seealso{
 \code{\link{array}}, \code{\link{dim}}, \code{\link{reshape.array}}.

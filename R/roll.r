@@ -31,18 +31,16 @@ roll <- function(a, shift, axis = NULL) {
   if (is.null(axis))
     return(marray(roll(flatten(a), shift, axis = 1L), dim = DIM(a)))
   else {
-    if (length(axis) > ndim(a))
-      stop(sprintf("number of specified axis (%d) is greater than the number of dimensions (%d).", length(axis), ndim(a)))
-    stopifnot("axis can not be zero or negative." = all(axis > 0L),
-              "any axis can not be greater than the number of dimensions." = all(axis <= ndim(a)))
+    axis <- .standardize_axis(axis, ndim(a) -> nd)
+
     if (length(shift) > 1L)
       stopifnot("shift and axis must be of the same length." = length(shift) == length(axis))
 
-    shifts <- rep(0L, ndim(a))
+    shifts <- rep(0L, nd)
     shifts[axis] <- shift
 
     d <- DIM(a)
-    arr_idx <- vector(mode = "list", length = (ndim(a)))
+    arr_idx <- vector(mode = "list", length = nd)
 
     for (i in seq_along(arr_idx)) {
       if (shifts[i] > 0L) # shift right

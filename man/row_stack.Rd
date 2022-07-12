@@ -7,7 +7,7 @@
 row_stack(..., order = c("C", "F"))
 }
 \arguments{
-\item{...}{Any numbers of objects they are coerced to 1-D arrays. The objects can be packed into a \code{list}. The length of these objects must be equal.}
+\item{...}{Any numbers of objects they are coerced to 1-D arrays. The objects can be packed into a \code{\link{list}}. The length of these objects must be equal.}
 
 \item{order}{The order in which elements of the objects should be read during coercing to arrays.
 By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.

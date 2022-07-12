@@ -7,7 +7,7 @@
 mabind(..., axis = -1, input_shape = NULL, order = c("C", "F"))
 }
 \arguments{
-\item{...}{Any number of objects that are combined into an array. The objects can be packed into a \code{list}. The dimensions of these objects must be equal, excluding axis, if they are not to be coerced into a certain \code{input_shape}.}
+\item{...}{Any number of objects that are combined into an array. The objects can be packed into a \code{\link{list}}. The dimensions of these objects must be equal, excluding axis, if they are not to be coerced into a certain \code{input_shape}.}
 
 \item{axis}{The dimension along the objects are combined. By default (\code{-1}), the last dimension is used for binding the arrays.}
 

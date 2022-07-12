@@ -1,5 +1,5 @@
 #' @title Data flattening
-#' @description Flatten data into a one-dimensional array.
+#' @description Flatten data into a one-dimensional array or into a vector of corresponding type.
 #'
 #' @param data Data to be flatten.
 #' @param axis The axes to be fixed while iterating over the remaining axes of \code{data}.

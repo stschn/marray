@@ -37,7 +37,7 @@ The flatten data in form of a one-dimensional array.
   \code{flatten_int()} returns an integer vector, \code{flatten_dbl()} a double vector, \code{flatten_raw()} a raw vector, \code{flatten_chr()} a character vector, and \code{flatten_lgl()} a logical vector.
 }
 \description{
-Flatten data into a one-dimensional array.
+Flatten data into a one-dimensional array or into a vector of corresponding type.
 }
 \details{
 This function corresponds to \code{ndarray.flatten()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.flatten.html}{see}).

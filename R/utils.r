@@ -1,5 +1,12 @@
 # Internal helper functions
 
+# A simple wrapper for transformation of an R object into an array
+.standardize_array <- function(a) {
+  if (!is(a, "array"))
+    a <- as.array(a)
+  a
+}
+
 # Simplifies arguments (...) to a list
 # Packaging arguments externally into a list makes function calls pipe-friendly.
 .dots <- function(..., simplify = TRUE) {
@@ -13,17 +20,15 @@
 # Indexing can be done with or without symbols i, j, k etc. All indices are proofed and adopted, if necessary.
 .aindex <- function(dim, ...) {
   ds <- lapply(dim, seq_len)
-  ds_min <- lapply(ds, min)
-  ds_max <- lapply(ds, max)
   args <- .dots(...)
-  if (length(args) > length(ds))
-    stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", length(args), length(ds)), call. = FALSE)
+  if (length(args) > length(dim))
+    stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", length(args), length(dim)), call. = FALSE)
   axis <- match(names(args), letters) - 8L
   if (!((is.integer(axis) && !length(axis)) || any(is.na(axis)))) {
     if (any(axis < 1L))
       stop(sprintf("symbols (%s) are not allowed as arguments for indexing.", paste(letters[axis[which(axis < 1L)] + 8L], collapse = ", ")), call. = FALSE)
-    if (max(axis) > length(ds))
-      stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", max(axis), length(ds)), call. = FALSE)
+    if (max(axis) > length(dim))
+      stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", max(axis), length(dim)), call. = FALSE)
     ds[axis] <- args
   } else {
     args <- lapply(seq_along(args), function(i) if (any(is.null(args[[i]])) || any(is.na(args[[i]])) || any(args[[i]] <= 0)) ds[[i]] else args[[i]])
@@ -31,8 +36,8 @@
   }
   ds <- lapply(seq_along(ds), function(i) {
     x <- ds[[i]]
-    x[x < ds_min[[i]]] <- ds_min[[i]]
-    x[x > ds_max[[i]]] <- ds_max[[i]]
+    x[x < 1L] <- 1L
+    x[x > dim[i]] <- dim[i]
     x
   })
   ds

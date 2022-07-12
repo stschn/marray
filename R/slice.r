@@ -37,3 +37,65 @@ slice <- function(a, ..., drop = FALSE) {
   args <- .aindex(DIM(a), ...)
   do.call(`[<-`, c(list(a), args, list(value = value)))
 }
+
+#' @title Extract indices of axes of an array
+#'
+#' @param a An array.
+#' @param value Any number of values to search for in \code{a}.
+#'
+#' @details If there is no match between \code{value} and the values of \code{a}, \code{NA} will be returned.
+#'
+#' @return A list of the index or indices of the dimension space of \code{value} within \code{a}, otherwise \code{NA}.
+#'
+#' @examples
+#' a <- marray(1:24, dim = c(4, 3, 2))
+#' axesindices(a, value = c(11, 2, 23))
+#'
+#' a <- marray(sample(6, 24, replace = TRUE), dim = c(4, 3, 2))
+#' axesindices(a, value = c(4, 6, 0))
+#'
+#' a <- ones(dim = c(4, 3, 2))
+#' axesindices(a, value = 1)
+#'
+#' @export
+axesindices <- function(a, value) {
+  a <- .standardize_array(a)
+  idx_table <- arrayInd(seq_along(a), DIM(a))
+  # a loop is necessary because which(a %in% value) ignores the order within value
+  idx <- lapply(value, function(v) which(a %in% v))
+  idx <- lapply(idx, function(i) if (length(i) == 0L) NA else i)
+  lapply(idx, function(i) if (all(!is.na(i))) idx_table[unlist(i), ] else NA)
+}
+
+#' @title Array subsetting
+#'
+#' @param a An array.
+#' @param subset Logical expression indicating elements to keep.
+#' @param drop Boolean passed on to \code{[} indexing operator.
+#'
+#' @return A vector containing the elements of \code{a} which meet conditions.
+#'
+#' @examples
+#' a <- marray(1:24, dim = c(4, 3, 2))
+#' values <- masubset(a, subset = (a > 3) & (a <= 11))
+#' values
+#'
+#' # Forward the values to axesindices() to get the coordinates of these values
+#' axesindices(a, value = values)
+#'
+#' @export
+masubset <- function(a, subset, drop = FALSE) {
+  a <- .standardize_array(a)
+  if (missing(subset))
+    return(a)
+  e <- substitute(subset)
+  r <- eval(e, parent.frame())
+  if (!is.logical(r))
+    stop("'subset' must be logical.", call. = FALSE)
+  r <- r & !is.na(r)
+  out <- a[r, drop = drop]
+  if (length(out) == 0L)
+    invisible(NULL)
+  else
+    out
+}

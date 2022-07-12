@@ -48,7 +48,7 @@
 #' @export
 reshape.array <- function(a, dim = NULL, order = c("C", "F")) {
   order <- match.arg(order)
-  if (isTRUE(c("C") %in% order))
+  if (identical(order, "C"))
     dimC(a) <- dim
   else
     dim(a) <- dim

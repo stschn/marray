@@ -7,7 +7,7 @@
 hstack(..., input_shape = NULL, order = c("C", "F"))
 }
 \arguments{
-\item{...}{Any number of objects that are combined into an array. The objects can be packed into a \code{list}. The dimensions of these objects must be equal, excluding axis 2, if they are not to be coerced into a certain \code{input_shape}.}
+\item{...}{Any number of objects that are combined into an array. The objects can be packed into a \code{\link{list}}. The dimensions of these objects must be equal, excluding axis 2, if they are not to be coerced into a certain \code{input_shape}.}
 
 \item{input_shape}{The dimension the input objects are to be coerced. By default \code{NULL}, the original dimensions are used.}
 

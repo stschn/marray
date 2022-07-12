@@ -31,3 +31,6 @@ tile(a, 2)
 tile(a, c(2, 1))
 
 }
+\seealso{
+\code{\link{marepeat}}.
+}
