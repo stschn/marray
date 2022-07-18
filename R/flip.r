@@ -22,7 +22,7 @@ flip <- function(a, axis = 1L) {
   axis <- .standardize_axis(axis, nd)
   ds <- lapply(d, seq_len)
   ds[axis] <- lapply(ds[axis], rev)
-  do.call('[', c(list(a), ds))
+  do.call(`[`, c(list(a), ds))
 }
 
 #' @rdname flip
