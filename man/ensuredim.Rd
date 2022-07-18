@@ -3,7 +3,7 @@
 \name{ensuredim}
 \alias{ensuredim}
 \alias{dropdim}
-\title{Enforce array and convert to vector}
+\title{Array enforcing and unravel}
 \usage{
 ensuredim(x)
 
@@ -22,7 +22,7 @@ An array of at least one dimension.
 A vector.
 }
 \description{
-Enforce array and convert to vector
+Enforce array or convert to vector.
 }
 \examples{
 v <- setNames(1:11, do.call(paste0, list("i", c(1:11))))

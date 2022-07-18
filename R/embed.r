@@ -3,6 +3,9 @@
 #' @param data The data to be embedded into a shifted series.
 #' @param length The length of a series.
 #' @param flip A logical value indicating whether the embedded series should be reversed.
+#' @param order The order in which elements of \code{data} should be read during flattening.
+#'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
+#'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
 #' @return An ongoing shifted series of \code{data}.
 #' @export
@@ -14,15 +17,15 @@
 #' head(a)
 #' a <- embedseries(df, length = 23L)
 #' head(a)
-embedseries <- function(data, length, flip) {
+embedseries <- function(data, ...) {
   UseMethod("embedseries")
 }
 
 #' @rdname embedseries
 #' @export
-embedseries.default <- function(data, length = 1L, flip = TRUE) {
+embedseries.default <- function(data, length = 1L, flip = TRUE, order = c("C", "F")) {
   length <- ifelse(is.null(length) || (length < 1L), 1L, length) # at least a length of 1 is needed
-  a <- stats::embed(as.vector(flatten(data)), dimension = length)
+  a <- stats::embed(as.vector(flatten(data, order = order)), dimension = length)
   if (flip) a <- flip(a, axis = 2L)
   a
 }

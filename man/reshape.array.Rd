@@ -2,7 +2,7 @@
 % Please edit documentation in R/reshape.r
 \name{reshape.array}
 \alias{reshape.array}
-\title{Reshape an array}
+\title{Array reshaping}
 \usage{
 reshape.array(a, dim = NULL, order = c("C", "F"))
 }
@@ -19,10 +19,13 @@ In opposite, the \code{Fortran}-style ordering means elements should be read in 
 The (redimensioned) array \code{a}.
 }
 \description{
-Reshape an array
+Reshape an array.
 }
 \details{
-This function corresponds to \code{reshape()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.reshape.html}{see}).
+This function corresponds to \code{reshape()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.reshape.html}{see}).\cr
+Reshaping an array causes the dimension space (shape) to change. This can result in new dimensions (axes) as well as changes in dimension lengths.
+In contrast to transpositions, which also lead to changes in the dimension space, the layout of the underlying data, i.e. their order, remains unchanged.
+The data are flattened and then arranged into the new dimension space while retaining their order.
 }
 \seealso{
 \code{\link[reticulate]{array_reshape}}.

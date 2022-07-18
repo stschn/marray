@@ -1,76 +1,81 @@
 <!-- # marray -->
+
 <h2>Overview marray</h2>
+
 Multidimensional Array
 
-This R library is a replica of ndarray and functionality from NumPy.
+This R library is a replica of ndarray and functionality from [NumPy](https://numpy.org/). This functionality can also be found to some extent in [MATLAB](https://de.mathworks.com/help/matlab/matrices-and-arrays.html) and to a lesser extent in [APL](https://bookdown.org/jandeleeuw6/apl/).
 
 <ul>
-  <li><code>DIM()</code> returns the dimension of an object or its length.</li>
-  <li><code>ndim()</code> returns the number of dimensions of an array.</li>
-  <li><code>nsize()</code> returns the number of elements of an array.</li>
-  <li><code>ndmin()</code> ensures a minimum number of dimensions in an array.</li>
-  <li><code>ensuredim()</code> and <code>dropdim()</code> enforces an array or a vector.</li>
-  <li><code>dimC()</code> set the dimension of an object in row-major ordering (C-style).</li>
-  <li><code>reshape.array()</code> reshapes an array to new dimension.</li>
-  <li><code>resize.array()</code> resizes an array to new dimension.</li>
-  <li><code>broadcastDIM()</code> retrieves broadcast dimensions.</li>
-  <li><code>reshape_.array_broadcast()</code> reshapes array on basis of broadcasting.</li>
-  <li><code>array_save()</code> and <code>array_load()</code> writes arrays to files and restores them.</li>
-  <li><code>marray()</code> and <code>as.marray()</code> transform data into a multidimensional array and <code>is.marray()</code> checks for that type of array.</li>
-  <li><code>as.marray_int()</code>, <code>as.marray_dbl()</code>, <code>as.marray_raw()</code>, <code>as.marray_chr()</code> and <code>as.marray_lgl()</code> convert the elements of an array into corresponding type.</li>
-  <li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerces objects into arrays with corresponding number of dimensions.</li>
-  <li><code>flatten()</code> flattens data into a one-dimensional array.</li>
-  <li><code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flattens data into a vector from corresponding type.</li>
-  <li><code>expand_dims()</code> expands the shape of an array by inserting a new axis.</li>
-  <li><code>squeeze()</code> removes dimensions of length one from array.</li>
-  <li><code>mamatrix()</code> shrinks an array by rows or columns into a matrix.</li>
-  <li><code>slice()</code> read or write a part of an array.</li>
-  <li><code>masubset()</code> returns a subset of an array which meets conditions.</li>
-  <li><code>axesindices()</code> retrieves axes indices of values within an array.</li>
-  <li><code>maclip()</code> limits values of an array.</li>
-  <li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
-  <li><code>vstack()</code> stacks arrays in sequence vertically (row-wise).</li>
-  <li><code>hstack()</code> stacks arrays in sequence horizontally (column-wise).</li>
-  <li><code>dstack()</code> stacks arrays in sequence along 3rd axis (depth-wise).</li>
-  <li><code>column_stack()</code> stacks 1D arrays as columns into a 2D array.</li>
-  <li><code>row_stack()</code> stacks 1D arrays as rows into a 2D array.</li>
-  <li><code>array_split()</code> splits an array into sub-arrays along an axis.</li>
-  <li><code>vsplit()</code> splits an array into sub-arrays vertically (row-wise).</li>
-  <li><code>hsplit()</code> splits an array into sub-arrays horizontally (column-wise).</li>
-  <li><code>dsplit()</code> splits an array into sub-arrays along 3rd axis (depth-wise).</li>
-  <li><code>marepeat()</code> repeats elements of an array.</li>
-  <li><code>tile()</code> repeats an array a number of times.</li>
-  <li><code>eye()</code> creates a 2D identity matrix.</li>
-  <li><code>vander()</code> creates a Vandermonde matrix.</li>
-  <li><code>ones()</code> and <code>ones_like</code> creates an array filled with ones.</li>
-  <li><code>zeros()</code> and <code>zeros_like</code> creates an array filled with zeros.</li>
-  <li><code>empty()</code> and <code>empty_like</code> creates an array filled with NA.</li>
-  <li><code>full()</code> and <code>full_like</code> creates an array filled with value.</li>
-  <li><code>maidentity()</code> creates an identity array.</li>
-  <li><code>insert()</code> inserts objects into an array.</li>
-  <li><code>delete()</code> deletes parts from an array.</li>
-  <li><code>erase()</code> deletes axis from an array.</li>
-  <li><code>transpose()</code> transposes an array by swapping dimensions.</li>
-  <li><code>rearrange()</code> rearranges axis-driven an array by swapping dimensions.</li>
-  <li><code>swapaxes()</code> interchanges two axes of an array.</li>
-  <li><code>moveaxis()</code> moves axes of an array to new positions.</li>
-  <li><code>flip()</code> reverses the order of the elements of an array along axes.</li>
-  <li><code>flipud()</code> flips an array vertically (axis = 1).</li>
-  <li><code>fliplr()</code> flips an array horizontally (axis = 2).</li>
-  <li><code>rot90()</code> rotates an array by 90 degrees in the plane specified by axes.</li>
-  <li><code>roll()</code> shifts an array circularly.</li>
-  <li><code>crop()</code> takes out a part of an array with default values for the remaining part.</li>
-  <li><code>slide()</code> slides over an array with a window of given size and given stride.</li>
-  <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
-  <li><code>mareplace()</code> replaces values in an array.</li>
+<li><code>DIM()</code> returns the dimension of an object or its length.</li>
+<li><code>ndim()</code> returns the number of dimensions of an array.</li>
+<li><code>nsize()</code> returns the number of elements of an array.</li>
+<li><code>ndmin()</code> ensures a minimum number of dimensions in an array.</li>
+<li><code>ensuredim()</code> and <code>dropdim()</code> enforces an array or a vector.</li>
+<li><code>dimC()</code> set the dimension of an object in row-major ordering (C-style).</li>
+<li><code>reshape.array()</code> reshapes an array to new dimension.</li>
+<li><code>resize.array()</code> resizes an array to new dimension.</li>
+<li><code>broadcastDIM()</code> retrieves broadcast dimensions.</li>
+<li><code>reshape_broadcast()</code> reshapes array on basis of broadcasting.</li>
+<li><code>array_save()</code> and <code>array_load()</code> writes arrays to files and restores them.</li>
+<li><code>marray()</code> and <code>as.marray()</code> transform data into a multidimensional array.</li>
+<li><code>as.marray_int()</code>, <code>as.marray_dbl()</code>, <code>as.marray_raw()</code>, <code>as.marray_chr()</code> and <code>as.marray_lgl()</code> convert the elements of an array into corresponding type. <code>as.marray_norm()</code> converts the elements of an array into its normal distribution.</li>
+<li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerces objects into arrays with corresponding number of dimensions.</li>
+<li><code>flatten()</code> flattens data into a one-dimensional array.</li>
+<li><code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flattens data into a vector from corresponding type.</li>
+<li><code>expand_dims()</code> expands the shape of an array by inserting a new axis.</li>
+<li><code>squeeze()</code> removes dimensions of length one from array.</li>
+<li><code>mamatrix()</code> shrinks an array by rows or columns into a matrix.</li>
+<li><code>slice()</code> read or write a part of an array.</li>
+<li><code>extract()</code> returns values from an array that meet conditions.</li>
+<li><code>axesindices()</code> retrieves axes indices of values within an array.</li>
+<li><code>maclip()</code> limits values of an array.</li>
+<li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
+<li><code>vstack()</code> stacks arrays in sequence vertically (row-wise).</li>
+<li><code>hstack()</code> stacks arrays in sequence horizontally (column-wise).</li>
+<li><code>dstack()</code> stacks arrays in sequence along 3rd axis (depth-wise).</li>
+<li><code>column_stack()</code> stacks 1D arrays as columns into a 2D array.</li>
+<li><code>row_stack()</code> stacks 1D arrays as rows into a 2D array.</li>
+<li><code>array_split()</code> splits an array into sub-arrays along an axis.</li>
+<li><code>vsplit()</code> splits an array into sub-arrays vertically (row-wise).</li>
+<li><code>hsplit()</code> splits an array into sub-arrays horizontally (column-wise).</li>
+<li><code>dsplit()</code> splits an array into sub-arrays along 3rd axis (depth-wise).</li>
+<li><code>marepeat()</code> repeats elements of an array.</li>
+<li><code>tile()</code> repeats an array a number of times.</li>
+<li><code>eye()</code> creates a 2D identity matrix.</li>
+<li><code>vander()</code> creates a Vandermonde matrix.</li>
+<li><code>ones()</code> and <code>ones_like</code> creates an array filled with ones.</li>
+<li><code>zeros()</code> and <code>zeros_like</code> creates an array filled with zeros.</li>
+<li><code>empty()</code> and <code>empty_like</code> creates an array filled with NA.</li>
+<li><code>full()</code> and <code>full_like</code> creates an array filled with value.</li>
+<li><code>maidentity()</code> creates an identity array.</li>
+<li><code>insert()</code> inserts objects into an array.</li>
+<li><code>delete()</code> deletes parts from an array.</li>
+<li><code>erase()</code> deletes axis from an array.</li>
+<li><code>transpose()</code> transposes an array by swapping dimensions.</li>
+<li><code>rearrange()</code> rearranges axis-driven an array by swapping dimensions.</li>
+<li><code>swapaxes()</code> interchanges two axes of an array.</li>
+<li><code>moveaxis()</code> moves axes of an array to new positions.</li>
+<li><code>flip()</code> reverses the order of the elements of an array along axes.</li>
+<li><code>flipud()</code> flips an array vertically (axis = 1).</li>
+<li><code>fliplr()</code> flips an array horizontally (axis = 2).</li>
+<li><code>rot90()</code> rotates an array by 90 degrees in the plane specified by axes.</li>
+<li><code>roll()</code> shifts an array circularly.</li>
+<li><code>crop()</code> takes out a part of an array with default values for the remaining part.</li>
+<li><code>slide()</code> slides over an array with a window of given size and given stride.</li>
+<li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
+<li><code>place()</code> replaces values in an array.</li>
+<li><code>where()</code> creates an array based on meeting conditions.</li>
+<li><code>memberof()</code> creates a binary array based on values to be sought.</li>
 </ul>
 
-<h2>Examples</h3>
+<h2>Examples</h2>
+
 <p><code>library(marray)</code></p>
 
 <h3>Array creation from scratch</h3>
 
-```r
+``` r
 # Filled with NA
 a <- empty(dim = c(4, 3, 2))
 # Filled with Zeros
@@ -84,7 +89,7 @@ a <- full(dim = c(4, 3, 2), fill_value = c(11, 2, 23), order = "F")
 
 <h3>Array creation with ordering and from other data</h3>
 
-```r
+``` r
 # Row-major ordering
 a <- marray(1:24, dim = c(4, 3, 2))
 # Column-major ordering
@@ -104,7 +109,7 @@ a <- marray(v) # just change the argument
 
 <h3>Expand and squeeze dimensions</h3>
 
-```r
+``` r
 a <- marray(seq_len(12))
 a <- expand_dims(a)
 a <- squeeze(a)
@@ -112,14 +117,14 @@ a <- squeeze(a)
 
 <h3>Flatten data</h3>
 
-```r
+``` r
 a4 <- array(1:48, dim = c(4, 3, 2, 2))
 flatten(a4, order = "F")
 ```
 
 <h3>Bind arrays in pipe-friendly way</h3>
 
-```r
+``` r
 x <- marray(seq_len(24), dim = c(4, 3, 2), order = "F")
 y <- marray(-seq_len(24), dim = c(4, 3, 2), order = "F")
 z <- marray(seq_len(12), dim = c(4, 3))
@@ -132,7 +137,7 @@ a <- expand_dims(z) |>
 
 <h3>Insert into array</h3>
 
-```r
+``` r
 a <- marray(seq.int(2 * 3 * 4), dim = c(2, 3, 4), order = "F")
 x <- marray(100L + seq.int(2 * 1 * 4))
 insert(a, x, axis = 2L, order = "F") # x will automatically be coerced in the right shape
@@ -140,7 +145,7 @@ insert(a, x, axis = 2L, order = "F") # x will automatically be coerced in the ri
 
 <h3>Read and write slices of an array</h3>
 
-```r
+``` r
 a <- marray(1:48, dim = c(4, 3, 2, 2))
 slice(a) # read complete four-dimensional array
 slice(a, l = 2) # the values of the second element of the last dimension (4th dimension)
@@ -155,7 +160,7 @@ slice(a, i = 1L) <- matrix(100:105, nrow = 3L); a # equal to prior, nrow can be 
 
 <h3>Flip array</h3>
 
-```r
+``` r
 a <- marray(seq_len(24), dim = c(4, 3, 2), order = "F")
 # Along first dimension
 flip(a)
@@ -169,7 +174,7 @@ flip(a, axis = c(1L, 2L))
 
 <h3>Rotate array</h3>
 
-```r
+``` r
 a <- marray(seq_len(12), dim = c(4, 3), order = "F")
 # Clockwise
 rot90(a)
@@ -180,16 +185,17 @@ rot90(a, k = -1L)
 # Three times counterclockwise
 rot90(a, k = -3L)
 ```
+
 <h3>Embed series</h3>
 
-```r
+``` r
 a <- marray(1:24, dim = c(6, 4), order = "F")
 embedseries(a, length = 3L)
 ```
 
 <h3>Roll array</h3>
 
-```r
+``` r
 a <- marray(0:9)
 roll(a, shift = 2)
 roll(a, shift = -2)
@@ -202,14 +208,14 @@ roll(a, shift = -1, axis = 1)
 
 <h3>Crop array</h3>
 
-```r
+``` r
 a <- marray(1:24, dim = c(4, 3, 2))
 crop(a, i = 1, j = 2:3)
 ```
 
 <h3>Split array</h3>
 
-```r
+``` r
 a <- marray(1:8)
 sub_arys <- array_split(a, indices_or_sections = 3)
 sub_arys <- array_split(a, indices_or_sections = c(3, 5, 6))
@@ -225,7 +231,7 @@ sub_arys <- array_split(a, indices_or_sections = 2, axis = 2L)
 
 <h3>Slide over an array</h3>
 
-```r
+``` r
 a <- marray(sample(7 * 4 * 2), dim = c(7, 4, 2))
 # Sliding along each axes with a size of 1 and a stride of 1
 sub_arys <- slide(a)
@@ -235,7 +241,7 @@ sub_arys <- slide(a, size = c(2, 1), axis = c(1, 2))
 
 <h3>Move axis</h3>
 
-```r
+``` r
 a <- marray(1:(3*4*5), dim = c(3, 4, 5), order = "F")
 DIM(moveaxis(a, 1, 3))
 DIM(moveaxis(a, 3, 1))

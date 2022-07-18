@@ -1,4 +1,5 @@
-#' Array Serialization
+#' @title Array Serialization
+#' @description Save and load arrays.
 #'
 #' @param ... Any number of arrays. The arrays can be packed into a \code{\link{list}} to make code more pipe-friendly.
 #' @param file The names of the files or a folder the arrays are stored into or restored from.

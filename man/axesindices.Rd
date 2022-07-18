@@ -2,7 +2,7 @@
 % Please edit documentation in R/slice.r
 \name{axesindices}
 \alias{axesindices}
-\title{Extract indices of axes of an array}
+\title{Array Indexes}
 \usage{
 axesindices(a, value)
 }
@@ -15,7 +15,7 @@ axesindices(a, value)
 A list of the index or indices of the dimension space of \code{value} within \code{a}, otherwise \code{NA}.
 }
 \description{
-Extract indices of axes of an array
+Extract indices of axes of an array.
 }
 \details{
 If there is no match between \code{value} and the values of \code{a}, \code{NA} will be returned.

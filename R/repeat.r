@@ -1,4 +1,5 @@
 #' @title Array repetition
+#' @description Repeat elements of an array.
 #'
 #' @param a The input array.
 #' @param repeats An integerish vector or list of integerish vectors indicating the number of repetitions for each element along \code{axis}.

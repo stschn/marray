@@ -2,7 +2,7 @@
 % Please edit documentation in R/shape.r
 \name{atleast_2d}
 \alias{atleast_2d}
-\title{Convert inputs to arrays with at least two dimensions}
+\title{Array enforcing}
 \usage{
 atleast_2d(..., order = c("C", "F"))
 }
@@ -17,7 +17,7 @@ In opposite, the \code{Fortran}-style ordering means elements should be read in 
 An array, or list of arrays, each with at least two dimensions.
 }
 \description{
-Convert inputs to arrays with at least two dimensions
+Convert inputs to arrays with at least two dimensions.
 }
 \details{
 This function corresponds to \code{atleast_2d()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.atleast_2d.html}{see}).

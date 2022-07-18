@@ -4,12 +4,14 @@
 \alias{vander}
 \title{Array creation}
 \usage{
-vander(data, n = NULL)
+vander(data, n = NULL, dimnames = NULL)
 }
 \arguments{
 \item{data}{The data to be reshaped to a Vandermonde matrix.}
 
 \item{n}{The number of columns of the resulting matrix. If n is not specified, a square array is returned.}
+
+\item{dimnames}{Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of length \code{n}.}
 }
 \value{
 A Vandermonde matrix.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/shape.r
 \name{atleast_1d}
 \alias{atleast_1d}
-\title{Convert inputs to arrays with at least one dimension}
+\title{Array enforcing}
 \usage{
 atleast_1d(..., order = c("C", "F"))
 }
@@ -17,7 +17,7 @@ In opposite, the \code{Fortran}-style ordering means elements should be read in 
 An array, or list of arrays, each with at least one dimension.
 }
 \description{
-Convert inputs to arrays with at least one dimension
+Convert inputs to arrays with at least one dimension.
 }
 \details{
 This function corresponds to \code{atleast_1d()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.atleast_1d.html}{see}).

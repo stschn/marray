@@ -2,9 +2,12 @@
 % Please edit documentation in R/shape.r
 \name{DIM}
 \alias{DIM}
-\title{Retrieve dimensions of an object or its length}
+\alias{shape}
+\title{Array shape}
 \usage{
 DIM(x)
+
+shape(x)
 }
 \arguments{
 \item{x}{An R object.}
@@ -13,7 +16,10 @@ DIM(x)
 The number of dimensions or in cases of an atomic object the length.
 }
 \description{
-Retrieve dimensions of an object or its length
+Retrieve dimensions of an object or its length.
+}
+\details{
+The function \code{shape()} is a wrapper function for \code{DIM()}.
 }
 \references{
 Implementation credits go to \url{https://github.com/t-kalinowski/listarrays}.

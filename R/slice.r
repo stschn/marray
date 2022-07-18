@@ -38,7 +38,8 @@ slice <- function(a, ..., drop = FALSE) {
   do.call(`[<-`, c(list(a), args, list(value = value)))
 }
 
-#' @title Extract indices of axes of an array
+#' @title Array Indexes
+#' @description Extract indices of axes of an array.
 #'
 #' @param a An array.
 #' @param value Any number of values to search for in \code{a}.
@@ -67,35 +68,34 @@ axesindices <- function(a, value) {
   lapply(idx, function(i) if (all(!is.na(i))) idx_table[unlist(i), ] else NA)
 }
 
-#' @title Array subsetting
+#' @title Array searching
+#' @description Return elements of an array that satisfy conditions.
 #'
 #' @param a An array.
-#' @param subset Logical expression indicating elements to keep.
-#' @param drop Boolean passed on to \code{[} indexing operator.
+#' @param condition Logical expression indicating elements to keep.
 #'
-#' @return A vector containing the elements of \code{a} which meet conditions.
+#' @details This function is an equivalent to \code{extract()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.extract.html}{see}).
+#'
+#' @return An array with rank 1 containing elements of \code{a} that meet \code{condition}, otherwise invisible \code{NULL}.
 #'
 #' @examples
 #' a <- marray(1:24, dim = c(4, 3, 2))
-#' values <- masubset(a, subset = (a > 3) & (a <= 11))
+#' values <- extract(a, condition = (a > 3) & (a <= 11))
 #' values
 #'
 #' # Forward the values to axesindices() to get the coordinates of these values
 #' axesindices(a, value = values)
 #'
 #' @export
-masubset <- function(a, subset, drop = FALSE) {
+extract <- function(a, condition) {
   a <- .standardize_array(a)
-  if (missing(subset))
+  if (missing(condition))
     return(a)
-  e <- substitute(subset)
-  r <- eval(e, parent.frame())
-  if (!is.logical(r))
-    stop("'subset' must be logical.", call. = FALSE)
-  r <- r & !is.na(r)
-  out <- a[r, drop = drop]
-  if (length(out) == 0L)
-    invisible(NULL)
-  else
-    out
+  e <- substitute(condition)
+  idx <- eval(e, parent.frame())
+  if (!is.logical(idx))
+    stop("'condition' must be logical.", call. = FALSE)
+  idx <- idx & !is.na(idx)
+  out <- a[idx]
+  if (length(out)) as.array(out) else invisible(NULL)
 }

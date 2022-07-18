@@ -17,7 +17,7 @@ marepeat(a, repeats, axis = NULL)
 An output array which has the same shape as \code{a}, except along \code{axis}.
 }
 \description{
-Array repetition
+Repeat elements of an array.
 }
 \details{
 This function corresponds partially to \code{repeat()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.repeat.html}{see}) but extends its functionality to all axes of \code{a}.

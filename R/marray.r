@@ -111,3 +111,16 @@ as.marray_chr <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a
 #' @param a An array.
 #' @export
 as.marray_lgl <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.logical) }
+
+#' @rdname marray
+#' @param a An array.
+#' @param mean Vector of means.
+#' @param sd Vector of standard deviations.
+#' @param log A logical value indicating whether the probabilities are given as \code{\link{log}}.
+#' @export
+as.marray_norm <- function(a, mean = 0, sd = 1, log = FALSE) {
+  a <- .standardize_array(a)
+  if (is.null(mean)) mean <- mean(a)
+  if (is.null(sd)) sd <- sd(a)
+  apply(a, MARGIN = seq_along(DIM(a)), FUN = dnorm, mean = mean, sd = sd, log = log)
+}

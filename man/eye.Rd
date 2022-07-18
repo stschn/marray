@@ -4,12 +4,14 @@
 \alias{eye}
 \title{Array creation}
 \usage{
-eye(n, m = NULL)
+eye(n, m = NULL, dimnames = NULL)
 }
 \arguments{
 \item{n}{The number of rows.}
 
 \item{m}{The number of columns, default \code{NULL}.}
+
+\item{dimnames}{Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of length \code{n}.}
 }
 \value{
 An identity matrix with n rows and n or rather m columns.

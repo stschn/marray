@@ -2,9 +2,12 @@
 % Please edit documentation in R/shape.r
 \name{ndim}
 \alias{ndim}
-\title{Number of dimensions}
+\alias{marank}
+\title{Array shape}
 \usage{
 ndim(x)
+
+marank(x)
 }
 \arguments{
 \item{x}{A multidimensional data structure like array, matrix or data.frame.}
@@ -13,8 +16,10 @@ ndim(x)
 Number of dimensions.
 }
 \description{
-Number of dimensions
+Number of dimensions.
 }
 \details{
 This function corresponds to \code{ndarray.ndim} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.ndim.html}{see}).
+
+The function \code{marank()} is a wrapper function for \code{ndim()}.
 }

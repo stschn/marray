@@ -4,7 +4,7 @@
 \alias{roll}
 \title{Array circulation}
 \usage{
-roll(a, shift, axis = NULL)
+roll(a, shift, axis = NULL, order = c("C", "F"))
 }
 \arguments{
 \item{a}{An array.}
@@ -15,6 +15,10 @@ value is used for all given axes. A positive number indicates a shift to the rig
 
 \item{axis}{The axis or axes along \code{a} which elements are shifted.
 By default, the array is flattened before shifting, after which the original shape is restored.}
+
+\item{order}{The order in which elements of data should be read during flattening.
+By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
+In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.}
 }
 \value{
 An array with the same shape as \code{a} but with shifted elements along given axis.

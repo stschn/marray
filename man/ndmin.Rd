@@ -2,7 +2,7 @@
 % Please edit documentation in R/shape.r
 \name{ndmin}
 \alias{ndmin}
-\title{Ensure minimum number of dimensions}
+\title{Array shape}
 \usage{
 ndmin(a, n, axis = -1L)
 }
@@ -17,5 +17,5 @@ ndmin(a, n, axis = -1L)
 The array \code{a} with at least \code{n} dimensions.
 }
 \description{
-Ensure minimum number of dimensions
+Ensure minimum number of dimensions.
 }

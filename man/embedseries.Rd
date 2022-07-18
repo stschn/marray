@@ -7,9 +7,9 @@
 \alias{embedseries.data.frame}
 \title{Series embedding}
 \usage{
-embedseries(data, length, flip)
+embedseries(data, ...)
 
-\method{embedseries}{default}(data, length = 1L, flip = TRUE)
+\method{embedseries}{default}(data, length = 1L, flip = TRUE, order = c("C", "F"))
 
 \method{embedseries}{matrix}(data, length = 1L, flip = TRUE)
 
@@ -21,6 +21,10 @@ embedseries(data, length, flip)
 \item{length}{The length of a series.}
 
 \item{flip}{A logical value indicating whether the embedded series should be reversed.}
+
+\item{order}{The order in which elements of \code{data} should be read during flattening.
+By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
+In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.}
 }
 \value{
 An ongoing shifted series of \code{data}.

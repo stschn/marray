@@ -1,4 +1,5 @@
-#' @title Retrieve dimensions of an object or its length
+#' @title Array shape
+#' @description Retrieve dimensions of an object or its length.
 #'
 #' @param x An R object.
 #' @return The number of dimensions or in cases of an atomic object the length.
@@ -6,7 +7,13 @@
 #' @export
 DIM <- function(x) { dim(x) %||% length(x) }
 
-#' @title Number of dimensions
+#' @rdname DIM
+#' @details The function \code{shape()} is a wrapper function for \code{DIM()}.
+#' @export
+shape <- function(x) { DIM(x) }
+
+#' @title Array shape
+#' @description Number of dimensions.
 #'
 #' @param x A multidimensional data structure like array, matrix or data.frame.
 #' @details This function corresponds to \code{ndarray.ndim} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.ndim.html}{see}).
@@ -14,7 +21,13 @@ DIM <- function(x) { dim(x) %||% length(x) }
 #' @export
 ndim <- function(x) { length(dim(x)) }
 
-#' @title Number of elements
+#' @rdname ndim
+#' @details The function \code{marank()} is a wrapper function for \code{ndim()}.
+#' @export
+marank <- function(x) { ndim(x) }
+
+#' @title Array size
+#' @description Number of elements.
 #'
 #' @param x A multidimensional data structure like array, matrix or data.frame.
 #' @details This function corresponds to \code{ndarray.size} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.size.html}{see}).
@@ -22,7 +35,8 @@ ndim <- function(x) { length(dim(x)) }
 #' @export
 nsize <- function(x) { prod(dim(x)) }
 
-#' @title Ensure minimum number of dimensions
+#' @title Array shape
+#' @description Ensure minimum number of dimensions.
 #'
 #' @param a An array.
 #' @param n The desired number of dimensions.
@@ -35,7 +49,8 @@ ndmin <- function(a, n, axis = -1L) {
   a
 }
 
-#' @title Enforce array and convert to vector
+#' @title Array enforcing and unravel
+#' @description Enforce array or convert to vector.
 #'
 #' @param x A vector or array.
 #' @return An array of at least one dimension.
@@ -80,7 +95,8 @@ dropdim <- function(x, order = c("C", "F")) {
   x
 }
 
-#' @title Convert inputs to arrays with at least one dimension
+#' @title Array enforcing
+#' @description Convert inputs to arrays with at least one dimension.
 #'
 #' @param ... Any number of objects that are coerced into at least 1-D arrays.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
@@ -96,7 +112,8 @@ atleast_1d <- function(..., order = c("C", "F")) {
   arys
 }
 
-#' @title Convert inputs to arrays with at least two dimensions
+#' @title Array enforcing
+#' @description Convert inputs to arrays with at least two dimensions.
 #'
 #' @param ... Any number of objects that are coerced into at least 2-D arrays.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.
@@ -116,7 +133,8 @@ atleast_2d <- function(..., order = c("C", "F")) {
   arys
 }
 
-#' @title Convert inputs to arrays with at least three dimensions
+#' @title Array enforcing
+#' @description Convert inputs to arrays with at least three dimensions.
 #'
 #' @param ... Any number of objects that are coerced into at least 3-D arrays.
 #' @param order The order in which elements of the objects should be read during coercing to arrays.

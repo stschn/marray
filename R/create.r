@@ -3,16 +3,32 @@
 #'
 #' @param n The number of rows.
 #' @param m The number of columns, default \code{NULL}.
+#' @param dimnames Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of length \code{n}.
 #'
 #' @details This function corresponds to \code{eye()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.eye.html}{see}).
 #' @return An identity matrix with n rows and n or rather m columns.
 #'
 #' @export
-eye <- function(n, m = NULL) {
-  mat <- matrix(0, nrow = n, ncol = n)
+eye <- function(n, m = NULL, dimnames = NULL) {
+  if (is.null(m)) m <- n
+  if (m < n) m <- n
+  mat <- zeros(dim = c(n, m), dimnames = dimnames)
   diag(mat) <- 1
-  if (!is.null(m)) mat <- cbind(mat, matrix(0, nrow = n, ncol = m - n))
-  return(marray(mat, order = "F"))
+  mat
+}
+
+#' @title Array creation
+#' @description Return the identity array, a square array with ones on the main diagonal.
+#'
+#' @param n Number of rows and columns in \emph{n x n} output.
+#' @param dimnames Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of length \code{n}.
+#'
+#' @details This function corresponds to \code{identity()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.identity.html}{see}).
+#' @return \emph{n x n} array with its main diagonal set to one, and all other elements to zero.
+#'
+#' @export
+maidentity <- function(n, dimnames = NULL) {
+  eye(n, dimnames = dimnames)
 }
 
 #' @title Array creation
@@ -20,15 +36,16 @@ eye <- function(n, m = NULL) {
 #'
 #' @param data The data to be reshaped to a Vandermonde matrix.
 #' @param n The number of columns of the resulting matrix. If n is not specified, a square array is returned.
+#' @param dimnames Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of length \code{n}.
 #'
 #' @details This function corresponds to \code{vander()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.vander.html}{see}).
 #' @return A Vandermonde matrix.
 #'
 #' @export
-vander <- function(data, n = NULL) {
+vander <- function(data, n = NULL, dimnames = NULL) {
   data <- flatten(data)
   if (is.null(n)) n <- length(data)
-  marray(outer(data, seq(0, n - 1), "^"), order = "F")
+  marray(outer(data, seq(0, n - 1), "^"), dimnames = dimnames, order = "F")
 }
 
 #' @title Array creation
@@ -135,20 +152,4 @@ full <- function(dim = NULL, fill_value = NA, dimnames = NULL, order = c("C", "F
 #' @export
 full_like <- function(a, fill_value = NA, order = c("C", "F")) {
   full(dim = DIM(a), fill_value = fill_value, dimnames = dimnames(a), order = order)
-}
-
-#' @title Array creation
-#' @description Return the identity array, a square array with ones on the main diagonal.
-#'
-#' @param n Number of rows and columns in \emph{n x n} output.
-#' @param dimnames Either \code{NULL} or the names of the dimensions. This must be a list with one component for each dimension, either \code{NULL} or a character vector of length \code{n}.
-#'
-#' @details This function corresponds to \code{identity()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.identity.html}{see}).
-#' @return \emph{n x n} array with its main diagonal set to one, and all other elements to zero.
-#'
-#' @export
-maidentity <- function(n, dimnames = NULL) {
-  m <- zeros(dim = c(n, n), dimnames)
-  diag(m) <- 1L
-  m
 }

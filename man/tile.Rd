@@ -9,13 +9,13 @@ tile(a, reps)
 \arguments{
 \item{a}{The input array.}
 
-\item{reps}{Number of repetitions of \code{a} along each axis.}
+\item{reps}{Number of repetitions of \code{a} along each axis. If \code{reps} has length \code{d}, the result will have dimension of \code{max(d, ndim(a))}.}
 }
 \value{
 The tiled output array.
 }
 \description{
-Array repetition
+Construct an array by repeating \code{a} the number of times given by \code{reps}.
 }
 \details{
 This function corresponds to \code{tile()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.tile.html}{see}).

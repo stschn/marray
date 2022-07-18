@@ -39,6 +39,14 @@ flatten <- function(data, axis = NULL, order = c("C", "F")) {
 }
 
 #' @rdname flatten
+#' @details The function \code{ravel()} is a wrapper function for \code{flatten()}.
+#'   It corresponds to \code{ndarray.ravel()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ravel.html}{see}).
+#' @export
+ravel <- function(data, order = c("C", "F")) {
+  flatten(data, order = order)
+}
+
+#' @rdname flatten
 #' @export
 flatten_int <- function(data, order = c("C", "F")) {
   as.integer(dropdim(data, order = order))

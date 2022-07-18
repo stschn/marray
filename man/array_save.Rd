@@ -22,7 +22,7 @@ array_load(file = "", fileext = ".rds")
 An array or a list of restored arrays.
 }
 \description{
-Array Serialization
+Save and load arrays.
 }
 \details{
 If \code{file} is a folder, the names of the arguments are used as physical file names to store the arrays.

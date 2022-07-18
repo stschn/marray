@@ -2,7 +2,7 @@
 % Please edit documentation in R/shape.r
 \name{nsize}
 \alias{nsize}
-\title{Number of elements}
+\title{Array size}
 \usage{
 nsize(x)
 }
@@ -13,7 +13,7 @@ nsize(x)
 Number of elements.
 }
 \description{
-Number of elements
+Number of elements.
 }
 \details{
 This function corresponds to \code{ndarray.size} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.size.html}{see}).

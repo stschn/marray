@@ -2,12 +2,12 @@
 % Please edit documentation in R/reshape.r
 \name{resize.array}
 \alias{resize.array}
-\title{Resize an array}
+\title{Array resizing}
 \usage{
 resize.array(
   a,
   dim,
-  fill = c("copy", "zero", "na", "approx"),
+  fill = c("copy", "zero", "one", "na", "approx"),
   order = c("C", "F")
 )
 }
@@ -20,6 +20,7 @@ resize.array(
 \itemize{
 \item \code{copy}: repeated copies of \code{a}
 \item \code{zero}: zeros
+\item \code{one}: ones
 \item \code{na}: NA
 \item \code{approx}: approximated values
 }}
@@ -32,7 +33,7 @@ In opposite, the \code{Fortran}-style ordering means elements should be read in 
 The new array \code{a} with given shape.
 }
 \description{
-Resize an array
+Resize an array.
 }
 \details{
 This function corresponds partially to \code{resize()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.resize.html}{see}). The function from NumPy only uses the copy type.

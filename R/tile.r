@@ -1,7 +1,8 @@
 #' @title Array repetition
+#' @description Construct an array by repeating \code{a} the number of times given by \code{reps}.
 #'
 #' @param a The input array.
-#' @param reps Number of repetitions of \code{a} along each axis.
+#' @param reps Number of repetitions of \code{a} along each axis. If \code{reps} has length \code{d}, the result will have dimension of \code{max(d, ndim(a))}.
 #'
 #' @details This function corresponds to \code{tile()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.tile.html}{see}).
 #'

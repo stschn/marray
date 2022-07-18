@@ -2,6 +2,7 @@
 % Please edit documentation in R/flatten.r
 \name{flatten}
 \alias{flatten}
+\alias{ravel}
 \alias{flatten_int}
 \alias{flatten_dbl}
 \alias{flatten_raw}
@@ -10,6 +11,8 @@
 \title{Data flattening}
 \usage{
 flatten(data, axis = NULL, order = c("C", "F"))
+
+ravel(data, order = c("C", "F"))
 
 flatten_int(data, order = c("C", "F"))
 
@@ -41,6 +44,9 @@ Flatten data into a one-dimensional array or into a vector of corresponding type
 }
 \details{
 This function corresponds to \code{ndarray.flatten()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.flatten.html}{see}).
+
+The function \code{ravel()} is a wrapper function for \code{flatten()}.
+  It corresponds to \code{ndarray.ravel()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ravel.html}{see}).
 }
 \examples{
 v <- (1:24); dim(v); ndim(v)
