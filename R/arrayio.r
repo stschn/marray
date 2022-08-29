@@ -15,10 +15,10 @@
 #' a <- marray(1:12, dim = c(4, 3))
 #' b <- marray(1:12, dim = c(4, 3, 1))
 #' c <- marray(1:12, dim = c(4, 3, 1, 1))
-#' array_save(a, b, c, file = getwd())
+#' save.array(a, b, c, file = getwd())
 #'
 #' @export
-array_save <- function(..., file = "", fileext = ".rds") {
+save.array <- function(..., file = "", fileext = ".rds") {
   arys <- .dots(...)
   arys_name <- if (!(file_test("-d", file)))
     if (identical(length(arys), length(file)))
@@ -37,11 +37,11 @@ array_save <- function(..., file = "", fileext = ".rds") {
   return(invisible(NULL))
 }
 
-#' @rdname array_save
+#' @rdname save.array
 #' @return An array or a list of restored arrays.
 #' @seealso \code{\link{readRDS}}.
 #' @export
-array_load <- function(file = "", fileext = ".rds") {
+load.array <- function(file = "", fileext = ".rds") {
   if (file_test("-d", file)) {
     arys <- lapply(list.files(file, pattern = paste0("\\", fileext), full.names = TRUE), readRDS)
     if (length(arys) == 1L) arys <- arys[[1L]]

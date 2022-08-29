@@ -87,33 +87,57 @@ as.marray.list <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F"
   as.marray.default(array(unlist(data)), dim = dim, dimnames = dimnames, order = order)
 }
 
-#' @rdname marray
+#' @title Array function application
 #' @param a An array.
+#' @param FUN The function to be applied on each element of \code{a}.
+#' @param ... Optional arguments passed to \code{FUN}.
+#'
+#' @details The funcctions \code{as.marray_int()}, \code{as.marray_dbl()}, \code{as.marray_raw()}, \code{as.marray_cpx()}, \code{as.marray_chr()} and \code{as.marray_lgl()}
+#' transform the elements of an array into its corresponding types \code{\link{integer}}, \code{\link{double}}, \code{\link{raw}}, \code{\link{complex}}, \code{\link{character}} and \code{\link{logical}}.
+#'
+#' @return The array \code{a} with elements processed by \code{FUN}.
+#'
+#' @examples
+#' a <- marray(seq(24), dim = c(4, 3, 2))
+#' foreach.array(a, FUN = function(x) 3 * x)
+#' as.marray_int(a)
+#' as.marray_dbl(a)
+#' as.marray_raw(a)
+#' as.marray_chr(a)
+#' as.marray_lgl(a)
+#' as.marray_norm(a)
+#'
 #' @export
-as.marray_int <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.integer) }
+foreach.array <- function(a, FUN, ...) {
+  if (missing(FUN)) return(a)
+  apply(.standardize_array(a) -> a, MARGIN = seq_along(DIM(a)), FUN = FUN, ...)
+}
 
-#' @rdname marray
-#' @param a An array.
+#' @rdname foreach.array
 #' @export
-as.marray_dbl <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.double) }
+as.marray_int <- function(a) { foreach.array(a, FUN = as.integer) }
 
-#' @rdname marray
-#' @param a An array.
+#' @rdname foreach.array
 #' @export
-as.marray_raw <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.raw) }
+as.marray_dbl <- function(a) { foreach.array(a, FUN = as.double) }
 
-#' @rdname marray
-#' @param a An array.
+#' @rdname foreach.array
 #' @export
-as.marray_chr <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.character) }
+as.marray_raw <- function(a) { foreach.array(a, FUN = as.raw) }
 
-#' @rdname marray
-#' @param a An array.
+#' @rdname foreach.array
 #' @export
-as.marray_lgl <- function(a) { apply(.standardize_array(a) -> a, seq_along(DIM(a)), as.logical) }
+as.marray_cpx <- function(a) { foreach.array(a, FUN = as.complex) }
 
-#' @rdname marray
-#' @param a An array.
+#' @rdname foreach.array
+#' @export
+as.marray_chr <- function(a) { foreach.array(a, FUN = as.character) }
+
+#' @rdname foreach.array
+#' @export
+as.marray_lgl <- function(a) { foreach.array(a, FUN = as.logical) }
+
+#' @rdname foreach.array
 #' @param mean Vector of means.
 #' @param sd Vector of standard deviations.
 #' @param log A logical value indicating whether the probabilities are given as \code{\link{log}}.
@@ -122,5 +146,5 @@ as.marray_norm <- function(a, mean = 0, sd = 1, log = FALSE) {
   a <- .standardize_array(a)
   if (is.null(mean)) mean <- mean(a)
   if (is.null(sd)) sd <- sd(a)
-  apply(a, MARGIN = seq_along(DIM(a)), FUN = dnorm, mean = mean, sd = sd, log = log)
+  foreach.array(a, FUN = dnorm, mean = mean, sd = sd, log = log)
 }

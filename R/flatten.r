@@ -11,7 +11,7 @@
 #'
 #' @details This function corresponds to \code{ndarray.flatten()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.flatten.html}{see}).
 #' @return The flatten data in form of a one-dimensional array.
-#'   \code{flatten_int()} returns an integer vector, \code{flatten_dbl()} a double vector, \code{flatten_raw()} a raw vector, \code{flatten_chr()} a character vector, and \code{flatten_lgl()} a logical vector.
+#'   \code{flatten_int()} returns an integer vector, \code{flatten_dbl()} a double vector, \code{flatten_raw()} a raw vector, \code{flatten_cpx()} a complex vector \code{flatten_chr()} a character vector, and \code{flatten_lgl()} a logical vector.
 #'
 #' @examples
 #' v <- (1:24); dim(v); ndim(v)
@@ -62,6 +62,12 @@ flatten_dbl <- function(data, order = c("C", "F")) {
 #' @export
 flatten_raw <- function(data, order = c("C", "F")) {
   as.raw(dropdim(data, order = order))
+}
+
+#' @rdname flatten
+#' @export
+flatten_cpx <- function(data, order = c("C", "F")) {
+  as.complex(dropdim(data, order = order))
 }
 
 #' @rdname flatten

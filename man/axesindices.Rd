@@ -12,7 +12,7 @@ axesindices(a, value)
 \item{value}{Any number of values to search for in \code{a}.}
 }
 \value{
-A list of the index or indices of the dimension space of \code{value} within \code{a}, otherwise \code{NA}.
+A list of matrices with the indices of the dimension space of \code{value} within \code{a}, otherwise \code{NA}.
 }
 \description{
 Extract indices of axes of an array.

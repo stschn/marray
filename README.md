@@ -17,12 +17,13 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>resize.array()</code> resizes an array to new dimension.</li>
 <li><code>broadcastDIM()</code> retrieves broadcast dimensions.</li>
 <li><code>reshape_broadcast()</code> reshapes array on basis of broadcasting.</li>
-<li><code>array_save()</code> and <code>array_load()</code> writes arrays to files and restores them.</li>
+<li><code>save.array()</code> and <code>load.array()</code> writes and reads arrays to/from files.</li>
 <li><code>marray()</code> and <code>as.marray()</code> transform data into a multidimensional array.</li>
-<li><code>as.marray_int()</code>, <code>as.marray_dbl()</code>, <code>as.marray_raw()</code>, <code>as.marray_chr()</code> and <code>as.marray_lgl()</code> convert the elements of an array into corresponding type. <code>as.marray_norm()</code> converts the elements of an array into its normal distribution.</li>
-<li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerces objects into arrays with corresponding number of dimensions.</li>
+<li><code>foreach.array()</code> applies a function to each element of an array.</li>
+<li><code>as.marray_int()</code>, <code>as.marray_dbl()</code>, <code>as.marray_raw()</code>, <code>as.marray_cpx()</code>, <code>as.marray_chr()</code> and <code>as.marray_lgl()</code> convert the elements of an array into corresponding type. <code>as.marray_norm()</code> converts the elements of an array into its normal distribution.</li>
+<li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerce objects into arrays with corresponding number of dimensions.</li>
 <li><code>flatten()</code> flattens data into a one-dimensional array.</li>
-<li><code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flattens data into a vector from corresponding type.</li>
+<li><code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_cpx()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flatten data into a vector from corresponding type.</li>
 <li><code>expand_dims()</code> expands the shape of an array by inserting a new axis.</li>
 <li><code>squeeze()</code> removes dimensions of length one from array.</li>
 <li><code>mamatrix()</code> shrinks an array by rows or columns into a matrix.</li>
@@ -52,7 +53,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>insert()</code> inserts objects into an array.</li>
 <li><code>delete()</code> deletes parts from an array.</li>
 <li><code>erase()</code> deletes axis from an array.</li>
-<li><code>transpose()</code> transposes an array by swapping dimensions.</li>
+<li><code>t.array()</code> and <code>transpose()</code> transpose an array by reversing or swapping dimensions.</li>
 <li><code>rearrange()</code> rearranges axis-driven an array by swapping dimensions.</li>
 <li><code>swapaxes()</code> interchanges two axes of an array.</li>
 <li><code>moveaxis()</code> moves axes of an array to new positions.</li>
@@ -66,7 +67,8 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
 <li><code>place()</code> replaces values in an array.</li>
 <li><code>where()</code> creates an array based on meeting conditions.</li>
-<li><code>memberof()</code> creates a binary array based on values to be sought.</li>
+<li><code>bitwise()</code> combines arrays by bitwise operation of their elements.</li>
+<li><code>memberof()</code>, <code>mask_rectangle</code> and <code>mask_circle</code> create binary arrays (masked arrays) consisting of zeros and ones.</li>
 </ul>
 
 <h2>Examples</h2>

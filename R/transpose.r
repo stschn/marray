@@ -2,12 +2,20 @@
 #' @description Transpose an array.
 #'
 #' @param a An array.
-#' @param perm The permutation vector of the dimensions. The default \code{NULL} indicates to reverse the order of all dimensions.
 #'
-#' @return The array \code{a} with swapped dimensions.
+#' @return The array \code{a} with reversed or swapped dimensions.
 #'
 #' @seealso \code{\link{t}}, \code{\link{rearrange}}.
 #'
+#' @rdname transpositions
+#' @export
+t.array <- function(a) {
+  aperm(a)
+}
+
+#' @param perm The permutation vector of the dimensions. The default \code{NULL} indicates to reverse the order of all dimensions.
+#' @export
+#' @rdname transpositions
 #' @export
 transpose <- function(a, perm = NULL) {
   aperm(a, perm = perm)

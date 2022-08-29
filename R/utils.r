@@ -16,6 +16,9 @@
   args
 }
 
+# Retrieve letters for indexing
+.axis_symbol <- function(axis) { letters[abs(axis) + 8L] }
+
 # Indexing of an array
 # Indexing can be done with or without symbols i, j, k etc. All indices are proofed and adopted, if necessary.
 .aindex <- function(dim, ...) {

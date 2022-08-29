@@ -5,7 +5,7 @@
 \alias{erase}
 \title{Array deletion}
 \usage{
-delete(a, ...)
+delete(a, ..., drop = FALSE)
 
 erase(a, axis = 1L, keep = c("first", "last"), order = c("C", "F"))
 }
@@ -13,6 +13,8 @@ erase(a, axis = 1L, keep = c("first", "last"), order = c("C", "F"))
 \item{a}{An array.}
 
 \item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.}
+
+\item{drop}{For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.}
 
 \item{axis}{The axis or axes to delete from \code{a}.}
 

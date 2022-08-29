@@ -3,6 +3,7 @@
 #'
 #' @param a An array.
 #' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.
+#' @param drop For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.
 #'
 #' @details This function corresponds partially to \code{delete()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.delete.html}{see}).
 #'
@@ -19,47 +20,17 @@
 #' delete(a, i = 2, j = 3)
 #'
 #' @export
-delete <- function(a, ...) {
+delete <- function(a, ..., drop = FALSE) {
   if (missing(...)) return(a)
-  args <- .dots(...)
-  d <- DIM(a)
-  ds <- lapply(d, seq_len)
+  ds <- lapply(DIM(a) -> d, seq)
+  aidx <- .aindex(d, ...)
 
-  if (length(args) > length(d))
-    stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", length(args), length(d)), call. = FALSE)
-
-  idx <- match(names(args), letters) - 8L
-  if (!((is.integer(idx) && !length(idx)) || any(is.na(idx)))) {
-    if (any(idx < 1L))
-      stop(sprintf("symbols (%s) are not allowed as arguments for indexing.", paste(letters[idx[which(idx < 1L)] + 8L], collapse = ", ")), call. = FALSE)
-    axis <- vector(mode = "list", length = length(d))
-    axis[idx] <- args
-  } else {
-    axis <- lapply(seq_along(args), function(i) if (any(is.null(args[[i]])) || any(is.na(args[[i]])) || any(args[[i]] <= 0)) NULL else as.integer(args[[i]]))
+  keep <- vector(mode = "list", length = length(d))
+  for (i in seq_along(ds)) {
+    keep[[i]] <- setdiff(ds[[i]], aidx[[i]])
+    if (!length(keep[[i]])) keep[[i]] <- ds[[i]]
   }
-
-  axis <- lapply(seq_along(axis), function(i) {
-    x <- axis[[i]]
-    if (!is.null(x)) {
-      x[x < 1] <- 1L
-      x[x > d[i]] <- d[i]
-      x <- as.integer(unique(x))
-    }
-    x
-  })
-
-  keep <- lapply(seq_along(axis), function(i) {
-    if (is.null(axis[[i]]))
-      ds[[i]]
-    else
-      setdiff(ds[[i]], axis[[i]])
-  })
-
-  for (i in seq_along(keep))
-    if (is.integer(keep[[i]]) && (!length(keep[[i]])))
-      stop("array has lost a whole axis.", call. = FALSE)
-
-  slice(a, keep)
+  slice(a, keep, drop = drop)
 }
 
 #' @rdname delete

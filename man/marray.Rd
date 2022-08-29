@@ -7,12 +7,6 @@
 \alias{as.marray.matrix}
 \alias{as.marray.data.frame}
 \alias{as.marray.list}
-\alias{as.marray_int}
-\alias{as.marray_dbl}
-\alias{as.marray_raw}
-\alias{as.marray_chr}
-\alias{as.marray_lgl}
-\alias{as.marray_norm}
 \title{Multidimensional array}
 \usage{
 marray(data, ...)
@@ -26,18 +20,6 @@ as.marray(data, ...)
 \method{as.marray}{data.frame}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
 
 \method{as.marray}{list}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
-
-as.marray_int(a)
-
-as.marray_dbl(a)
-
-as.marray_raw(a)
-
-as.marray_chr(a)
-
-as.marray_lgl(a)
-
-as.marray_norm(a, mean = 0, sd = 1, log = FALSE)
 }
 \arguments{
 \item{data}{The data to be reshaped to a multidimensional array.}
@@ -49,14 +31,6 @@ as.marray_norm(a, mean = 0, sd = 1, log = FALSE)
 \item{order}{The order in which elements of data should be read during rearrangement.
 By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.}
-
-\item{a}{An array.}
-
-\item{mean}{Vector of means.}
-
-\item{sd}{Vector of standard deviations.}
-
-\item{log}{A logical value indicating whether the probabilities are given as \code{\link{log}}.}
 }
 \value{
 An array.

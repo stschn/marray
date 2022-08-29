@@ -1,13 +1,13 @@
 #' @title Array slicing
-#' @description Slice an array using enhanced indexing operations.
+#' @description Read and write slices of an array using enhanced indexing operations.
 #'
 #' @param a A vector, matrix, or array.
 #' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.
 #' @param value Any values to assign to the slice of \code{a}.
 #' @param drop For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.
 #'
-#' @details \code{slice} is an alternative way to handle indexing array objects, usually done with \code{\link[base]{[}}. The dimensions must be indexed by names,
-#'   i for the first dimension, j for the second and so on. The assigned values are the values (elements) of the corresponding dimension. The indexing expressions are the same as for \code{\link[base]{[}}.
+#' @details \code{slice} is an alternative way to handle indexing array objects, usually done with \code{\link[base]{[}}. The dimensions can be indexed by names,
+#'   i for the first dimension, j for the second and so on. The assigned values are the positions on the corresponding dimension. The indexing expressions are the same as for \code{\link[base]{[}}.
 #'
 #' @return An extracted part of \code{a}.
 #'
@@ -46,7 +46,7 @@ slice <- function(a, ..., drop = FALSE) {
 #'
 #' @details If there is no match between \code{value} and the values of \code{a}, \code{NA} will be returned.
 #'
-#' @return A list of the index or indices of the dimension space of \code{value} within \code{a}, otherwise \code{NA}.
+#' @return A list of matrices with the indices of the dimension space of \code{value} within \code{a}, otherwise \code{NA}.
 #'
 #' @examples
 #' a <- marray(1:24, dim = c(4, 3, 2))
@@ -61,11 +61,14 @@ slice <- function(a, ..., drop = FALSE) {
 #' @export
 axesindices <- function(a, value) {
   a <- .standardize_array(a)
-  idx_table <- arrayInd(seq_along(a), DIM(a))
   # a loop is necessary because which(a %in% value) ignores the order within value
-  idx <- lapply(value, function(v) which(a %in% v))
-  idx <- lapply(idx, function(i) if (length(i) == 0L) NA else i)
-  lapply(idx, function(i) if (all(!is.na(i))) idx_table[unlist(i), ] else NA)
+  lapply(value, function(v) {
+    i <- which(a %in% v) %|0|% NA
+    if (!any(is.na(i)))
+      arrayInd(i, DIM(a)) # arrayInd(seq_along(a), DIM(a)) returns all axes indices
+    else
+      i
+  })
 }
 
 #' @title Array searching

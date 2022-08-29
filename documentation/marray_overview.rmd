@@ -7,7 +7,7 @@ This R-Notebook provides an overview of the R-Package **marray**. This package i
 
 ![](MA.jpg){width="68"}
 
-## Installation and Load
+## Installation and Attach
 
 ```{r}
 #devtools::install_github("stschn/marray")

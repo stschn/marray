@@ -51,8 +51,11 @@ place <- function(a, ..., oldvalue, newvalue) {
 #' @param true Replacement value or function if conditions are met.
 #' @param false Replacement value or function if conditions aren't met.
 #'
-#' @details This function corresponds to \code{where()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.where.html}{see}).
-#'   If \code{true} or \code{false} are \code{NULL} the original values remain. For both arguments also functions can be specified.
+#' @details This function corresponds to \code{where()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.where.html}{see}). \cr
+#'
+#' The result is an array with the same shape as \code{a}, where the elements in \code{a} that satisfy or do not satisfy the given condition are processed in a specific way and placed at the same position as in \code{a} in the result.
+#' Elements that satisfy the condition are processed according to the specification for \code{true}, elements that do not satisfy the condition are processed according to the specification for \code{false}.
+#' If \code{true} or \code{false} are \code{NULL} the original values from \code{a} remain. For both arguments concrete values as well as functions can be specified.
 #'
 #' @return An array of same shape as \code{a} with elements either from \code{true} if conditions are met or from \code{false} elsewhere.
 #' @examples
@@ -85,23 +88,53 @@ where <- function(a, condition, true, false) {
   a
 }
 
-#' @title Array searching
-#' @description Create a binary array based on meeting conditions.
+# helper function
+.identical <- function(x, y) if (identical(x, y)) x else FALSE
+
+#' @title Bitwise array operation
+#' @description Bitwise AND, OR, or XOR concatenation of position equal elements of the given arrays.
 #'
-#' @param a An array.
-#' @param condition Logical expression indicating elements to search for.
+#' @param ... Any number of arrays all with identical shapes.
+#' @param op An operator indicating the type of bitwise operation.
+#'   * \code{and}: Bitwise AND concatenation
+#'   * \code{or}: Bitwise OR concatenation
+#'   * \code{xor}: Bitwise XOR concatenation
 #'
-#' @return A binary array with the shape of \code{a}. If an element in \code{a} meets \code{condition} the result value is one at the corresponding position, otherwise it is zero.
+#' @return An array with the same shape as the given arrays with bitwise combined elements.
+#'
 #' @examples
-#' a <- marray(1:24, dim = c(4, 3, 2))
-#' memberof(a, condition = a %in% c(1, 2, 15, 25, 11, 23))
-#' memberof(a, condition = (a > 11) & (a <= 23))
-#'
-#' @seealso \code{\link{where}}.
+#' a <- marray(c(0, 0, 0, 1, 1, 1, 0, 0, 1), dim = c(3, 3, 1))
+#' b <- marray(c(0, 1, 0, 0, 1, 1, 0, 1, 0), dim = c(3, 3, 1))
+#' c <- marray(c(0, 0, 1, 0, 1, 0, 0, 1, 1), dim = c(3, 3, 1))
+#' bitwise(a, b, c, op = "and")
+#' bitwise(a, b, c, op = "or")
+#' bitwise(a, b, c, op = "xor")
 #'
 #' @export
-memberof <- function(a, condition) {
-  return(where(a, condition = condition, true = 1, false = 0))
+bitwise <- function(..., op = c("and", "or", "xor")) {
+  op <- match.arg(op)
+  arys <- .dots(...)
+  n <- length(arys)
+  stopifnot("There must be at least two arrays for a bitwise combination." = n >= 2,
+            "All array dimensions must be identical." = Reduce(.identical, lapply(arys, DIM)) != FALSE)
+  d <- DIM(arys[[1]])
+  arys <- lapply(arys, FUN = flatten)
+  a <- arys[[1L]]
+  switch(op,
+    and = {
+      for (i in seq.int(2L, n))
+        a <- bitwAnd(a, arys[[i]])
+    },
+    or = {
+      for (i in seq.int(2L, n))
+        a <- bitwOr(a, arys[[i]])
+    },
+    xor = {
+      for (i in seq.int(2L, n))
+        a <- bitwXor(a, arys[[i]])
+    }
+  )
+  marray(a, dim = d)
 }
 
 #' @title Array searching
