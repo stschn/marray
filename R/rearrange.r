@@ -3,6 +3,7 @@
 #'
 #' @param a An array.
 #' @param axis Axis or axes along which to flip over.
+#' @param drop For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.
 #'
 #' @details This function corresponds to \code{flip()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.flip.html}{see}).
 #' Flipping along an axis can be exemplified with a matrix. If the order of the elements along the first dimension (row) is to be reversed,
@@ -16,13 +17,13 @@
 #' @return The reversed array \code{a} along axes.
 #'
 #' @export
-flip <- function(a, axis = 1L) {
+flip <- function(a, axis = 1L, drop = FALSE) {
   d <- DIM(a)
   nd <- length(d)
   axis <- .standardize_axis(axis, nd)
   ds <- lapply(d, seq_len)
   ds[axis] <- lapply(ds[axis], rev)
-  do.call(`[`, c(list(a), ds))
+  do.call(`[`, c(list(a), ds, list(drop = drop)))
 }
 
 #' @rdname flip
@@ -43,12 +44,13 @@ fliplr <- function(a) {
 #' @param a An array.
 #' @param k Number of times the array is rotated by 90 degree. Positive numbers represent clockwise rotation, negative numbers counterclockwise rotation.
 #' @param axes The array is rotated in the plane defined by the axes. Axes must be different.
+#' @param drop For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.
 #'
 #' @details This function corresponds to \code{rot90()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.rot90.html}{see}).
 #' @return A rotated view of \code{a}.
 #'
 #' @export
-rot90 <- function(a, k = 1L, axes = c(1L, 2L)) {
+rot90 <- function(a, k = 1L, axes = c(1L, 2L), drop = FALSE) {
   stopifnot("a must be at least a 2-dimensional array." = ndim(a) >= 2L,
             "axes must consist of two values to span the plane the array is rotated." = length(axes) == 2L)
   d <- DIM(a)
@@ -61,13 +63,13 @@ rot90 <- function(a, k = 1L, axes = c(1L, 2L)) {
   # clockwise rotation
   if (k > 0L) {
     for (i in seq_len(k)) {
-      a <- transpose(flip(a, min(axes)), perm = perm)
+      a <- transpose(flip(a, min(axes), drop = drop), perm = perm)
     }
   }
   # counterclockwise rotation
   else {
     for (i in seq_len(abs(k))) {
-      a <- flip(transpose(a, perm = perm), min(axes))
+      a <- flip(transpose(a, perm = perm), min(axes), drop = drop)
     }
   }
   a

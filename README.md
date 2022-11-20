@@ -31,6 +31,8 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>extract()</code> returns values from an array that meet conditions.</li>
 <li><code>axesindices()</code> retrieves axes indices of values within an array.</li>
 <li><code>maclip()</code> limits values of an array.</li>
+<li><code>argmax</code> returns indices of maximum values along an axis.</li>
+<li><code>argmin</code> returns indices of minimum values along an axis.</li>
 <li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
 <li><code>vstack()</code> stacks arrays in sequence vertically (row-wise).</li>
 <li><code>hstack()</code> stacks arrays in sequence horizontally (column-wise).</li>

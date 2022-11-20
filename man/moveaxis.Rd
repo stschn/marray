@@ -24,8 +24,8 @@ This function corresponds to \code{moveaxis()} from NumPy (\href{https://numpy.o
 }
 \examples{
 a <- marray(1:(3*4*5), dim = c(3, 4, 5), order = "F")
-DIM(moveaxis(a, 1, 3))
-DIM(moveaxis(a, 3, 1))
+DIM(moveaxis(a, source = 1, destination = 3))
+DIM(moveaxis(a, source = 3, destination = 1))
 DIM(moveaxis(a, source = c(1, 2), destination = c(3, 1)))
 
 a <- marray(1:24, dim = c(4, 3, 2, 1))

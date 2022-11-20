@@ -4,7 +4,7 @@
 \alias{rot90}
 \title{Array rotation}
 \usage{
-rot90(a, k = 1L, axes = c(1L, 2L))
+rot90(a, k = 1L, axes = c(1L, 2L), drop = FALSE)
 }
 \arguments{
 \item{a}{An array.}
@@ -12,6 +12,8 @@ rot90(a, k = 1L, axes = c(1L, 2L))
 \item{k}{Number of times the array is rotated by 90 degree. Positive numbers represent clockwise rotation, negative numbers counterclockwise rotation.}
 
 \item{axes}{The array is rotated in the plane defined by the axes. Axes must be different.}
+
+\item{drop}{For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.}
 }
 \value{
 A rotated view of \code{a}.

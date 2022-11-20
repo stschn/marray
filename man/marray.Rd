@@ -7,6 +7,7 @@
 \alias{as.marray.matrix}
 \alias{as.marray.data.frame}
 \alias{as.marray.list}
+\alias{as.marray.factor}
 \title{Multidimensional array}
 \usage{
 marray(data, ...)
@@ -20,6 +21,8 @@ as.marray(data, ...)
 \method{as.marray}{data.frame}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
 
 \method{as.marray}{list}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
+
+\method{as.marray}{factor}(data, encode = c("onehot", "sparse"))
 }
 \arguments{
 \item{data}{The data to be reshaped to a multidimensional array.}
@@ -31,6 +34,9 @@ as.marray(data, ...)
 \item{order}{The order in which elements of data should be read during rearrangement.
 By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.}
+
+\item{encode}{The mode to be used for converting a factor object into an array. The mode \code{onehot} builds a matrix with as many columns as the factor variable has levels, where each column corresponds to a level.
+The mode \code{sparse} creates a matrix with only one column, whose values correspond to the ordinal value of a level. The mode \code{NULL} stands for no encoding.}
 }
 \value{
 An array.
@@ -70,6 +76,12 @@ a <- marray(data, order = "F"); a
 a <- marray(sample(c(0, 1), 24, replace = TRUE), dim = c(4, 3 ,2, 1)) |>
   as.marray_lgl()
 a
+
+# Convert factor variable into an array
+x <- factor(sample(c("cloudy", "sunny", "foggy", "rainy", "snowy") -> lvls, size = 20, replace = TRUE), levels = lvls)
+marray(x, encode = "onehot")
+marray(x, encode = "sparse")
+
 }
 \seealso{
 \code{\link{array}}, \code{\link{dim}}, \code{\link{reshape.array}}.

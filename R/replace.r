@@ -74,7 +74,7 @@ where <- function(a, condition, true, false) {
   idx <- idx & !is.na(idx)
 
   idxTRUE <- which(idx)
-  idxFALSE <- setdiff(seq_len(nsize(a)), idxTRUE)
+  idxFALSE <- which(!idx) # setdiff(seq_len(nsize(a)), idxTRUE)
   if (!is.null(true))
     if (!is.function(true))
       a[idxTRUE] <- true
@@ -168,4 +168,43 @@ maclip <- function(a, ..., a_min, a_max) {
   }
   slice(a, ...) <- as
   a
+}
+
+#' @title Array searching
+#' @description Get indices of maximum or minimum values.
+#'
+#' @param a An array.
+#' @param axis The axis along which to search for values. By default (\code{NULL}), the index is into the flattened array.
+#'
+#' @details This function corresponds to \code{argmax()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.argmax.html}{see}).
+#'
+#' @return Array of indices into the array. It has the same shape as \code{a} with the dimension along axis removed.
+#'
+#' @examples
+#' a <- marray(c(1:8, 8), dim = c(3, 3, 1))
+#' argmax(a)
+#' argmax(a, axis = 1)
+#' argmax(a, axis = 2)
+#' argmax(a, axis = 3)
+#'
+#' @export
+argmax <- function(a, axis = NULL) {
+  a <- .standardize_array(a)
+  if (is.null(axis))
+    return(which.max(flatten(a)))
+  d <- DIM(a)
+  axis <- .standardize_axis(axis, length(d))
+  apply(a, MARGIN = seq_along(d)[-axis], which.max)
+}
+
+#' @rdname argmax
+#' @details This function corresponds to \code{argmin()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.argmin.html}{see}).
+#' @export
+argmin <- function(a, axis = NULL) {
+  a <- .standardize_array(a)
+  if (is.null(axis))
+    return(which.min(flatten(a)))
+  d <- DIM(a)
+  axis <- .standardize_axis(axis, length(d))
+  apply(a, MARGIN = seq_along(d)[-axis], which.min)
 }

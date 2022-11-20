@@ -6,7 +6,7 @@
 \alias{fliplr}
 \title{Array flip}
 \usage{
-flip(a, axis = 1L)
+flip(a, axis = 1L, drop = FALSE)
 
 flipud(a)
 
@@ -16,6 +16,8 @@ fliplr(a)
 \item{a}{An array.}
 
 \item{axis}{Axis or axes along which to flip over.}
+
+\item{drop}{For matrices and arrays. If \code{TRUE} the result is coerced to the lowest possible dimension. This only works for extracting elements, not for the replacement. See \code{\link[base]{drop}} for further details.}
 }
 \value{
 The reversed array \code{a} along axes.

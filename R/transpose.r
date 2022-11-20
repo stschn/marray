@@ -80,8 +80,8 @@ swapaxes <- function(a, axis1, axis2) {
 #'
 #' @examples
 #' a <- marray(1:(3*4*5), dim = c(3, 4, 5), order = "F")
-#' DIM(moveaxis(a, 1, 3))
-#' DIM(moveaxis(a, 3, 1))
+#' DIM(moveaxis(a, source = 1, destination = 3))
+#' DIM(moveaxis(a, source = 3, destination = 1))
 #' DIM(moveaxis(a, source = c(1, 2), destination = c(3, 1)))
 #'
 #' a <- marray(1:24, dim = c(4, 3, 2, 1))
@@ -95,13 +95,10 @@ moveaxis <- function(a, source, destination) {
   destination <- unique(destination)
   source <- .standardize_axis(source, nd)
   destination <- .standardize_axis(destination, nd)
-  stopifnot("source and destination must have the same number of elements." = length(source) == length(destination))
+  stopifnot("source and destination must be of the same length." = length(source) == length(destination))
 
-  newds <- setdiff(ds, source)
-  source <- source[order(destination, decreasing = FALSE)]
-  destination <- sort(destination)
-  for (i in seq_along(source))
-    newds <- append(newds, source[i], destination[i] - 1L)
-
-  aperm(a, perm = newds)
+  perm <- vector("integer", length = nd)
+  perm[destination] <- ds[source]
+  perm[-destination] <- ds[-source]
+  aperm(a, perm = perm)
 }

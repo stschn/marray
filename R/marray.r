@@ -9,6 +9,8 @@
 #' @param order The order in which elements of data should be read during rearrangement.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
+#' @param encode The mode to be used for converting a factor object into an array. The mode \code{onehot} builds a matrix with as many columns as the factor variable has levels, where each column corresponds to a level.
+#'   The mode \code{sparse} creates a matrix with only one column, whose values correspond to the ordinal value of a level. The mode \code{NULL} stands for no encoding.
 #'
 #' @details This introduced n-dimensional array is an equivalent to \code{ndarray} class from NumPy (\url{https://numpy.org/}), a famous package in Python.
 #'   Usually, an n-dimensional array is a multidimensional container consisting of bunches of bunches of bunches... of matrices.
@@ -44,6 +46,12 @@
 #' a <- marray(sample(c(0, 1), 24, replace = TRUE), dim = c(4, 3 ,2, 1)) |>
 #'   as.marray_lgl()
 #' a
+#'
+#' # Convert factor variable into an array
+#' x <- factor(sample(c("cloudy", "sunny", "foggy", "rainy", "snowy") -> lvls, size = 20, replace = TRUE), levels = lvls)
+#' marray(x, encode = "onehot")
+#' marray(x, encode = "sparse")
+#'
 #' @export
 marray <- function(data, ...) {
   as.marray(data, ...)
@@ -85,6 +93,27 @@ as.marray.data.frame <- function(data, dim = NULL, dimnames = NULL, order = c("C
 #' @export
 as.marray.list <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F")) {
   as.marray.default(array(unlist(data)), dim = dim, dimnames = dimnames, order = order)
+}
+
+#' @rdname marray
+#' @export
+as.marray.factor <- function(data, encode = c("onehot", "sparse")) {
+  if (is.null(encode)) return(as.array(data))
+  encode <- match.arg(encode)
+  switch(encode,
+    onehot = {
+      a <- eye(length(levels(data) -> lvls), dimnames = list(NULL, lvls))
+      a <- a[as.integer(data), ]
+      return(a)
+    },
+    sparse = {
+      a <- expand_dims(as.integer(data) - 1L)
+      e <- substitute(data)
+      e <- do.call(substitute, list(e), env = parent.frame())
+      dimnames(a) <- list(NULL, deparse(e))
+      return(a)
+    }
+  )
 }
 
 #' @title Array function application
