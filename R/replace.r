@@ -1,4 +1,24 @@
 #' @title Array searching
+#' @description Rescale elements of an array.
+#'
+#' @param a An array.
+#' @param ... Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.
+#' @param FUN Rescale function.
+#' @return An array with rescaled values.
+#'
+#' @examples
+#' a <- marray(seq(24), dim = c(4, 3, 2))
+#' rescale.array(a, i = c(1, 3), j = 2, FUN = \(x) { x * 3 })
+#'
+#' @export
+rescale.array <- function(a, ..., FUN) {
+  a <- .standardize_array(a)
+  if (missing(FUN)) return(a)
+  slice(a, ...) <- FUN(slice(a, ...))
+  a
+}
+
+#' @title Array searching
 #' @description Replace elements of an array with new values.
 #'
 #' @param a An array.
@@ -207,4 +227,53 @@ argmin <- function(a, axis = NULL) {
   d <- DIM(a)
   axis <- .standardize_axis(axis, length(d))
   apply(a, MARGIN = seq_along(d)[-axis], which.min)
+}
+
+#' @title Array counting
+#' @description Counts the number of non-zero values in an array.
+#'
+#' @param a An array.
+#' @param axis The axis or tuple of axes along which to count non-zeros. By default (\code{NULL}), meaning that non-zeros will be counted along a flattened version of \code{a}.
+#'
+#' @details This function corresponds to \code{count_nonzero()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.count_nonzero.html}{see}).\cr
+#' If axis is given, the result array has the same shape as \code{a} with the dimension along axis removed.
+#'
+#' @return The number of non-zeros along a given axis. Otherwise, the total number of non-zeros in the array.
+#'
+#' @examples
+#' a <- marray(c(0, 1, 7, 0, 3, 0, 2, 19), dim = c(2, 4, 1))
+#' count_nonzero(a)
+#' count_nonzero(a, axis = 1)
+#' count_nonzero(a, axis = 2)
+#'
+#' @export
+count_nonzero <- function(a, axis = NULL) {
+  a <- .standardize_array(a)
+  if (is.null(axis))
+    return(sum(a != 0))
+  d <- seq_along(DIM(a))
+  axis <- .standardize_axis(axis, length(d))
+  apply(a, MARGIN = d[-axis], function(x) sum(x != 0))
+}
+
+#' @title Array counting
+#' @description Return indices that are non-zero in a flatten array.
+#'
+#' @param a An array.
+#'
+#' @details This function corresponds to \code{flatnonzero()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.flatnonzero.html}{see}).\cr
+#'
+#' @return Vector containing the indices of non-zero elements within \code{a}.
+#'
+#' @examples
+#' a <- marray(seq(-2, 2))
+#' flatnonzero(a)
+#'
+#' # Use the indices of the non-zero elements as an index vector to extract these elements
+#' flatten(a)[flatnonzero(a)]
+#'
+#' @export
+flatnonzero <- function(a) {
+  a <- .standardize_array(a)
+  which(flatten(a) != 0)
 }

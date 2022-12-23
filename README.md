@@ -22,8 +22,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>foreach.array()</code> applies a function to each element of an array.</li>
 <li><code>as.marray_int()</code>, <code>as.marray_dbl()</code>, <code>as.marray_raw()</code>, <code>as.marray_cpx()</code>, <code>as.marray_chr()</code> and <code>as.marray_lgl()</code> convert the elements of an array into corresponding type. <code>as.marray_norm()</code> converts the elements of an array into its normal distribution.</li>
 <li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerce objects into arrays with corresponding number of dimensions.</li>
-<li><code>flatten()</code> flattens data into a one-dimensional array.</li>
-<li><code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_cpx()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flatten data into a vector from corresponding type.</li>
+<li><code>flatten()</code> flattens data into a one-dimensional array. <code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_cpx()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flatten data into a vector from corresponding type.</li>
 <li><code>expand_dims()</code> expands the shape of an array by inserting a new axis.</li>
 <li><code>squeeze()</code> removes dimensions of length one from array.</li>
 <li><code>mamatrix()</code> shrinks an array by rows or columns into a matrix.</li>
@@ -31,8 +30,10 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>extract()</code> returns values from an array that meet conditions.</li>
 <li><code>axesindices()</code> retrieves axes indices of values within an array.</li>
 <li><code>maclip()</code> limits values of an array.</li>
-<li><code>argmax</code> returns indices of maximum values along an axis.</li>
-<li><code>argmin</code> returns indices of minimum values along an axis.</li>
+<li><code>argmax()</code> returns indices of maximum values along an axis.</li>
+<li><code>argmin()</code> returns indices of minimum values along an axis.</li>
+<li><code>count_nonzero()</code> counts the number of non-zero values along an axis.</li>
+<li><code>flatnonzero()</code> returns indices of non-zero elements within a flatten array.</li>
 <li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
 <li><code>vstack()</code> stacks arrays in sequence vertically (row-wise).</li>
 <li><code>hstack()</code> stacks arrays in sequence horizontally (column-wise).</li>
@@ -53,6 +54,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>full()</code> and <code>full_like</code> creates an array filled with value.</li>
 <li><code>maidentity()</code> creates an identity array.</li>
 <li><code>insert()</code> inserts objects into an array.</li>
+<li><code>copyto()</code> copies values from one array to another.</li>
 <li><code>delete()</code> deletes parts from an array.</li>
 <li><code>erase()</code> deletes axis from an array.</li>
 <li><code>t.array()</code> and <code>transpose()</code> transpose an array by reversing or swapping dimensions.</li>
@@ -67,6 +69,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>crop()</code> takes out a part of an array with default values for the remaining part.</li>
 <li><code>slide()</code> slides over an array with a window of given size and given stride.</li>
 <li><code>embedseries()</code> resamples data into an ongoing shifted series array.</li>
+<li><code>rescale.array()</code> rescales values in an array.</li>
 <li><code>place()</code> replaces values in an array.</li>
 <li><code>where()</code> creates an array based on meeting conditions.</li>
 <li><code>bitwise()</code> combines arrays by bitwise operation of their elements.</li>

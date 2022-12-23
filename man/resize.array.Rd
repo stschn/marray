@@ -7,7 +7,7 @@
 resize.array(
   a,
   dim,
-  fill = c("copy", "zero", "one", "na", "approx"),
+  type = c("copy", "zero", "one", "na", "approx", "nearest_neighbor"),
   order = c("C", "F")
 )
 }
@@ -16,13 +16,15 @@ resize.array(
 
 \item{dim}{An integerish vector of new shape (dimension space) to be set on the array.}
 
-\item{fill}{The type of fill method. If the new array is larger than the original array, then the new array is filled with:
+\item{type}{The technique to be used for creating the resized array.
 \itemize{
-\item \code{copy}: repeated copies of \code{a}
-\item \code{zero}: zeros
-\item \code{one}: ones
-\item \code{na}: NA
-\item \code{approx}: approximated values
+\item \code{copy}: if the new array is larger, it's filled with repeated copies of \code{a}.
+\item \code{zero}: if the new array is larger, it's filled with zeros.
+\item \code{one}: if the new array is larger, it's filled with ones.
+\item \code{na}: if the new array is larger, it's filled with NA.
+\item \code{approx}: if the new array is larger, it's filled with approximated values.
+\item \code{nearest_neighbor}: nearest-neighbor interpolation, also known as proximal interpolation, is a simple multivariate interpolation technique for one or more dimensions.
+If a dimension of the new array is a larger than the corresponding dimension of \code{a}, only every nth array element along this dimension is selected. Otherwise, an array element along this dimension is selected n times.
 }}
 
 \item{order}{The order in which elements of \code{a} should be read during rearrangement.
@@ -36,5 +38,10 @@ The new array \code{a} with given shape.
 Resize an array.
 }
 \details{
-This function corresponds partially to \code{resize()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.resize.html}{see}). The function from NumPy only uses the copy type.
+This function corresponds only partially to \code{resize()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.resize.html}{see}). The function from NumPy only uses the copy type.
+}
+\examples{
+a <- marray(c(10, 4, 22, 2, 18, 7, 9, 14, 25), dim = c(3, 3))
+resize.array(a, dim = c(6, 6), type = "nearest_neighbor")
+
 }

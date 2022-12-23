@@ -116,52 +116,86 @@ reshape.array <- function(a, dim = NULL, order = c("C", "F")) {
 #'
 #' @param a An array.
 #' @param dim An integerish vector of new shape (dimension space) to be set on the array.
-#' @param fill The type of fill method. If the new array is larger than the original array, then the new array is filled with:
-#'   * \code{copy}: repeated copies of \code{a}
-#'   * \code{zero}: zeros
-#'   * \code{one}: ones
-#'   * \code{na}: NA
-#'   * \code{approx}: approximated values
+#' @param type The technique to be used for creating the resized array.
+#'   * \code{copy}: if the new array is larger, it's filled with repeated copies of \code{a}.
+#'   * \code{zero}: if the new array is larger, it's filled with zeros.
+#'   * \code{one}: if the new array is larger, it's filled with ones.
+#'   * \code{na}: if the new array is larger, it's filled with NA.
+#'   * \code{approx}: if the new array is larger, it's filled with approximated values.
+#'   * \code{nearest_neighbor}: nearest-neighbor interpolation, also known as proximal interpolation, is a simple multivariate interpolation technique for one or more dimensions.
+#'     If a dimension of the new array is a larger than the corresponding dimension of \code{a}, only every nth array element along this dimension is selected. Otherwise, an array element along this dimension is selected n times.
 #' @md
 #' @param order The order in which elements of \code{a} should be read during rearrangement.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
-#' @details This function corresponds partially to \code{resize()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.resize.html}{see}). The function from NumPy only uses the copy type.
+#' @details This function corresponds only partially to \code{resize()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.resize.html}{see}). The function from NumPy only uses the copy type.
 #'
 #' @return The new array \code{a} with given shape.
 #'
+#' @examples
+#' a <- marray(c(10, 4, 22, 2, 18, 7, 9, 14, 25), dim = c(3, 3))
+#' resize.array(a, dim = c(6, 6), type = "nearest_neighbor")
+#'
 #' @export
-resize.array <- function(a, dim, fill = c("copy", "zero", "one", "na", "approx"), order = c("C", "F")) {
-  fill <- match.arg(fill)
+resize.array <- function(a, dim, type = c("copy", "zero", "one", "na", "approx", "nearest_neighbor"), order = c("C", "F")) {
+  type <- match.arg(type)
   oldsize <- nsize(a)
   newsize <- prod(dim)
-  a <- flatten(a, order = order)
-
-  if (newsize > oldsize)
-    switch(fill,
-      copy = {
+  switch(type,
+    copy = {
+      a <- flatten(a, order = order)
+      if (newsize > oldsize) {
         repeats <- -floor(-newsize / oldsize)
         a <- rep(a, repeats)
-      },
-      zero = {
+      }
+      return(marray(a[1L:newsize], dim = dim, order = order))
+    },
+    zero = {
+      a <- flatten(a, order = order)
+      if (newsize > oldsize) {
         repeats <- newsize - oldsize
         a <- c(a, rep(0, repeats))
-      },
-      one = {
+      }
+      return(marray(a[1L:newsize], dim = dim, order = order))
+    },
+    one = {
+      a <- flatten(a, order = order)
+      if (newsize > oldsize) {
         repeats <- newsize - oldsize
         a <- c(a, rep(1, repeats))
-      },
-      na = {
+      }
+      return(marray(a[1L:newsize], dim = dim, order = order))
+    },
+    na = {
+      a <- flatten(a, order = order)
+      if (newsize > oldsize) {
         repeats <- newsize - oldsize
         a <- c(a, rep(NA, repeats))
-      },
-      approx = {
+      }
+      return(marray(a[1L:newsize], dim = dim, order = order))
+    },
+    approx = {
+      a <- flatten(a, order = order)
+      if (newsize > oldsize) {
         a <- stats::approx(a, n = newsize)$y
       }
-    )
-
-  marray(a[1L:newsize], dim = dim, order = order)
+      return(marray(a[1L:newsize], dim = dim, order = order))
+    },
+    nearest_neighbor = {
+      d <- DIM(a)
+      stopifnot("The new shape must have the same number of axes as the shape of a." = length(d) == length(dim))
+      ratio <- dim / d
+      ds <- lapply(dim, seq)
+      idx <- lapply(seq_along(ds), function(i) {
+        if (dim[i] < d[i])
+          round(seq(1, d[i], by = d[i] / dim[i]))
+        else
+          ceiling(ds[[i]] / ratio[i])
+      })
+      return(slice(a, idx))
+    }
+  )
 }
 
 #' @title Retrieve broadcast dimensions
