@@ -27,6 +27,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>squeeze()</code> removes dimensions of length one from array.</li>
 <li><code>mamatrix()</code> shrinks an array by rows or columns into a matrix.</li>
 <li><code>slice()</code> read or write a part of an array.</li>
+<li><code>take()</code> extracts elements from an array along an axis.</li>
 <li><code>extract()</code> returns values from an array that meet conditions.</li>
 <li><code>axesindices()</code> retrieves axes indices of values within an array.</li>
 <li><code>maclip()</code> limits values of an array.</li>
@@ -74,6 +75,11 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>where()</code> creates an array based on meeting conditions.</li>
 <li><code>bitwise()</code> combines arrays by bitwise operation of their elements.</li>
 <li><code>memberof()</code>, <code>mask_rectangle</code> and <code>mask_circle</code> create binary arrays (masked arrays) consisting of zeros and ones.</li>
+<li><code>bartlett()</code> creates the Bartlett window.</li>
+<li><code>bblackman()</code> creates the Blackman window.</li>
+<li><code>hamming()</code> creates the Hamming window.</li>
+<li><code>hanning()</code> creates the Hanning window.</li>
+<li><code>kaiser()</code> creates the Kaiser window.</li>
 </ul>
 
 <h2>Examples</h2>

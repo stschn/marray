@@ -38,6 +38,36 @@ slice <- function(a, ..., drop = FALSE) {
   do.call(`[<-`, c(list(a), args, list(value = value)))
 }
 
+#' @title Array slicing
+#' @description Take elements from an array along an axis.
+#'
+#' @param a An array.
+#' @param indices The indices of the values to extract. Allows scalars as well as an array.
+#'
+#' @details This function corresponds to \code{take()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.take.html}{see}).
+#'
+#' @return An extracted part of \code{a}.
+#'
+#' @examples
+#' a <- marray(1:24, dim = c(4, 3, 2))
+#' take(a, indices = c(11, 2, 23))
+#' take(a, indices = marray(c(11, 2, 23), dim = c(1, 3)))
+#' take(a, indices = marray(c(1, 3), dim = c(1, 2)), axis = 1)
+#'
+#' @export
+take <- function(a, indices, axis = NULL) {
+  a <- .standardize_array(a)
+  if (is.null(axis)) {
+    return(marray(flatten(a)[flatten(indices)], dim = DIM(indices)))
+  } else {
+    axis <- .standardize_axis(axis, ndim(a) -> nd)
+    newdim <- append(DIM(a)[-axis], DIM(indices), axis - 1L)
+    index <- as.list(rep(TRUE, nd))
+    index[[axis]] <- flatten(indices)
+    return(marray(do.call(`[`, c(list(a), index, list(drop = FALSE))), dim = newdim))
+  }
+}
+
 #' @title Array Indexes
 #' @description Extract indices of axes of an array.
 #'
