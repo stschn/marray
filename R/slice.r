@@ -43,6 +43,7 @@ slice <- function(a, ..., drop = FALSE) {
 #'
 #' @param a An array.
 #' @param indices The indices of the values to extract. Allows scalars as well as an array.
+#' @param axis The axis over which to select values. By default, the flattened input array is used.
 #'
 #' @details This function corresponds to \code{take()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.take.html}{see}).
 #'

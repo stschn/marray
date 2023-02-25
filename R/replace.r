@@ -229,6 +229,54 @@ argmin <- function(a, axis = NULL) {
   apply(a, MARGIN = seq_along(d)[-axis], which.min)
 }
 
+#' @title Array searching
+#' @description Return the maximum of an array or maximum along an axis.\cr
+#'   Return the minimum of an array or minimum along an axis.
+#'
+#' @param a An array.
+#' @param axis Axis or axes along which to operate. By default (\code{NULL}), flattened input is used.
+#'
+#' @details This function corresponds to \code{amax()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.amax.html}{see}).
+#'
+#' @return Maximum of \code{a}. If \code{axis} is \code{NULL}, the result is a scalar value. If \code{axis} is an int, the result is an array of dimension \code{\link{ndim}} - 1. If \code{axis} is a tuple, the result is an array of dimension \code{\link{ndim}} - \code{length(axis)}.
+#'
+#' @examples
+#' a <- marray(c(0:3), dim = c(2, 2))
+#' amax(a)
+#' amax(a, axis = 1)
+#' amax(a, axis = 2)
+#'
+#' amin(a)
+#' amin(a, axis = 1)
+#' amin(a, axis = 2)
+#'
+#' @export
+amax <- function(a, axis = NULL) {
+  a <- .standardize_array(a)
+  d <- DIM(a)
+  axis <- .standardize_axis(axis, length(d))
+  along <- seq_along(d)[-axis]
+  if ((is.null(axis)) || (length(along) == 0L))
+    return(max(flatten(a)))
+  else
+    return(apply(a, along, max))
+}
+
+#' @rdname amax
+#' @details This function corresponds to \code{amin()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.amin.html}{see}).
+#' @return Minimum of \code{a}. If \code{axis} is \code{NULL}, the result is a scalar value. If \code{axis} is an int, the result is an array of dimension \code{\link{ndim}} - 1. If \code{axis} is a tuple, the result is an array of dimension \code{\link{ndim}} - \code{length(axis)}.
+#' @export
+amin <- function(a, axis = NULL) {
+  a <- .standardize_array(a)
+  d <- DIM(a)
+  axis <- .standardize_axis(axis, length(d))
+  along <- seq_along(d)[-axis]
+  if ((is.null(axis)) || (length(along) == 0L))
+    return(min(flatten(a)))
+  else
+    return(apply(a, along, min))
+}
+
 #' @title Array counting
 #' @description Counts the number of non-zero values in an array.
 #'

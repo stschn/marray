@@ -10,6 +10,8 @@ take(a, indices, axis = NULL)
 \item{a}{An array.}
 
 \item{indices}{The indices of the values to extract. Allows scalars as well as an array.}
+
+\item{axis}{The axis over which to select values. By default, the flattened input array is used.}
 }
 \value{
 An extracted part of \code{a}.
