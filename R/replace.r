@@ -230,6 +230,25 @@ argmin <- function(a, axis = NULL) {
 }
 
 #' @title Array searching
+#' @description Find the indices of those elements of an array that satisfy conditions.
+#'
+#' @param a An array.
+#' @param condition Logical expression indicating elements to keep.
+#'
+#' @details This function corresponds partially to \code{argwhere()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.argwhere.html}{see}).
+#'
+#' @return Indices of elements of \code{a} that meet \code{condition}, otherwise \code{NULL}.
+#'
+#' @examples
+#' a <- marray(0:5, dim = c(2, 3))
+#' argwhere(a, a > 1)
+#'
+#' @export
+argwhere <- function(a, condition) {
+  do.call(rbind, axesindices(a, extract(a, condition)))
+}
+
+#' @title Array searching
 #' @description Return the maximum of an array or maximum along an axis.\cr
 #'   Return the minimum of an array or minimum along an axis.
 #'

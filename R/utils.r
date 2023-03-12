@@ -59,3 +59,14 @@
   axis[which(axis > ndim)] <- ndim
   axis
 }
+
+# During reshaping of an array, one axis of the new shape can be -1.
+# In this case, the value is inferred from the size of the array and remaining dimensions and automatically computed.
+.standardize_shape <- function(adim, newdim = NULL) {
+  if (is.null(newdim)) return(newdim)
+  mapidx <- unique(which(newdim %in% -1))
+  if (!length(mapidx)) return(newdim) # empty integer indicates that no -1 is inside newdim
+  stopifnot("-1 can only be used for one axis" = length(mapidx) == 1)
+  newdim[mapidx] <- prod(adim) / as.integer(prod(newdim[-mapidx]))
+  newdim
+}

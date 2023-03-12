@@ -87,7 +87,7 @@ ndmin <- function(a, n, axis = -1L) {
 #' @description Reshape an array.
 #'
 #' @param a An array.
-#' @param dim An integerish vector of new dimensions to be set on the array.
+#' @param dim An integerish vector of new dimensions to be set on the array. One dimension axis can be -1. In this case, the value is inferred from the size of the array and remaining dimensions.
 #' @param order The order in which elements of \code{a} should be read during rearrangement.
 #'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
@@ -104,6 +104,7 @@ ndmin <- function(a, n, axis = -1L) {
 #' @export
 reshape.array <- function(a, dim = NULL, order = c("C", "F")) {
   order <- match.arg(order)
+  dim <- .standardize_shape(DIM(a), dim)
   if (identical(order, "C"))
     dimC(a) <- dim
   else

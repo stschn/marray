@@ -33,6 +33,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>maclip()</code> limits values of an array.</li>
 <li><code>argmax()</code> returns indices of maximum values along an axis.</li>
 <li><code>argmin()</code> returns indices of minimum values along an axis.</li>
+<li><code>argwhere()</code> returns indices of elements that meet condition.</li>
 <li><code>amax()</code> returns maximum values along an axis.</li>
 <li><code>amin()</code> returns minimum values along an axis.</li>
 <li><code>count_nonzero()</code> counts the number of non-zero values along an axis.</li>
