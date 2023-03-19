@@ -19,7 +19,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>reshape_broadcast()</code> reshapes array on basis of broadcasting.</li>
 <li><code>save.array()</code> and <code>load.array()</code> writes and reads arrays to/from files.</li>
 <li><code>marray()</code> and <code>as.marray()</code> transform data into a multidimensional array.</li>
-<li><code>foreach.array()</code> applies a function to each element of an array.</li>
+<li><code>foreach.array()</code> applies a function to the elements of an array.</li>
 <li><code>as.marray_int()</code>, <code>as.marray_dbl()</code>, <code>as.marray_raw()</code>, <code>as.marray_cpx()</code>, <code>as.marray_chr()</code> and <code>as.marray_lgl()</code> convert the elements of an array into corresponding type. <code>as.marray_norm()</code> converts the elements of an array into its normal distribution.</li>
 <li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerce objects into arrays with corresponding number of dimensions.</li>
 <li><code>flatten()</code> flattens data into a one-dimensional array. <code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_cpx()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flatten data into a vector from corresponding type.</li>
@@ -56,6 +56,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>zeros()</code> and <code>zeros_like</code> creates an array filled with zeros.</li>
 <li><code>empty()</code> and <code>empty_like</code> creates an array filled with NA.</li>
 <li><code>full()</code> and <code>full_like</code> creates an array filled with value.</li>
+<li><code>random_int()</code>, <code>random_int_like</code>, <code>random_dbl()</code> and <code>random_dbl_like</code> creates an array filled with random values.</li>
 <li><code>maidentity()</code> creates an identity array.</li>
 <li><code>insert()</code> inserts objects into an array.</li>
 <li><code>copyto()</code> copies values from one array to another.</li>
