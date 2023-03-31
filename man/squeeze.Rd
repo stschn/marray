@@ -9,14 +9,14 @@ squeeze(a, axis = NULL, order = c("C", "F"))
 \arguments{
 \item{a}{An array.}
 
-\item{axis}{The dimensions which should be removed. If \code{NULL} (default), all dimensions of length one are removed.}
+\item{axis}{The axis or axes which should be removed. If \code{NULL} (default), all axes of length one are removed.}
 
 \item{order}{The order in which elements of data should be read during rearrangement after removing of corresponding dimensions.
 By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
 In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.}
 }
 \value{
-The array \code{a} usually without dimensions of length one.
+The array \code{a} usually without axes of length one.
 }
 \description{
 Compress the shape of an array by removing singleton dimensions.
