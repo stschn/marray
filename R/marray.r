@@ -98,7 +98,7 @@ as.marray.list <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F"
 #' @rdname marray
 #' @export
 as.marray.factor <- function(data, encode = c("onehot", "sparse")) {
-  if (is.null(encode)) return(as.array(data))
+  if (is.null(encode)) return(as.marray.default(data))
   encode <- match.arg(encode)
   switch(encode,
     onehot = {
