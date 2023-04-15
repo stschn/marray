@@ -118,11 +118,12 @@ as.marray.factor <- function(data, encode = c("onehot", "sparse")) {
 
 #' @title Array function application
 #' @param a An array.
+#' @param axis The axis or axes along the function \code{FUN} is applied. Per default {\code{NULL}}, each element is passed separately as an argument to the function. Otherwise, the elements along \code{axis} are passed in combination.
 #' @param FUN The function to be applied on each element of \code{a}.
 #' @param ... Optional arguments passed to \code{FUN}.
-#' @param axis The axis or axes along the function \code{FUN} is applied. Per default {\code{NULL}}, each element is passed separately as an argument to the function. Otherwise, the elements along \code{axis} are passed in combination.
+#' @param simplify A logical indicating whether results should be simplified if possible, default \code{TRUE}.
 #'
-#' @details The functions \code{as.marray_int()}, \code{as.marray_dbl()}, \code{as.marray_raw()}, \code{as.marray_cpx()}, \code{as.marray_chr()} and \code{as.marray_lgl()}
+#' @details This function is a wrapper for \code{\link{apply}}. The functions \code{as.marray_int()}, \code{as.marray_dbl()}, \code{as.marray_raw()}, \code{as.marray_cpx()}, \code{as.marray_chr()} and \code{as.marray_lgl()}
 #' transform the elements of an array into its corresponding types \code{\link{integer}}, \code{\link{double}}, \code{\link{raw}}, \code{\link{complex}}, \code{\link{character}} and \code{\link{logical}}.
 #'
 #' @return The array \code{a} with elements processed by \code{FUN}.
@@ -137,18 +138,14 @@ as.marray.factor <- function(data, encode = c("onehot", "sparse")) {
 #' as.marray_lgl(a)
 #' as.marray_norm(a)
 #'
-#' for (i in seq(3)) { print(foreach.array(a, FUN = sum, axis = i)) }
+#' for (i in seq(3)) { print(foreach.array(a, axis = i, FUN = sum)) }
 #'
 #' @export
-foreach.array <- function(a, FUN, ..., axis = NULL) {
+foreach.array <- function(a, axis = NULL, FUN, ..., simplify = TRUE) {
   if (missing(FUN)) return(a)
   a <- .standardize_array(a)
-  ds <- seq_along(DIM(a))
-  if (!is.null(axis)) {
-    axis <- .standardize_axis(axis, ndim(a))
-    ds <- ds[-axis]
-  }
-  apply(a, MARGIN = ds, FUN = FUN, ...)
+  axis <- if (is.null(axis)) seq_along(DIM(a)) else .standardize_axis(axis, ndim(a))
+  apply(a, MARGIN = axis, FUN = FUN, ..., simplify = simplify)
 }
 
 #' @rdname foreach.array

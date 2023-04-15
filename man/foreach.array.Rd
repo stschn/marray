@@ -11,7 +11,7 @@
 \alias{as.marray_norm}
 \title{Array function application}
 \usage{
-foreach.array(a, FUN, ..., axis = NULL)
+foreach.array(a, axis = NULL, FUN, ..., simplify = TRUE)
 
 as.marray_int(a)
 
@@ -30,11 +30,13 @@ as.marray_norm(a, mean = 0, sd = 1, log = FALSE)
 \arguments{
 \item{a}{An array.}
 
+\item{axis}{The axis or axes along the function \code{FUN} is applied. Per default {\code{NULL}}, each element is passed separately as an argument to the function. Otherwise, the elements along \code{axis} are passed in combination.}
+
 \item{FUN}{The function to be applied on each element of \code{a}.}
 
 \item{...}{Optional arguments passed to \code{FUN}.}
 
-\item{axis}{The axis or axes along the function \code{FUN} is applied. Per default {\code{NULL}}, each element is passed separately as an argument to the function. Otherwise, the elements along \code{axis} are passed in combination.}
+\item{simplify}{A logical indicating whether results should be simplified if possible, default \code{TRUE}.}
 
 \item{mean}{Vector of means.}
 
@@ -49,7 +51,7 @@ The array \code{a} with elements processed by \code{FUN}.
 Array function application
 }
 \details{
-The functions \code{as.marray_int()}, \code{as.marray_dbl()}, \code{as.marray_raw()}, \code{as.marray_cpx()}, \code{as.marray_chr()} and \code{as.marray_lgl()}
+This function is a wrapper for \code{\link{apply}}. The functions \code{as.marray_int()}, \code{as.marray_dbl()}, \code{as.marray_raw()}, \code{as.marray_cpx()}, \code{as.marray_chr()} and \code{as.marray_lgl()}
 transform the elements of an array into its corresponding types \code{\link{integer}}, \code{\link{double}}, \code{\link{raw}}, \code{\link{complex}}, \code{\link{character}} and \code{\link{logical}}.
 }
 \examples{
@@ -62,6 +64,6 @@ as.marray_chr(a)
 as.marray_lgl(a)
 as.marray_norm(a)
 
-for (i in seq(3)) { print(foreach.array(a, FUN = sum, axis = i)) }
+for (i in seq(3)) { print(foreach.array(a, axis = i, FUN = sum)) }
 
 }
