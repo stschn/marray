@@ -5,6 +5,7 @@
 \alias{as.marray}
 \alias{as.marray.default}
 \alias{as.marray.matrix}
+\alias{as.marray.table}
 \alias{as.marray.data.frame}
 \alias{as.marray.list}
 \alias{as.marray.factor}
@@ -17,6 +18,8 @@ as.marray(data, ...)
 \method{as.marray}{default}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
 
 \method{as.marray}{matrix}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
+
+\method{as.marray}{table}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
 
 \method{as.marray}{data.frame}(data, dim = NULL, dimnames = NULL, order = c("C", "F"))
 

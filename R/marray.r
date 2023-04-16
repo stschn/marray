@@ -84,6 +84,14 @@ as.marray.matrix <- function(data, dim = NULL, dimnames = NULL, order = c("C", "
 
 #' @rdname marray
 #' @export
+as.marray.table <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F")) {
+  if (is.null(dimnames)) dimnames <- dimnames(data)
+  # table is an array with extra class "table"
+  as.marray.default(unclass(data), dim = dim, dimnames = dimnames, order = order)
+}
+
+#' @rdname marray
+#' @export
 as.marray.data.frame <- function(data, dim = NULL, dimnames = NULL, order = c("C", "F")) {
   if (is.null(dimnames)) dimnames <- dimnames(data)
   as.marray.default(as.matrix(data), dim = dim, dimnames = dimnames, order = order)
