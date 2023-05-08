@@ -19,7 +19,8 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>reshape_broadcast()</code> reshapes array on basis of broadcasting.</li>
 <li><code>save.array()</code> and <code>load.array()</code> writes and reads arrays to/from files.</li>
 <li><code>marray()</code> and <code>as.marray()</code> transform data into a multidimensional array.</li>
-<li><code>foreach.array()</code> applies a function to the elements of an array.</li>
+<li><code>foreach.array()</code> applies a function to the elements of an array for axes.</li>
+<li><code>apply_over_axes()</code> applies a function over or along axes of an array.</li>
 <li><code>as.marray_int()</code>, <code>as.marray_dbl()</code>, <code>as.marray_raw()</code>, <code>as.marray_cpx()</code>, <code>as.marray_chr()</code> and <code>as.marray_lgl()</code> convert the elements of an array into corresponding type. <code>as.marray_norm()</code> converts the elements of an array into its normal distribution.</li>
 <li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerce objects into arrays with corresponding number of dimensions.</li>
 <li><code>flatten()</code> flattens data into a one-dimensional array. <code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_cpx()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flatten data into a vector from corresponding type.</li>
@@ -79,6 +80,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>where()</code> creates an array based on meeting conditions.</li>
 <li><code>bitwise()</code> combines arrays by bitwise operation of their elements.</li>
 <li><code>memberof()</code>, <code>mask_rectangle</code> and <code>mask_circle</code> create binary arrays (masked arrays) consisting of zeros and ones.</li>
+<li><code>sparse_to_onehot()</code> and <code>one_to_sparse()</code> converts an array from one encoded form into the other.</li>
 <li><code>bartlett()</code> creates the Bartlett window.</li>
 <li><code>bblackman()</code> creates the Blackman window.</li>
 <li><code>hamming()</code> creates the Hamming window.</li>

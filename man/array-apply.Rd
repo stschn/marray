@@ -2,6 +2,7 @@
 % Please edit documentation in R/marray.r
 \name{foreach.array}
 \alias{foreach.array}
+\alias{apply_over_axes}
 \alias{as.marray_int}
 \alias{as.marray_dbl}
 \alias{as.marray_raw}
@@ -12,6 +13,8 @@
 \title{Array function application}
 \usage{
 foreach.array(a, axis = NULL, FUN, ..., simplify = TRUE)
+
+apply_over_axes(a, axes = NULL, FUN, ..., simplify = TRUE)
 
 as.marray_int(a)
 
@@ -38,6 +41,8 @@ as.marray_norm(a, mean = 0, sd = 1, log = FALSE)
 
 \item{simplify}{A logical indicating whether results should be simplified if possible, default \code{TRUE}.}
 
+\item{axes}{Axes over which function is applied.}
+
 \item{mean}{Vector of means.}
 
 \item{sd}{Vector of standard deviations.}
@@ -46,13 +51,19 @@ as.marray_norm(a, mean = 0, sd = 1, log = FALSE)
 }
 \value{
 The array \code{a} with elements processed by \code{FUN}.
+
+The output array.
 }
 \description{
-Array function application
+Applies a function over or along axes of an array.
 }
 \details{
 This function is a wrapper for \code{\link{apply}}. The functions \code{as.marray_int()}, \code{as.marray_dbl()}, \code{as.marray_raw()}, \code{as.marray_cpx()}, \code{as.marray_chr()} and \code{as.marray_lgl()}
 transform the elements of an array into its corresponding types \code{\link{integer}}, \code{\link{double}}, \code{\link{raw}}, \code{\link{complex}}, \code{\link{character}} and \code{\link{logical}}.
+
+This function corresponds to \code{apply_over_axes()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.apply_over_axes.html}{see}).\cr
+If a function is applied over or along axes, the function is called for those axes. The answer of the function calls relates to the remaining axes. For e.g.,
+if the sum of rows (first axis) for a 2D-array is calculated, the function must be applied over the columns (second axis) to get the sum for each row.
 }
 \examples{
 a <- marray(seq(24), dim = c(4, 3, 2))
@@ -65,5 +76,8 @@ as.marray_lgl(a)
 as.marray_norm(a)
 
 for (i in seq(3)) { print(foreach.array(a, axis = i, FUN = sum)) }
+
+a <- marray(0:23, dim = c(2, 3, 4))
+apply_over_axes(a, axes = c(1, 3), FUN = sum)
 
 }

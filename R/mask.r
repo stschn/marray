@@ -129,3 +129,38 @@ mask_circle <- function(dim, ..., radius) {
   }
   a
 }
+
+#' @rdname array-encode
+#' @title Masked Array
+#' @description Converts a sparse array to an one-hot encoded array.
+#'
+#' @param a An array.
+#'
+#' @return A binary array with each value aka label form \code{a} encoded on a separate position of the last axis.
+#' @examples
+#' a <- random_int(dim = c(5, 5), min = 0, max = 3)
+#' sparse_to_onehot(a)
+#'
+#' @export
+sparse_to_onehot <- function(a) {
+  a <- .standardize_array(a)
+  values <- sort(unique(flatten(a)))
+  newdim <- c(DIM(a), length(values))
+  out <- zeros(newdim)
+  for (v in values) {
+    idx <- axesindices(a, value = v)[[1L]]
+    idx <- cbind(idx, which(values %in% v))
+    for (i in seq_len(NROW(idx)))
+      slice(out, as.list(idx[i, ])) <- 1
+  }
+  out
+}
+
+#' @rdname array-encode
+#' @param axis The axis along which to search for values.
+#' @seealso \code{\link{argmax}}
+#' @export
+onehot_to_sparse <- function(a, axis = -1) {
+  a <- .standardize_array(a)
+  argmax(a, axis = axis)
+}

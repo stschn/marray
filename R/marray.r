@@ -124,6 +124,7 @@ as.marray.factor <- function(data, encode = c("onehot", "sparse")) {
   )
 }
 
+#' @rdname array-apply
 #' @title Array function application
 #' @param a An array.
 #' @param axis The axis or axes along the function \code{FUN} is applied. Per default {\code{NULL}}, each element is passed separately as an argument to the function. Otherwise, the elements along \code{axis} are passed in combination.
@@ -150,37 +151,63 @@ as.marray.factor <- function(data, encode = c("onehot", "sparse")) {
 #'
 #' @export
 foreach.array <- function(a, axis = NULL, FUN, ..., simplify = TRUE) {
-  if (missing(FUN)) return(a)
+  if (!missing(FUN)) FUN <- match.fun(FUN) else return(a)
   a <- .standardize_array(a)
   axis <- if (is.null(axis)) seq_along(DIM(a)) else .standardize_axis(axis, ndim(a))
   apply(a, MARGIN = axis, FUN = FUN, ..., simplify = simplify)
 }
 
-#' @rdname foreach.array
+#' @rdname array-apply
+#' @description Applies a function over or along axes of an array.
+#'
+#' @param axes Axes over which function is applied.
+#'
+#' @details This function corresponds to \code{apply_over_axes()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.apply_over_axes.html}{see}).\cr
+#' If a function is applied over or along axes, the function is called for those axes. The answer of the function calls relates to the remaining axes. For e.g.,
+#' if the sum of rows (first axis) for a 2D-array is calculated, the function must be applied over the columns (second axis) to get the sum for each row.
+#'
+#' @return The output array.
+#'
+#' @examples
+#' a <- marray(0:23, dim = c(2, 3, 4))
+#' apply_over_axes(a, axes = c(1, 3), FUN = sum)
+#'
+#' @export
+apply_over_axes <- function(a, axes = NULL, FUN, ..., simplify = TRUE) {
+  if (!missing(FUN)) FUN <- match.fun(FUN) else return(a)
+  a <- .standardize_array(a)
+  d <- DIM(a)
+  ds <- seq_along(d)
+  axes <- if (is.null(axes)) ds else .standardize_axis(axes, length(d))
+  ds.call <- ds[-axes]
+  apply(a, MARGIN = ds.call, FUN = FUN, ..., simplify = simplify)
+}
+
+#' @rdname array-apply
 #' @export
 as.marray_int <- function(a) { foreach.array(a, FUN = as.integer) }
 
-#' @rdname foreach.array
+#' @rdname array-apply
 #' @export
 as.marray_dbl <- function(a) { foreach.array(a, FUN = as.double) }
 
-#' @rdname foreach.array
+#' @rdname array-apply
 #' @export
 as.marray_raw <- function(a) { foreach.array(a, FUN = as.raw) }
 
-#' @rdname foreach.array
+#' @rdname array-apply
 #' @export
 as.marray_cpx <- function(a) { foreach.array(a, FUN = as.complex) }
 
-#' @rdname foreach.array
+#' @rdname array-apply
 #' @export
 as.marray_chr <- function(a) { foreach.array(a, FUN = as.character) }
 
-#' @rdname foreach.array
+#' @rdname array-apply
 #' @export
 as.marray_lgl <- function(a) { foreach.array(a, FUN = as.logical) }
 
-#' @rdname foreach.array
+#' @rdname array-apply
 #' @param mean Vector of means.
 #' @param sd Vector of standard deviations.
 #' @param log A logical value indicating whether the probabilities are given as \code{\link{log}}.
