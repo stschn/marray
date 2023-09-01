@@ -46,16 +46,16 @@ An array.
 }
 \description{
 \code{marray(data, ...)} creates a reshaped multidimensional array.\cr
-  \code{as.marray(data, ...)} attempts to turn its argument into an array.\cr
+\code{as.marray(data, ...)} attempts to turn its argument into an array.\cr
 }
 \details{
 This introduced n-dimensional array is an equivalent to \code{ndarray} class from NumPy (\url{https://numpy.org/}), a famous package in Python.
-  Usually, an n-dimensional array is a multidimensional container consisting of bunches of bunches of bunches... of matrices.
-  The first two dimensions define the matrix while the remaining dimensions define the corresponding bunches. For e.g., an 4x3x2 array has 2 bunches of each 4x3 matrix.
-  An 6x4x3x2 array has 2 bunches, each of these two bunches has 3 bunches and each of these three bunches again contains a 6x4 matrix.
+Usually, an n-dimensional array is a multidimensional container consisting of bunches of bunches of bunches... of matrices.
+The first two dimensions define the matrix while the remaining dimensions define the corresponding bunches. For e.g., an 4x3x2 array has 2 bunches of each 4x3 matrix.
+An 6x4x3x2 array has 2 bunches, each of these two bunches has 3 bunches and each of these three bunches again contains a 6x4 matrix.
 
-  The behavior of \code{marray} is similar to that of ndarray from NumPy. R follows a column-major ordering (Fortran-style) during building up an array,
-  wile Python respectively NumPy prefers row-major ordering (C-style) but offers both. For a comparison see \url{https://rstudio.github.io/reticulate/articles/arrays.html}.
+The behavior of \code{marray} is similar to that of ndarray from NumPy. R follows a column-major ordering (Fortran-style) during building up an array,
+wile Python respectively NumPy prefers row-major ordering (C-style) but offers both. For a comparison see \url{https://rstudio.github.io/reticulate/articles/arrays.html}.
 }
 \examples{
 # Vector input with explicit dimensions

@@ -20,7 +20,7 @@ NULL assignment operator
 }
 \details{
 Checking for \code{NULL} is very common practice in R. This operator shortens the handling of such checks and the return of corresponding values.
-  It is adopted from package \code{rlang}, also used in package \code{listarrays}.
+It is adopted from package \code{rlang}, also used in package \code{listarrays}.
 }
 \examples{
 11 \%||\% 23

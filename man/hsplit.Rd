@@ -21,5 +21,5 @@ Split an array into multiple sub-arrays horizontally (column-wise).
 }
 \details{
 This function corresponds to \code{hsplit()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.hsplit.html}{see}).
-  It's equivalent to \code{\link{array_split}} along the second axis.
+It's equivalent to \code{\link{array_split}} along the second axis.
 }

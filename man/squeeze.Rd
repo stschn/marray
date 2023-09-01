@@ -2,9 +2,15 @@
 % Please edit documentation in R/shape.r
 \name{squeeze}
 \alias{squeeze}
+\alias{squeeze_first}
+\alias{squeeze_last}
 \title{Array compressing}
 \usage{
 squeeze(a, axis = NULL, order = c("C", "F"))
+
+squeeze_first(a, order = c("C", "F"))
+
+squeeze_last(a, order = c("C", "F"))
 }
 \arguments{
 \item{a}{An array.}
@@ -20,11 +26,26 @@ The array \code{a} usually without axes of length one.
 }
 \description{
 Compress the shape of an array by removing singleton dimensions.
+
+Remove leading singleton dimensions.
+
+Remove trailing singleton dimensions.
 }
 \details{
 This function corresponds to \code{squeeze()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html}{see}).
-  The base R function \code{\link{drop}} does the same as this function. In opposite to \code{drop} this function
-  allows reordering the elements of the newly created array as well as specifying only certain axes.
+The base R function \code{\link{drop}} does the same as this function. In opposite to \code{drop} this function
+allows reordering the elements of the newly created array as well as specifying only certain axes.
+}
+\examples{
+a <- marray(seq(4*3*2), dim = c(1, 4, 3, 1, 2, 1))
+DIM(squeeze(a))
+
+a <- marray(seq(4*3*2), dim = c(1, 4, 3, 1, 2, 1))
+DIM(squeeze_first(a))
+
+a <- marray(seq(4*3*2), dim = c(1, 4, 3, 1, 2, 1))
+DIM(squeeze_last(a))
+
 }
 \seealso{
 \code{\link{drop}}, \code{\link{expand_dims}}.

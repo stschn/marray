@@ -21,5 +21,5 @@ Split an array into multiple sub-arrays vertically (row-wise).
 }
 \details{
 This function corresponds to \code{vsplit()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.vsplit.html}{see}).
-  It's equivalent to \code{\link{array_split}} along the first axis.
+It's equivalent to \code{\link{array_split}} along the first axis.
 }

@@ -23,5 +23,5 @@ Stack arrays in sequence horizontally (column-wise).
 }
 \details{
 This function corresponds to \code{hstack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.hstack.html}{see}).
-  It's equivalent to \code{\link{mabind}} along the second axis.
+It's equivalent to \code{\link{mabind}} along the second axis.
 }

@@ -34,13 +34,13 @@
       stop(sprintf("number of arguments for indexing (%d) is greater than the number of dimensions (%d).", max(axis), length(dim)), call. = FALSE)
     ds[axis] <- args
   } else {
-    args <- lapply(seq_along(args), function(i) if (any(is.null(args[[i]])) || any(is.na(args[[i]])) || any(args[[i]] <= 0)) ds[[i]] else args[[i]])
+    args <- lapply(seq_along(args), function(i) if (any(is.null(args[[i]])) || any(is.na(args[[i]])) || any(args[[i]] == 0)) ds[[i]] else args[[i]])
     ds[seq_along(args)] <- args
   }
   ds <- lapply(seq_along(ds), function(i) {
     x <- ds[[i]]
-    x[x < 1L] <- 1L
-    x[x > dim[i]] <- dim[i]
+    x[(x > dim[i])] <- dim[i]
+    if (any(x == 0)) x <- seq(dim[i])
     x
   })
   ds

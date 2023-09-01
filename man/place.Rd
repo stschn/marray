@@ -25,7 +25,7 @@ Replace elements of an array with new values.
 }
 \details{
 This function is an equivalent to \code{place()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.place.html}{see}).
-  In opposite to NumPy this function is more precise when replacing values.
+In opposite to NumPy this function is more precise when replacing values.
 }
 \examples{
 a <- marray(c(rep(1, 4), 2, rep(3, 5), 21:34), dim = c(4, 3, 2), order = "F")

@@ -26,7 +26,7 @@ Read and write slices of an array using enhanced indexing operations.
 }
 \details{
 \code{slice} is an alternative way to handle indexing array objects, usually done with \code{\link[base]{[}}. The dimensions can be indexed by names,
-  i for the first dimension, j for the second and so on. The assigned values are the positions on the corresponding dimension. The indexing expressions are the same as for \code{\link[base]{[}}.
+i for the first dimension, j for the second and so on. The assigned values are the positions on the corresponding dimension. The indexing expressions are the same as for \code{\link[base]{[}}.
 }
 \examples{
 a <- marray(1:48, dim = c(4, 3, 2, 2))

@@ -26,7 +26,7 @@ Save and load arrays.
 }
 \details{
 If \code{file} is a folder, the names of the arguments are used as physical file names to store the arrays.
-  For restoring, if \code{file} is a folder all files with the extension \code{fileext} are restored as arrays and packed into a list.
+For restoring, if \code{file} is a folder all files with the extension \code{fileext} are restored as arrays and packed into a list.
 }
 \examples{
 a <- marray(1:12, dim = c(4, 3))

@@ -19,7 +19,7 @@ Rearrange an array.
 }
 \details{
 Rearrangement of an array is equal to permutation its dimensions (axes). The given \code{axis} are the dimensions along the data of \code{a} are read.
-  The remaining axes span the dimension space where the data are read into, including \code{axis} at the last position of the entire dimension space (shape).
+The remaining axes span the dimension space where the data are read into, including \code{axis} at the last position of the entire dimension space (shape).
 }
 \seealso{
 \code{\link{transpose}}.

@@ -305,6 +305,16 @@ expand_dims <- function(a, axis = -1L) {
 #'
 #' @return The array \code{a} usually without axes of length one.
 #'
+#' @examples
+#' a <- marray(seq(4*3*2), dim = c(1, 4, 3, 1, 2, 1))
+#' DIM(squeeze(a))
+#'
+#' a <- marray(seq(4*3*2), dim = c(1, 4, 3, 1, 2, 1))
+#' DIM(squeeze_first(a))
+#'
+#' a <- marray(seq(4*3*2), dim = c(1, 4, 3, 1, 2, 1))
+#' DIM(squeeze_last(a))
+#'
 #' @seealso \code{\link{drop}}, \code{\link{expand_dims}}.
 #'
 #' @export
@@ -324,6 +334,28 @@ squeeze <- function(a, axis = NULL, order = c("C", "F")) {
       newdim <- d
   }
   marray(a, dim = newdim, order = order)
+}
+
+#' @rdname squeeze
+#' @description Remove leading singleton dimensions.
+#'
+#' @export
+squeeze_first <- function(a, order = c("C", "F")) {
+  if (ndim(a) >= 2L)
+    while ((DIM(a) -> d)[1L] == 1)
+      a <- squeeze(a, axis = 1, order = order)
+  a
+}
+
+#' @rdname squeeze
+#' @description Remove trailing singleton dimensions.
+#'
+#' @export
+squeeze_last <- function(a, order = c("C", "F")) {
+  if (ndim(a) >= 2L)
+    while ((DIM(a) -> d)[length(d)] == 1)
+      a <- squeeze(a, axis = -1, order = order)
+  a
 }
 
 #' @title Array enforcing and unravel

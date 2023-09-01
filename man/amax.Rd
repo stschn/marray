@@ -21,7 +21,7 @@ Minimum of \code{a}. If \code{axis} is \code{NULL}, the result is a scalar value
 }
 \description{
 Return the maximum of an array or maximum along an axis.\cr
-  Return the minimum of an array or minimum along an axis.
+Return the minimum of an array or minimum along an axis.
 }
 \details{
 This function corresponds to \code{amax()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.amax.html}{see}).

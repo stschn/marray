@@ -10,9 +10,11 @@ bitwise(..., op = c("and", "or", "xor"))
 \item{...}{Any number of arrays all with identical shapes.}
 
 \item{op}{An operator indicating the type of bitwise operation.
-* \code{and}: Bitwise AND concatenation
-* \code{or}: Bitwise OR concatenation
-* \code{xor}: Bitwise XOR concatenation}
+\itemize{
+\item \code{and}: Bitwise AND concatenation
+\item \code{or}: Bitwise OR concatenation
+\item \code{xor}: Bitwise XOR concatenation
+}}
 }
 \value{
 An array with the same shape as the given arrays with bitwise combined elements.

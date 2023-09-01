@@ -99,12 +99,12 @@ where <- function(a, condition, true, false) {
     if (!is.function(true))
       a[idxTRUE] <- true
     else
-      if (length(idxTRUE)) a[idxTRUE] <- true(a[idxTRUE])
+      if (length(idxTRUE)) a[idxTRUE] <- forceAndCall(1, true, a[idxTRUE]) #true(a[idxTRUE])
   if (!is.null(false))
     if (!is.function(false))
       a[idxFALSE] <- false
     else
-      if (length(idxFALSE)) a[idxFALSE] <- false(a[idxFALSE])
+      if (length(idxFALSE)) a[idxFALSE] <- forceAndCall(1, false, a[idxFALSE])# false(a[idxFALSE])
   a
 }
 
@@ -343,4 +343,37 @@ count_nonzero <- function(a, axis = NULL) {
 flatnonzero <- function(a) {
   a <- .standardize_array(a)
   which(flatten(a) != 0)
+}
+
+#' @title Array manipulation
+#' @description Trim the leading and/or trailing zeros from a 1D array.
+#'
+#' @param filt 1D input array.
+#' @param trim A string with ‘f’ representing trim from front and ‘b’ to trim from back. Default is ‘fb’, trim zeros from both front and back of the array.
+#'
+#' @details This function corresponds to \code{trim_zeros()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.trim_zeros.html}{see}).\cr
+#'
+#' @return A 1D array of trimming the input.
+#'
+#' @examples
+#' a <- marray(c(0, 0, 0, 1, 2, 3, 0, 2, 1, 0))
+#' trim_zeros(a)
+#' trim_zeros(a, 'b')
+#'
+#' @export
+trim_zeros <- function(filt, trim = c("fb", "f", "b")) {
+  filt <- flatten(filt)
+  trim <- match.arg(trim)
+  switch (trim,
+    fb = {
+      filt <- filt[min(which(filt != 0)) : max(which(filt != 0))]
+    },
+    f = {
+      filt <- filt[min(which(filt != 0)) : length(filt)]
+    },
+    b = {
+      filt <- filt[1L : max(which(filt != 0))]
+    }
+  )
+  return(filt)
 }

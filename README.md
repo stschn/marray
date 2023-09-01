@@ -25,7 +25,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>atleast_1d()</code>, <code>atleast_2d()</code> and <code>atleast_3d()</code> coerce objects into arrays with corresponding number of dimensions.</li>
 <li><code>flatten()</code> flattens data into a one-dimensional array. <code>flatten_int()</code>, <code>flatten_dbl()</code>, <code>flatten_raw()</code>, <code>flatten_cpx()</code>, <code>flatten_chr()</code> and <code>flatten_lgl()</code> flatten data into a vector from corresponding type.</li>
 <li><code>expand_dims()</code> expands the shape of an array by inserting a new axis.</li>
-<li><code>squeeze()</code> removes dimensions of length one from array.</li>
+<li><code>squeeze()</code>, <code>squeeze_first()</code> and <code>squeeze_last()</code> removes dimensions of length one from array.</li>
 <li><code>mamatrix()</code> shrinks an array by rows or columns into a matrix.</li>
 <li><code>slice()</code> read or write a part of an array.</li>
 <li><code>take()</code> extracts elements from an array along an axis.</li>
@@ -39,6 +39,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>amin()</code> returns minimum values along an axis.</li>
 <li><code>count_nonzero()</code> counts the number of non-zero values along an axis.</li>
 <li><code>flatnonzero()</code> returns indices of non-zero elements within a flatten array.</li>
+<li><code>trim_zeros()</code> trims leading and/or trailing zeros from 1D array.</li>
 <li><code>mabind()</code> combines input arrays to an output array along a specified axis.</li>
 <li><code>vstack()</code> stacks arrays in sequence vertically (row-wise).</li>
 <li><code>hstack()</code> stacks arrays in sequence horizontally (column-wise).</li>
