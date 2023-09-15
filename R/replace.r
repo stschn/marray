@@ -377,3 +377,59 @@ trim_zeros <- function(filt, trim = c("fb", "f", "b")) {
   )
   return(filt)
 }
+
+#' @title Array math
+#' @description Calculate the n-th discrete difference along the given axis.
+#'
+#' @param a An array.
+#' @param n The number of times values are differenced. If zero, the input is returned as-is.
+#' @param axis The axis along which the difference is taken, default is the last axis.
+#' @param order The order in which elements of data should be read during operation.
+#'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
+#'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
+#'
+#' @details This function corresponds to \code{diff()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.diff.html}{see}).
+#'
+#' @return An array with the n-th differences. The shape of the output is the same as \code{a} except along \code{axis} where the dimension is smaller by \code{n}.
+#'
+#' @examples
+#' a <- marray(c(3, 4, 8, 2, 6, 5), dim = c(2, 3))
+#' madiff(a, axis = 1)
+#' madiff(a, axis = 2)
+#'
+#' a <- marray(c(11, 2, 4, 10, 13, 5, 1, 8, 3, 9, 10, 11, 2, 19, 4, 4, 10, 11, 23, 67, 69, 47, 21, 23), dim = c(4, 3, 2))
+#' madiff(a)
+#' madiff(a, axis = 1)
+#' madiff(a, axis = 2)
+#'
+#' @export
+madiff <- function(a, n = 1, axis = -1, order = c("C", "F")) {
+  a <- .standardize_array(a)
+  order <- match.arg(order)
+  d <- DIM(a)
+  axis <- .standardize_axis(axis, length(d))
+  stopifnot("The length of axis must be less or equal the number of axis of a." = length(axis) <= length(d))
+  if (any(n >= d[axis]))
+    n <- min(d[axis]) - 1L
+  if (length(d) == 1L)
+    return(marray(diff(a, differences = n)))
+  else {
+    axes <- as.list(rep(1, length(d)))
+    axes[[axis]] <- NA
+    iter <- seq(length(d))[-axis]
+    d[axis] <- d[axis] - n
+    out <- empty(dim = d)
+    seq_order <- if (identical(order, "C")) rev(iter) else iter
+    for (j in seq_len(prod(d[iter]))) {
+      out <- copyto(out, dst_axis_index = axes, diff(slice(a, axes, drop = TRUE), differences = n))
+      for (i in seq_order) {
+        axes[[i]] <- axes[[i]] + 1
+        if (axes[[i]] <= d[i])
+          break
+        else
+          axes[[i]] <- 1
+      }
+    }
+    return(out)
+  }
+}

@@ -37,6 +37,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>argwhere()</code> returns indices of elements that meet condition.</li>
 <li><code>amax()</code> returns maximum values along an axis.</li>
 <li><code>amin()</code> returns minimum values along an axis.</li>
+<li><code>madiff()</code> calculates the n-th discrete difference along axis.</li>
 <li><code>count_nonzero()</code> counts the number of non-zero values along an axis.</li>
 <li><code>flatnonzero()</code> returns indices of non-zero elements within a flatten array.</li>
 <li><code>trim_zeros()</code> trims leading and/or trailing zeros from 1D array.</li>
