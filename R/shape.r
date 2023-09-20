@@ -19,7 +19,7 @@ shape <- function(x) { DIM(x) }
 #' @details This function corresponds to \code{ndarray.ndim} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.ndim.html}{see}).
 #' @return Number of dimensions.
 #' @export
-ndim <- function(x) { length(dim(x)) }
+ndim <- function(x) { length(DIM(x)) }
 
 #' @rdname ndim
 #' @details The function \code{marank()} is a wrapper function for \code{ndim()}.
@@ -33,7 +33,7 @@ marank <- function(x) { ndim(x) }
 #' @details This function corresponds to \code{ndarray.size} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.size.html}{see}).
 #' @return Number of elements.
 #' @export
-nsize <- function(x) { prod(dim(x)) }
+nsize <- function(x) { prod(DIM(x)) }
 
 #' @title Array shape
 #' @description Ensure minimum number of dimensions.

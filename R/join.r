@@ -113,7 +113,7 @@ mabind <- function(..., axis = -1, input_shape = NULL, order = c("C", "F")) {
 #'
 #' @export
 vstack <- function(..., input_shape = NULL, order = c("C", "F")) {
-  mabind(..., axis = 1L, input_shape = input_shape, order = order)
+  mabind(atleast_2d(..., order = order), axis = 1L, input_shape = input_shape, order = order)
 }
 
 #' @title Array stack
@@ -126,13 +126,19 @@ vstack <- function(..., input_shape = NULL, order = c("C", "F")) {
 #'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
 #'
 #' @details This function corresponds to \code{hstack()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.hstack.html}{see}).
-#'   It's equivalent to \code{\link{mabind}} along the second axis.
+#'   It's equivalent to \code{\link{mabind}} along the second axis, except for 1-D arrays where it concatenates along the first axis.
 #'
 #' @return The array formed by stacking the given arrays.
 #'
 #' @export
 hstack <- function(..., input_shape = NULL, order = c("C", "F")) {
-  mabind(atleast_2d(..., order = order), axis = 2L, input_shape = input_shape, order = order)
+  arrs <- atleast_1d(..., order = order)
+  if (!is.list(arrs)) return(arrs)
+  # As a special case, dimension 1 of 1-D arrays is horizontal
+  if (all(sapply(arrs, ndim) == 1L))
+    mabind(arrs, axis = 1L, order = order)
+  else
+    mabind(arrs, axis = 2L, input_shape = input_shape, order = order)
 }
 
 #' @title Array stack
