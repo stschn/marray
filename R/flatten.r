@@ -81,3 +81,30 @@ flatten_chr <- function(data, order = c("C", "F")) {
 flatten_lgl <- function(data, order = c("C", "F")) {
   as.logical(dropdim(data, order = order))
 }
+
+#' @title Array indexing
+#' @description Converts a list of indices into an array of flat indices.
+#'
+#' @param multi_index A list of indexes, one element for each dimension.
+#' @param dims The shape of array into which the indices from \code{multi_index} apply.
+#' @param order The order in which elements of the array should be read.
+#'   By default, the order is equivalent to the \code{C}-style ordering and means elements should be read in row-major order.
+#'   In opposite, the \code{Fortran}-style ordering means elements should be read in column-major order.
+#'
+#' @details This function corresponds to \code{ndarray.ravel_multi_index()} from NumPy (\href{https://numpy.org/doc/stable/reference/generated/numpy.ravel_multi_index.html}{see}).
+#' @return An array of indices into the flattened version of an array of dimensions \code{dims}.
+#'
+#' @examples
+#' # Same examples as for NumPy
+#' ravel_multi_index(multi_index = list(c(4, 7, 7), c(5, 6, 2)), dims = c(7, 6)) - 1 # indexing in Python starts at 0
+#' ravel_multi_index(multi_index = list(c(4, 7, 7), c(5, 6, 2)), dims = c(7, 6), order = "F") - 1
+#' ravel_multi_index(list(4, 2, 5, 2), dims = c(6, 7, 8, 9)) - 1
+#'
+#' @export
+ravel_multi_index <- function(multi_index, dims, order = c("C", "F")) {
+  a <- marray(seq(prod(dims)), dim = dims, order = order)
+  mi_len <- unique(unlist(lapply(multi_index, length)))
+  stopifnot("Length of 'multi_index' must be equal to the length of 'dims'." = length(multi_index) == length(dims),
+            "All elements within 'multi_index' must have the same length." = length(mi_len) == 1L)
+  return(unlist(lapply(seq_len(mi_len), function(i) { slice(a, sapply(multi_index, `[`, i, simplify = FALSE)) })))
+}

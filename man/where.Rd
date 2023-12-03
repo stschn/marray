@@ -4,7 +4,7 @@
 \alias{where}
 \title{Array searching}
 \usage{
-where(a, condition, true, false)
+where(a, condition, true = NULL, false = NULL)
 }
 \arguments{
 \item{a}{An array.}

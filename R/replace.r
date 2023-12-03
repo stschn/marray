@@ -85,8 +85,9 @@ place <- function(a, ..., oldvalue, newvalue) {
 #' where(a, a < 11, true = \(x) x * 100, false = 0) # lamdba-like anonymous function syntax \(x) from R 4.1
 #'
 #' @export
-where <- function(a, condition, true, false) {
+where <- function(a, condition, true = NULL, false = NULL) {
   a <- .standardize_array(a)
+  if (missing(condition)) return(a)
   e <- substitute(condition)
   idx <- eval(e, parent.frame())
   if (!is.logical(idx))
