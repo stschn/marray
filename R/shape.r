@@ -322,6 +322,9 @@ squeeze <- function(a, axis = NULL, order = c("C", "F")) {
   order <- match.arg(order)
   a <- .standardize_array(a)
   d <- DIM(a)
+  if (all(d == 1)) {
+    newdim = 1
+  } else
   if (is.null(axis)) {
     newdim <- d[!d %in% c(1L)]
   } else {

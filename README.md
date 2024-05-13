@@ -60,7 +60,7 @@ This R library is a replica of ndarray and functionality from [NumPy](https://nu
 <li><code>zeros()</code> and <code>zeros_like</code> creates an array filled with zeros.</li>
 <li><code>empty()</code> and <code>empty_like</code> creates an array filled with NA.</li>
 <li><code>full()</code> and <code>full_like</code> creates an array filled with value.</li>
-<li><code>random_int()</code>, <code>random_int_like</code>, <code>random_dbl()</code> and <code>random_dbl_like</code> creates an array filled with random values.</li>
+<li><code>random_int()</code>, <code>random_int_like</code>, <code>random_dbl()</code>, <code>random_dbl_like()</code> and <code>randorm_normal()</code> creates an array filled with random values.</li>
 <li><code>maidentity()</code> creates an identity array.</li>
 <li><code>insert()</code> inserts objects into an array.</li>
 <li><code>copyto()</code> copies values from one array to another.</li>
