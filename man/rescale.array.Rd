@@ -4,14 +4,16 @@
 \alias{rescale.array}
 \title{Array searching}
 \usage{
-rescale.array(a, ..., FUN)
+rescale.array(a, index = NULL, FUN, ...)
 }
 \arguments{
 \item{a}{An array.}
 
-\item{...}{Indexing instructions with or without letters in form of \code{name = value} pairs. The names of the arguments specify the axis and the values its positions.}
+\item{index}{Indexing instructions with or without letters in form of \code{name = value} pairs embed into a list. The names of the arguments specify the axis and the values its positions.}
 
 \item{FUN}{Rescale function.}
+
+\item{...}{Optional arguments passed to \code{FUN}.}
 }
 \value{
 An array with rescaled values.
@@ -21,6 +23,6 @@ Rescale elements of an array.
 }
 \examples{
 a <- marray(seq(24), dim = c(4, 3, 2))
-rescale.array(a, i = c(1, 3), j = 2, FUN = \(x) { x * 3 })
+rescale.array(a, index = list(i = c(1, 3), j = 2), FUN = \(x) { x * 3 })
 
 }
