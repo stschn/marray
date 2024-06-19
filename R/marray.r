@@ -185,27 +185,27 @@ apply_over_axes <- function(a, axes = NULL, FUN, ..., simplify = TRUE) {
 
 #' @rdname array-apply
 #' @export
-as.marray_int <- function(a) { foreach.array(a, FUN = as.integer) }
+as.marray_int <- function(a) { class(a) <- "integer"; a } # foreach.array(a, FUN = as.integer)
 
 #' @rdname array-apply
 #' @export
-as.marray_dbl <- function(a) { foreach.array(a, FUN = as.double) }
+as.marray_dbl <- function(a) { class(a) <- "double"; a } # foreach.array(a, FUN = as.double)
 
 #' @rdname array-apply
 #' @export
-as.marray_raw <- function(a) { foreach.array(a, FUN = as.raw) }
+as.marray_raw <- function(a) { class(a) <- "raw"; a } # foreach.array(a, FUN = as.raw)
 
 #' @rdname array-apply
 #' @export
-as.marray_cpx <- function(a) { foreach.array(a, FUN = as.complex) }
+as.marray_cpx <- function(a) { class(a) <- "complex"; a } # foreach.array(a, FUN = as.complex)
 
 #' @rdname array-apply
 #' @export
-as.marray_chr <- function(a) { foreach.array(a, FUN = as.character) }
+as.marray_chr <- function(a) { class(a) <- "character"; a } # foreach.array(a, FUN = as.character)
 
 #' @rdname array-apply
 #' @export
-as.marray_lgl <- function(a) { foreach.array(a, FUN = as.logical) }
+as.marray_lgl <- function(a) { class(a) <- "logical"; a } # foreach.array(a, FUN = as.logical)
 
 #' @rdname array-apply
 #' @param mean Vector of means.
